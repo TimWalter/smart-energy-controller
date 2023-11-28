@@ -1,45 +1,39 @@
 class TCL:
-    """
-    Simulates an invidual TCL
-    """
+    def __init__(self,
+                 T_initial_indoor,
+                 T_initial_building_mass,
+                 thermal_mass_air,
+                 thermal_mass_building,
+                 unintentional_heat_gain,
+                 nominal_power,
+                 T_min,
+                 T_max
+                 ):
+        self.T_indoor = T_initial_indoor
+        self.T_building_mass = T_initial_building_mass
 
-    def __init__(self, ca, cm, q, P, Tmin=TCL_TMIN, Tmax=TCL_TMAX):
-        self.ca = ca
-        self.cm = cm
-        self.q = q
-        self.P = P
-        self.Tmin = Tmin
-        self.Tmax = Tmax
+        self.T_min = T_min
+        self.T_max = T_max
 
-        # Added for clarity
-        self.u = 0
+        self.thermal_mass_air = thermal_mass_air
+        self.thermal_mass_building = thermal_mass_building
+        self.unintentional_heat_gain = unintentional_heat_gain
+        self.nominal_power = nominal_power
 
-    def set_T(self, T, Tm):
-        self.T = T
-        self.Tm = Tm
+    def step(self, action, T_outdoor):
+        if self.T_indoor > self.T_max:
+            action = 0
+        elif self.T_indoor < self.T_min:
+            action = 1
 
-    def control(self, ui=0):
-        # control TCL using u with respect to the backup controller
-        if self.T < self.Tmin:
-            self.u = 1
-        elif self.Tmin < self.T < self.Tmax:
-            self.u = ui
-        else:
-            self.u = 0
+        self.T_building_mass += 1 / self.thermal_mass_building * (
+                self.T_indoor - self.T_building_mass)
 
-    def update_state(self, T0):
-        # update the indoor and mass temperatures according to (22)
-        for _ in range(5):
-            self.T += self.ca * (T0 - self.T) + self.cm * (self.Tm - self.T) + self.P * self.u + self.q
-            self.Tm += self.cm * (self.T - self.Tm)
-            if self.T >= self.Tmax:
-                break
-
-    """ 
-    @property allows us to write "tcl.SoC", and it will
-    run this function to get the value
-    """
+        self.T_indoor += 1 / self.thermal_mass_air * (T_outdoor - self.T_indoor)
+        self.T_indoor += 1 / self.thermal_mass_building * (self.T_building_mass - self.T_indoor)
+        self.T_indoor += action * self.nominal_power
+        self.T_indoor += self.unintentional_heat_gain
 
     @property
-    def SoC(self):
-        return (self.T - self.Tmin) / (self.Tmax - self.Tmin)
+    def state_of_charge(self):
+        return (self.T_indoor - self.T_min) / (self.T_max - self.T_min)

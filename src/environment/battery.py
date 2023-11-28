@@ -1,47 +1,42 @@
+import numpy as np
+
+
 class Battery:
     def __init__(self,
-                 capacity,
-                 charge_coefficient,
-                 discharge_coefficient,
-                 dissipation,
-                 lossC,
-                 rateC,
-                 maxDD,
-                 chargeE,
-                 tmax
+                 capacitiy,
+                 charge_rate_max,
+                 discharge_rate_max,
+                 round_trip_efficiency,
+                 self_discharge_rate,
+                 initial_charge
                  ):
-        self.capacity = capacity
-        self.charge_coefficient = charge_coefficient
-        self.discharge_coefficient = discharge_coefficient
+        self.capacity = capacitiy
+        self.charge_rate_max = charge_rate_max
+        self.discharge_rate_max = discharge_rate_max
+        self.round_trip_efficiency_sqrt = np.sqrt(round_trip_efficiency)
+        self.self_discharge_rate = self_discharge_rate
 
-        self.dissipation = dissipation  # dissipation coefficient of the battery
-        self.lossC = lossC  # charge loss
-        self.rateC = rateC  # charging rate
-        self.maxDD = maxDD  # maximum power that the battery can deliver per timestep
-        self.tmax = tmax  # maxmum charging time
-        self.chargeE = chargeE  # Energy given to the battery to charge
-        self.RC = 0  # remaining capacity
-        self.ct = 0  # Charging step
+        self.charge = initial_charge
 
-    def charge(self, E):
-        empty = self.capacity - self.RC
-        if empty <= 0:
-            return E
-        else:
-            self.RC += self.rateC * E
-            leftover = self.RC - self.capacity
-            self.RC = min(self.capacity, self.RC)
-            return max(leftover, 0)
+        self.reward_cache = {}
 
-    def supply(self, E):
-        remaining = self.RC
-        self.RC -= E * self.useD
-        self.RC = max(self.RC, 0)
-        return min(E, remaining)
+    def step(self, action):
+        lower_bound = self.charge * self.self_discharge_rate * self.round_trip_efficiency_sqrt
+        upper_bound = (self.capacity - self.charge * self.self_discharge_rate) / self.round_trip_efficiency_sqrt
+        actual_action = np.clip(action, lower_bound, upper_bound)
 
-    def dissipate(self):
-        self.RC = self.RC * math.exp(- self.dissipation)
+        charging_rate = min(max(actual_action, 0), self.charge_rate_max)
+        discharge_rate = min(max(-actual_action, 0), self.discharge_rate_max)
+
+        self.charge = (self.charge * self.self_discharge_rate
+                       + charging_rate * self.round_trip_efficiency_sqrt
+                       - discharge_rate / self.round_trip_efficiency_sqrt)
+        
+        self.reward_cache = {
+            "C_t": charging_rate,
+            "D_t": discharge_rate,
+        }
 
     @property
-    def SoC(self):
-        return self.RC / self.capacity
+    def state_of_charge(self):
+        return self.charge / self.capacity

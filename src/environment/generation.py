@@ -5,7 +5,7 @@ import pandas as pd
 
 class Generation:
     def __init__(self):
-        self.file = 'data/datasets/generation.h5'
+        self.file = '../../data/minutely/pv.h5'
         self.episode = None
 
     def set_episode(self, episode: int):
