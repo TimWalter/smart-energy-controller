@@ -3,9 +3,9 @@ from datetime import datetime
 import pandas as pd
 
 
-class Generation:
+class UncontrolledAppliances:
     def __init__(self):
-        self.file = '../../data/minutely/pv.h5'
+        self.file = '../../data/minutely/uncontrolled_appliances.h5'
         self.episode = None
 
         self.reward_cache = {}
@@ -25,13 +25,13 @@ class Generation:
 
         :return: float
         """
-        generated_power = self.get_values(time)["AC"].values
-        self.reward_cache["G_t"] = generated_power
+        consumed_power = self.get_values(time)["power"].values
+        self.reward_cache["L_t"] = consumed_power
 
 
 if __name__ == "__main__":
-    gen = Generation()
+    gen = UncontrolledAppliances()
     gen.set_episode(0)
 
-    gen.step(datetime(2007, 1, 1, 0, 0, 0))
+    gen.step(datetime(2007, 1, 1, 18, 0, 0))
     print(gen.reward_cache)

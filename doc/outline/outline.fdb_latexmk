@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex example_paper"] 1700760543 "example_paper.aux" "example_paper.bbl" "example_paper" 1701171009
+["bibtex outline"] 1701438032 "outline.aux" "outline.bbl" "outline" 1701438033
   "./icml2023.bst" 1672727823 27147 6b71b3d7a2f07477af75aa14d559effb ""
-  "example_paper.aux" 1701171009 1029 ed55013e1ea77bf620c218e2f8197539 "pdflatex"
   "literature.bib" 1700759271 302 1389d2e168cae082a6ae05b2a7d1fc83 ""
+  "outline.aux" 1701438033 1029 ed55013e1ea77bf620c218e2f8197539 "pdflatex"
   (generated)
-  "example_paper.bbl"
-  "example_paper.blg"
-["pdflatex"] 1701171009 "/home/tim/Projects/smart-energy-controller/doc/outline/example_paper.tex" "example_paper.pdf" "example_paper" 1701171009
+  "outline.bbl"
+  "outline.blg"
+["pdflatex"] 1701438032 "/home/tim/Projects/smart-energy-controller/doc/outline/outline.tex" "outline.pdf" "outline" 1701438033
   "/etc/texmf/web2c/texmf.cnf" 1695387434 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/tim/Projects/smart-energy-controller/doc/outline/example_paper.tex" 1701171008 11525 577190e452602955cb6306eb302ccb9b ""
+  "/home/tim/Projects/smart-energy-controller/doc/outline/outline.tex" 1701171008 11525 577190e452602955cb6306eb302ccb9b ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -205,14 +205,14 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1700549467 1435803 5dd4b8496ec32d8b2d00417a4ae6b567 ""
   "algorithm.sty" 1672727314 2302 d2b29bd8abe4b311c2e3cf0641b4549b ""
   "algorithmic.sty" 1672727314 7615 a7a253154ed6d7d83141571d55bc3515 ""
-  "example_paper.aux" 1701171009 1029 ed55013e1ea77bf620c218e2f8197539 "pdflatex"
-  "example_paper.bbl" 1700760543 600 efa078811c96f406e5e15df0c4f82d66 "bibtex example_paper"
-  "example_paper.out" 1701171009 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "example_paper.tex" 1701171008 11525 577190e452602955cb6306eb302ccb9b ""
   "fancyhdr.sty" 1672727314 21006 088e3513a90ac3aa21515dd46e858ae4 ""
   "icml2023.sty" 1673078890 27888 5d2d5d3bcd7161421f3fd4a95cd5a7b6 ""
+  "outline.aux" 1701438033 1029 ed55013e1ea77bf620c218e2f8197539 "pdflatex"
+  "outline.bbl" 1701438032 600 efa078811c96f406e5e15df0c4f82d66 "bibtex outline"
+  "outline.out" 1701438032 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "outline.tex" 1701171008 11525 577190e452602955cb6306eb302ccb9b ""
   (generated)
-  "example_paper.aux"
-  "example_paper.log"
-  "example_paper.out"
-  "example_paper.pdf"
+  "outline.aux"
+  "outline.log"
+  "outline.out"
+  "outline.pdf"

@@ -32,10 +32,8 @@ class Battery:
                        + charging_rate * self.round_trip_efficiency_sqrt
                        - discharge_rate / self.round_trip_efficiency_sqrt)
         
-        self.reward_cache = {
-            "C_t": charging_rate,
-            "D_t": discharge_rate,
-        }
+        self.reward_cache["C_t"] = charging_rate
+        self.reward_cache["D_t"] = discharge_rate
 
     @property
     def state_of_charge(self):

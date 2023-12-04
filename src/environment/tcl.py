@@ -20,6 +20,8 @@ class TCL:
         self.unintentional_heat_gain = unintentional_heat_gain
         self.nominal_power = nominal_power
 
+        self.reward_cache = {"L_{TCL}": nominal_power}
+
     def step(self, action, T_outdoor):
         if self.T_indoor > self.T_max:
             action = 0
@@ -33,6 +35,8 @@ class TCL:
         self.T_indoor += 1 / self.thermal_mass_building * (self.T_building_mass - self.T_indoor)
         self.T_indoor += action * self.nominal_power
         self.T_indoor += self.unintentional_heat_gain
+
+        self.reward_cache["a_{tcl,t}"] = action
 
     @property
     def state_of_charge(self):
