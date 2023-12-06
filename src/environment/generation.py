@@ -1,37 +1,30 @@
-from datetime import datetime
+from src.environment.base.base_component import BaseComponent
+from src.environment.base.data_loader import BaseDataLoader
 
-import pandas as pd
 
+class Generation(BaseComponent, BaseDataLoader):
+    def __init__(self, episode: int = 0):
+        BaseDataLoader.__init__(self, file='../../data/minutely/generation.h5')
+        self.set_episode(episode)
 
-class Generation:
-    def __init__(self):
-        self.file = '../../data/minutely/pv.h5'
-        self.episode = None
+        self.update_state()
+        BaseComponent.__init__(self, initial_state=self.state)
 
-        self.reward_cache = {}
+    def step(self):
+        self.update_reward_cache()
+        self.step_time()
+        self.update_state()
 
-    def set_episode(self, episode: int):
-        self.episode = pd.read_hdf(self.file, key=f'eps_{episode}')
+    def update_state(self):
+        self.state = self.get_values(self.time)["AC"].values # in kW
 
-    def get_values(self, start: datetime, end: datetime = None):
-        if end is None:
-            end = start
-        return self.episode.loc[start:end]
-
-    def step(self, time: datetime):
-        """
-        Returns the power generated at a given time in Watts
-        :param time: datetime
-
-        :return: float
-        """
-        generated_power = self.get_values(time)["AC"].values
-        self.reward_cache["G_t"] = generated_power
+    def update_reward_cache(self):
+        self.reward_cache["G_t"] = self.state
 
 
 if __name__ == "__main__":
-    gen = Generation()
-    gen.set_episode(0)
+    gen = Generation(0)
 
-    gen.step(datetime(2007, 1, 1, 0, 0, 0))
+    gen.step()
     print(gen.reward_cache)
+    print(gen.state)
