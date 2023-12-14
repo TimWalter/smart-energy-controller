@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  6 DEC 2023 17:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  13 DEC 2023 16:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -762,11 +762,6 @@ Overfull \hbox (49.50478pt too wide) detected at line 90
 
 
 ]
-Overfull \hbox (3.9795pt too wide) detected at line 130
-[][][]\OML/cmm/m/it/10 s[] \OT1/cmr/m/n/10 = [\OML/cmm/m/it/10 BSoC[]; TSoC[]; s[]\OT1/cmr/m/n/10 ] \OMS/cmsy/m/n/10 2 \OT1/cmr/m/n/10 [[0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1]\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 [0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1]\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 1\OMS/cmsy/m/n/10 g[]\OT1/cmr/m/n/10 ] = \OML/cmm/m/it/10 S[]
- []
-
-
 Underfull \hbox (badness 1762) in paragraph at lines 134--136
 \OT1/ptm/m/n/10 (+20) Lastly, the informal state describes all parts of the
  []
@@ -800,15 +795,15 @@ Package rerunfilecheck Info: File `outline.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26256 strings out of 480553
- 492189 string characters out of 2895249
+ 26259 strings out of 480553
+ 492216 string characters out of 2895249
  796794 words of memory out of 3000000
  43523 multiletter control sequences out of 15000+600000
- 495984 words of font info for 158 fonts, out of 8000000 for 9000
+ 496103 words of font info for 160 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
  99i,12n,94p,1052b,432s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Program Files/LaTeX/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on outline.pdf (3 pages, 191319 bytes).
+Output written on outline.pdf (3 pages, 191049 bytes).
 PDF statistics:
  143 PDF objects out of 1000 (max. 8388607)
  38 named destinations out of 1000 (max. 500000)

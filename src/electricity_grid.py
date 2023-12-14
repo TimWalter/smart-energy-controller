@@ -1,10 +1,12 @@
-from src.environment.base.base_component import BaseComponent
-from src.environment.base.data_loader import BaseDataLoader
+import numpy as np
+
+from src.base.base_component import BaseComponent
+from src.base.data_loader import BaseDataLoader
 
 
 class ElectricityGrid(BaseComponent, BaseDataLoader):
     def __init__(self, episode: int = 0):
-        BaseDataLoader.__init__(self, file='../../data/minutely/intensity.h5')
+        BaseDataLoader.__init__(self, file='../data/minutely/intensity.h5')
         self.set_episode(episode)
 
         self.update_state()
@@ -16,7 +18,7 @@ class ElectricityGrid(BaseComponent, BaseDataLoader):
         self.update_state()
 
     def update_state(self):
-        self.state = self.get_values(self.time)["Carbon Intensity gCO₂eq/kWmin (direct)"].values
+        self.state = np.array(self.get_values(self.time)["Carbon Intensity gCO₂eq/kWmin (direct)"].values, dtype=np.float32)
 
     def update_reward_cache(self):
         self.reward_cache["I_t"] = self.state

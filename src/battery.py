@@ -42,7 +42,7 @@ class Battery(BaseComponent):
         lower_bound = np.max([-possible_discharge / self.discharge_rate_max, -1])
         upper_bound = np.min([possible_charge / self.charge_rate_max, 1])
 
-        bound_action = np.clip(action, lower_bound, upper_bound)
+        bound_action = np.clip(action[0], lower_bound, upper_bound)
 
         charging_rate = min(max(bound_action, 0), self.charge_rate_max)
         discharge_rate = min(max(-bound_action, 0), self.discharge_rate_max)
@@ -55,7 +55,7 @@ class Battery(BaseComponent):
         self.update_state()
 
     def update_state(self):
-        self.state = self.charge / self.capacity
+        self.state = np.array([self.charge / self.capacity], dtype=np.float32)
 
     def update_reward_cache(self, charging_rate, discharge_rate):
         self.reward_cache["C_t"] = charging_rate

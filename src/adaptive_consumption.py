@@ -4,23 +4,23 @@ from datetime import timedelta
 import numpy as np
 import pandas as pd
 
-from src.environment.base.base_component import BaseComponent
-from src.environment.base.data_loader import BaseDataLoader
+from src.base.base_component import BaseComponent
+from src.base.data_loader import BaseDataLoader
 
 
 @dataclass
 class AdaptiveConsumptionParameters:
     planning_horizon: int = 60 * 12
-    patience: float = 10
+    patience: float = 100
 
 
 class AdaptiveConsumption(BaseComponent, BaseDataLoader):
     def __init__(self, planning_horizon: int, patience: float, episode: int = 0):
         self.planning_horizon = planning_horizon
         self.patience = patience
-        self.half_horizon = timedelta(minutes=planning_horizon)
+        self.timedelta = timedelta(minutes=planning_horizon)
 
-        BaseDataLoader.__init__(self, file='../../data/minutely/adaptive_consumption.h5')
+        BaseDataLoader.__init__(self, file='../data/minutely/adaptive_consumption.h5')
         self.set_episode(episode)
 
         self.update_state()
@@ -38,26 +38,26 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
 
         executed_actions = coins < probas
 
-        power = np.sum(self.state["power"].values[executed_actions])
+        power = np.sum(self.state[executed_actions])
 
         # Set power to 0 for executed actions
-        self.state.loc[:, "power"] = self.state["power"].values * (executed_actions == 0)
-        self.set_values(self.state, self.time - self.half_horizon, self.time + self.half_horizon)
+        self.state = self.state * (executed_actions == 0)
+        self.set_values(self.state, self.time - self.timedelta, self.time + self.timedelta, "power")
 
         # Delay beyond time_horizon results in deterministic execution
-        power += self.state["power"].values[-1]
+        power += self.state[0]
 
         self.update_reward_cache(power)
         self.step_time()
         self.update_state()
 
     def update_state(self):
-        self.state = self.get_values(self.time - self.half_horizon, self.time + self.half_horizon)  # in kW
+        self.state = self.get_values(self.time - self.timedelta, self.time + self.timedelta)  # in kW
         rows_to_add = 2 * self.planning_horizon + 1 - self.state.shape[0]
 
         if rows_to_add > 0:
             # Create a new DataFrame with zeros and the correct index
-            if self.time - self.half_horizon < self.state.index[0]:
+            if self.time - self.timedelta < self.state.index[0]:
                 # If time is before the start of the state DataFrame, prepend the rows
                 zero_data = pd.DataFrame({"power": [0] * rows_to_add},
                                          index=pd.date_range(end=self.state.index[0] - pd.Timedelta(minutes=1),
@@ -69,6 +69,9 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
                                          index=pd.date_range(start=self.state.index[-1] + pd.Timedelta(minutes=1),
                                                              periods=rows_to_add, freq='min'))
                 self.state = pd.concat([self.state, zero_data])
+
+        # Need np.array so only values remain
+        self.state = np.array(self.state["power"], dtype=np.float32)
 
     def update_reward_cache(self, power):
         self.reward_cache["s_{a,t}"] = power

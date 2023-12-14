@@ -1,2 +1,4 @@
 .idea
 __pycache__
+doc/outline/*
+!doc/outline/outline.tex

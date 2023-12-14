@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
-from src.environment.base.base_component import BaseComponent
+import numpy as np
+
+from src.base.base_component import BaseComponent
 
 
 @dataclass
@@ -45,6 +47,8 @@ class TCL(BaseComponent):
         self.reward_cache = {"L_{TCL}": nominal_power}
 
     def step(self, action, T_outdoor):
+        # rescale action from [-1,1] to [0,1]
+        action = (action[0] + 1) / 2
         if self.T_indoor > self.T_max:
             action = 0
         elif self.T_indoor < self.T_min:
@@ -62,7 +66,7 @@ class TCL(BaseComponent):
         self.update_state()
 
     def update_state(self):
-        self.state = (self.T_indoor - self.T_min) / (self.T_max - self.T_min)
+        self.state = np.array([(self.T_indoor - self.T_min) / (self.T_max - self.T_min)], dtype=np.float32)
 
     def update_reward_cache(self, action):
         self.reward_cache["a_{tcl,t}"] = action

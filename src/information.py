@@ -1,13 +1,13 @@
 from datetime import datetime
 
-from src.environment.base.base_component import BaseComponent
-from src.environment.base.data_loader import BaseDataLoader
+from src.base.base_component import BaseComponent
+from src.base.data_loader import BaseDataLoader
 
 
 class Information(BaseComponent, BaseDataLoader):
 
     def __init__(self, episode: int = 0):
-        BaseDataLoader.__init__(self, file='../../data/minutely/information.h5')
+        BaseDataLoader.__init__(self, file='../data/minutely/information.h5')
         self.set_episode(episode)
 
         self.update_state()
@@ -27,6 +27,8 @@ class Information(BaseComponent, BaseDataLoader):
 
 if __name__ == "__main__":
     info = Information(0)
+    import numpy as np
+    print(np.min(info.episode["H_sun"]))
 
     info.step()
     print(info.reward_cache)
