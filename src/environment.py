@@ -32,8 +32,6 @@ def register(adaptive_consumption_params: AdaptiveConsumptionParameters = Adapti
 
 
 class SingleFamilyHome(gym.Env):
-    metadata = {"render_modes": ["console"]}
-
     def __init__(self, adaptive_consumption_params: AdaptiveConsumptionParameters = AdaptiveConsumptionParameters(),
                  battery_params: BatteryParameters = BatteryParameters(),
                  tcl_parameters: TCLParameters = TCLParameters(), ):
@@ -42,36 +40,41 @@ class SingleFamilyHome(gym.Env):
         self.battery_params = battery_params
         self.tcl_parameters = tcl_parameters
 
-        self.ac_dim = 2 * adaptive_consumption_params.planning_horizon + 1
+        action_space_shape = 0
+        observation_space = {
+            "generation": gym.spaces.Box(low=-np.inf, high=np.inf, shape=(1,)),
+            "consumption": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
+            "intensity": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
+
+            "day_of_year": gym.spaces.Box(low=1, high=366, shape=(1,), dtype=np.int32),
+            "hour_of_day": gym.spaces.Box(low=0, high=23, shape=(1,), dtype=np.int32),
+            "solar_irradiation": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
+            "solar_elevation": gym.spaces.Box(low=0, high=90, shape=(1,)),
+            "temperature": gym.spaces.Box(low=-np.inf, high=np.inf, shape=(1,)),
+            "wind_speed": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
+        }
+
+        if self.adaptive_consumption_params is not None:
+            self.ac_dim = 2 * adaptive_consumption_params.planning_horizon + 1
+            self.ac_slice = slice(action_space_shape, action_space_shape + self.ac_dim)
+            action_space_shape += self.ac_dim
+            observation_space["adaptive_consumption_schedule"] = gym.spaces.Box(low=0, high=np.inf,
+                                                                                shape=(self.ac_dim,))
+
+        if self.battery_params is not None:
+            self.battery_slice = slice(action_space_shape, action_space_shape + 1)
+            action_space_shape += 1
+            observation_space["battery_state_of_charge"] = gym.spaces.Box(low=0, high=1, shape=(1,))
+
+        if self.tcl_parameters is not None:
+            self.tcl_slice = slice(action_space_shape, action_space_shape + 1)
+            action_space_shape += 1
+            observation_space["tcl_state_of_charge"] = gym.spaces.Box(low=0, high=1, shape=(1,))
 
         self.render_mode = "console"
-        self.observation_space = gym.spaces.Dict(
-            {
-                "battery_state_of_charge": gym.spaces.Box(low=0, high=1, shape=(1,)),
-                "tcl_state_of_charge": gym.spaces.Box(low=0, high=1, shape=(1,)),
-                "adaptive_consumption_schedule": gym.spaces.Box(low=0, high=np.inf, shape=(self.ac_dim,)),
+        self.observation_space = gym.spaces.Dict(observation_space)
 
-                "generation": gym.spaces.Box(low=-np.inf, high=np.inf, shape=(1,)),
-                "consumption": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
-                "intensity": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
-
-                "day_of_year": gym.spaces.Box(low=1, high=366, shape=(1,), dtype=np.int32),
-                "hour_of_day": gym.spaces.Box(low=0, high=23, shape=(1,), dtype=np.int32),
-                "solar_irradiation": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
-                "solar_elevation": gym.spaces.Box(low=0, high=90, shape=(1,)),
-                "temperature": gym.spaces.Box(low=-np.inf, high=np.inf, shape=(1,)),
-                "wind_speed": gym.spaces.Box(low=0, high=np.inf, shape=(1,)),
-            }
-        )
-
-        self.action_space = gym.spaces.Box(low=-1, high=1, shape=(2,), dtype=np.float32)
-        self.battery_slice = slice(0, 1)
-        self.tcl_slice = slice(1, 2)
-
-        #self.action_space = gym.spaces.Box(low=-1, high=1, shape=(self.ac_dim + 2,), dtype=np.float32)
-        #self.ac_slice = slice(0, self.ac_dim)
-        #self.battery_slice = slice(self.ac_dim, self.ac_dim + 1)
-        #self.tcl_slice = slice(self.ac_dim + 1, self.ac_dim + 2)
+        self.action_space = gym.spaces.Box(low=-1, high=1, shape=(action_space_shape,), dtype=np.float32)
 
         self.adaptive_consumption = None
         self.battery = None
@@ -86,9 +89,15 @@ class SingleFamilyHome(gym.Env):
 
         episode = 0
 
-        self.adaptive_consumption = AdaptiveConsumption(**self.adaptive_consumption_params.__dict__, episode=episode)
+        if self.adaptive_consumption_params is not None:
+            self.adaptive_consumption = AdaptiveConsumption(**self.adaptive_consumption_params.__dict__,
+                                                            episode=episode)
 
-        self.battery = Battery(**self.battery_params.__dict__)
+        if self.battery_params is not None:
+            self.battery = Battery(**self.battery_params.__dict__)
+
+        if self.tcl_parameters is not None:
+            self.tcl = TCL(**self.tcl_parameters.__dict__)
 
         self.consumption = Consumption(episode=episode)
 
@@ -98,20 +107,22 @@ class SingleFamilyHome(gym.Env):
 
         self.information = Information(episode=episode)
 
-        self.tcl = TCL(**self.tcl_parameters.__dict__)
-
         observation = self._construct_observation()
         return observation, {}
 
     def step(self, action: ActType) -> tuple[ObsType, float, bool, bool, dict]:
-        #self.adaptive_consumption.step(np.ones(self.ac_dim))
-        #self.adaptive_consumption.step(action[self.ac_slice])
-        self.battery.step(action[self.battery_slice])
+        if self.adaptive_consumption_params is not None:
+            self.adaptive_consumption.step(action[self.ac_slice])
+
+        if self.battery_params is not None:
+            self.battery.step(action[self.battery_slice])
+
+        if self.tcl_parameters is not None:
+            self.tcl.step(action[self.tcl_slice], self.information.state["T2m"].values[0])
+
         self.consumption.step()
         self.electricity_grid.step()
         self.generation.step()
-
-        self.tcl.step(action[self.tcl_slice], self.information.state["T2m"].values[0])
         self.information.step()
 
         observation = self._construct_observation()
@@ -123,11 +134,7 @@ class SingleFamilyHome(gym.Env):
         return observation, reward, terminated, truncated, info
 
     def _construct_observation(self):
-        return {
-            "battery_state_of_charge": self.battery.state,
-            "tcl_state_of_charge": self.tcl.state,
-            "adaptive_consumption_schedule": self.adaptive_consumption.state,
-
+        observation = {
             "generation": self.generation.state,
             "consumption": self.consumption.state,
             "intensity": self.electricity_grid.state,
@@ -138,19 +145,29 @@ class SingleFamilyHome(gym.Env):
             "solar_elevation": self.information.state["H_sun"].values.astype(np.float32),
             "temperature": self.information.state["T2m"].values.astype(np.float32),
             "wind_speed": self.information.state["WS10m"].values.astype(np.float32),
-
         }
+        if self.adaptive_consumption_params is not None:
+            observation["adaptive_consumption_schedule"] = self.adaptive_consumption.state
+
+        if self.battery_params is not None:
+            observation["battery_state_of_charge"] = self.battery.state
+
+        if self.tcl_parameters is not None:
+            observation["tcl_state_of_charge"] = self.tcl.state
+        return observation
 
     def _calculate_reward(self):
-        produced_energy = self.generation.reward_cache["G_t"] + self.battery.reward_cache["D_t"]
-        #consumed_energy = (self.consumption.reward_cache["L_t"] +
-        #                   self.battery.reward_cache["C_t"] +
-        #                   self.tcl.reward_cache["L_{TCL}"] * self.tcl.reward_cache["a_{tcl,t}"] +
-        #                   self.adaptive_consumption.reward_cache["s_{a,t}"])
+        produced_energy = self.generation.reward_cache["G_t"]
+        consumed_energy = self.consumption.reward_cache["L_t"]
+        if self.adaptive_consumption_params is not None:
+            consumed_energy += self.adaptive_consumption.reward_cache["s_{a,t}"]
 
-        consumed_energy = (self.consumption.reward_cache["L_t"] +
-                           self.battery.reward_cache["C_t"] +
-                           self.tcl.reward_cache["L_{TCL}"] * self.tcl.reward_cache["a_{tcl,t}"])
+        if self.battery_params is not None:
+            produced_energy += self.battery.reward_cache["D_t"]
+            consumed_energy += self.battery.reward_cache["C_t"]
+
+        if self.tcl_parameters is not None:
+            consumed_energy += self.tcl.reward_cache["L_{TCL}"] * self.tcl.reward_cache["a_{tcl,t}"]
 
         reward = self.electricity_grid.reward_cache["I_t"] * (produced_energy - consumed_energy)
         return float(reward[0])
