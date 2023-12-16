@@ -1,12 +1,12 @@
 import matplotlib.pyplot as plt
 
 
-def visualize_scenario(callback):
-    intensities = [info["observation"]["intensity"] for info in callback.infos]
+def visualize_scenario(callback, env):
+    intensities = [info["observation"][env.observation_slices["intensity"]] for info in callback.infos]
     plt.plot(intensities, label="Intensity", alpha=0.8)
-    consumptions = [info["observation"]["consumption"] for info in callback.infos]
+    consumptions = [info["observation"][env.observation_slices["consumption"]] for info in callback.infos]
     plt.plot(consumptions, label="Consumption", alpha=0.8)
-    generations = [info["observation"]["generation"] for info in callback.infos]
+    generations = [info["observation"][env.observation_slices["generation"]] for info in callback.infos]
     plt.plot(generations, label="Generation", alpha=0.8)
 
     plt.legend()
@@ -14,8 +14,8 @@ def visualize_scenario(callback):
 
 
 def visualize_battery_behaviour(callback, env):
-    state_of_charge = [info["observation"]["battery_state_of_charge"] for info in callback.infos]
-    battery_actions = [info["action"][env.unwrapped.battery_slice] for info in callback.infos]
+    state_of_charge = [info["observation"][env.observation_slices["battery"]] for info in callback.infos]
+    battery_actions = [info["action"][env.action_slice["battery"]] for info in callback.infos]
 
     fig, ax1 = plt.subplots()
     color = 'tab:blue'
@@ -37,8 +37,8 @@ def visualize_battery_behaviour(callback, env):
 
 def visualize_reward(callback):
     rewards = [info["reward"] for info in callback.infos]
-    produced_energy = [info["reward_cache"]["produced_energy"] for info in callback.infos]
-    consumed_energy = [info["reward_cache"]["consumed_energy"] for info in callback.infos]
+    produced_energy = [info["reward_cache"]["PE_t"] for info in callback.infos]
+    consumed_energy = [info["reward_cache"]["CE_t"] for info in callback.infos]
 
     fig, ax = plt.subplots(1, 3, figsize=(15, 5))
     color = 'tab:red'
@@ -46,7 +46,6 @@ def visualize_reward(callback):
     ax[0].set_ylabel('Reward', color=color)
     ax[0].plot(rewards, color=color, label="Reward")
     ax[0].tick_params(axis='y', labelcolor=color)
-    ax[0].legend(loc="upper left")
 
     ax1 = ax[0].twinx()  # instantiate a second axes that shares the same x-axis
 
@@ -56,7 +55,7 @@ def visualize_reward(callback):
     ax1.tick_params(axis='y')
     ax1.legend(loc="upper right")
 
-    ax[1].plot(produced_energy, label="Produced Energy", alpha=0.8)
+    ax[1].plot(produced_energy, label="Produced Energy", alpha=0.8, color="yellow")
     g_t = [info["reward_cache"]["G_t"] for info in callback.infos]
     ax[1].plot(g_t, label="G_t", alpha=0.8)
     if "D_t" in callback.infos[0]["reward_cache"].keys():
@@ -64,7 +63,7 @@ def visualize_reward(callback):
         ax[1].plot(d_t, label="D_t", alpha=0.8)
     ax[1].legend()
 
-    ax[2].plot(consumed_energy, label="Consumed Energy", alpha=0.8)
+    ax[2].plot(consumed_energy, label="Consumed Energy", alpha=0.8, color="black")
     l_t = [info["reward_cache"]["L_t"] for info in callback.infos]
     ax[2].plot(l_t, label="L_t", alpha=0.8)
     if "C_t" in callback.infos[0]["reward_cache"].keys():
@@ -74,7 +73,7 @@ def visualize_reward(callback):
         s_at = [info["reward_cache"]["s_{a,t}"] for info in callback.infos]
         ax[2].plot(s_at, label="s_{a,t}", alpha=0.8)
     if "a_{tcl,t}" in callback.infos[0]["reward_cache"].keys():
-        a_tcl_t = [info["reward_cache"]["a_{tcl,t}"]*info["reward_cache"]["L_{TCL}"] for info in callback.infos]
+        a_tcl_t = [info["reward_cache"]["a_{tcl,t}"] * info["reward_cache"]["L_{TCL}"] for info in callback.infos]
         ax[2].plot(a_tcl_t, label="a_{tcl,t}*L_{TCL}", alpha=0.8)
     ax[2].legend()
 

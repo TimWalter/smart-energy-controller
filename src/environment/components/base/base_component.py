@@ -1,17 +1,23 @@
 from abc import ABC, abstractmethod
 
+import numpy as np
+
 
 class BaseComponent(ABC):
-    def __init__(self, initial_state):
-        self.state = initial_state
+    def __init__(self, normalise: bool, max_state: float | np.ndarray, min_state: float | np.ndarray):
+        self.state = None
         self.reward_cache = {}
 
-    @abstractmethod
-    def update_state(self, *args, **kwargs):
-        pass
+        self.normalise = normalise
+        self.max_state = max_state
+        self.min_state = min_state
+
+    def update_state(self):
+        if self.normalise:
+            self.state = (self.state - self.min_state) / (self.max_state - self.min_state)
 
     @abstractmethod
-    def update_reward_cache(self, *args, **kwargs):
+    def update_reward_cache(self):
         pass
 
     @abstractmethod

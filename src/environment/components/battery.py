@@ -11,8 +11,8 @@ class BatteryParameters:
     charge_rate_max: float = 60  # in kW
     discharge_rate_max: float = 60
     round_trip_efficiency: float = 0.95
-    self_discharge_rate: float = 0.99
-    initial_charge: float = 600
+    self_discharge_rate: float = 0.9999
+    initial_charge: float = 60
 
 
 class Battery(BaseComponent):
@@ -24,6 +24,10 @@ class Battery(BaseComponent):
                  self_discharge_rate: float,
                  initial_charge: float
                  ):
+        super().__init__(normalise=False,
+                         max_state=1,
+                         min_state=0,
+                         )
         self.capacity = capacity
         self.charge_rate_max = charge_rate_max
         self.discharge_rate_max = discharge_rate_max
@@ -33,7 +37,6 @@ class Battery(BaseComponent):
         self.charge = initial_charge
 
         self.update_state()
-        super().__init__(initial_state=self.state)
 
     def step(self, action):
         possible_discharge = self.charge * self.self_discharge_rate * self.round_trip_efficiency_sqrt
@@ -55,7 +58,7 @@ class Battery(BaseComponent):
         self.update_state()
 
     def update_state(self):
-        self.state = np.array([self.charge / self.capacity], dtype=np.float32)
+        self.state = self.charge / self.capacity
 
     def update_reward_cache(self, charging_rate, discharge_rate):
         self.reward_cache["C_t"] = charging_rate
@@ -63,8 +66,9 @@ class Battery(BaseComponent):
 
 
 if __name__ == "__main__":
-    battery = Battery(**BatteryParameters.__dict__)
+    battery = Battery(**BatteryParameters().__dict__)
+    battery.charge = 2950
     print(battery.state)
-    battery.step(1)
+    battery.step([1])
     print(battery.state)
     print(battery.reward_cache)

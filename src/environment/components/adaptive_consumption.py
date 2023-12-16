@@ -20,17 +20,20 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
                  patience: float,
                  episode: int = 0,
                  synthetic_data: bool = False,
-                 episode_length: int = None):
+                 episode_length: int = None,
+                 normalise: bool = False
+                 ):
         self.planning_horizon = planning_horizon
         self.patience = patience
         self.timedelta = timedelta(minutes=planning_horizon)
+
+        BaseComponent.__init__(self, normalise=normalise, max_state=8.583999999998824, min_state=0)
 
         BaseDataLoader.__init__(self, file='../data/minutely/adaptive_consumption.h5',
                                 synthetic_data=synthetic_data, episode_length=episode_length)
         self.set_episode(episode)
 
         self.update_state()
-        BaseComponent.__init__(self, initial_state=self.state)
 
         self.desired_behaviour = np.concatenate([np.ones(self.planning_horizon + 1), np.zeros(self.planning_horizon)])
         self.weighting = np.exp(
@@ -61,7 +64,7 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
         self.state = self.get_values(self.time - self.timedelta, self.time + self.timedelta)  # in kW
         if self.synthetic_data:
             # set all non zero values to 100
-            self.state["power"] = np.where(self.state["power"] != 0, 100, 0)
+            self.state["power"] = np.where(self.state["power"] != 0, 1, 0)
 
         rows_to_add = 2 * self.planning_horizon + 1 - self.state.shape[0]
 
@@ -80,8 +83,10 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
                                                              periods=rows_to_add, freq='min'))
                 self.state = pd.concat([self.state, zero_data])
 
-        # Need np.array so only values remain
-        self.state = np.array(self.state["power"], dtype=np.float32)
+        self.state = self.state["power"].values
+
+        if not self.synthetic_data:
+            super().update_state()
 
     def update_reward_cache(self, power):
         self.reward_cache["s_{a,t}"] = power

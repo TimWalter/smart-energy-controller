@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-import numpy as np
-
 from src.environment.components.base.base_component import BaseComponent
 
 
@@ -30,6 +28,9 @@ class TCL(BaseComponent):
                  T_min,
                  T_max
                  ):
+        super().__init__(normalise=False,
+                         max_state=1,
+                         min_state=0, )
         self.T_indoor = T_initial_indoor
         self.T_building_mass = T_initial_building_mass
 
@@ -43,7 +44,7 @@ class TCL(BaseComponent):
         self.nominal_power = nominal_power
 
         self.update_state()
-        super().__init__(initial_state=self.state)
+
         self.reward_cache = {"L_{TCL}": nominal_power}
 
     def step(self, action, T_outdoor):
@@ -66,7 +67,7 @@ class TCL(BaseComponent):
         self.update_state()
 
     def update_state(self):
-        self.state = np.array([(self.T_indoor - self.T_min) / (self.T_max - self.T_min)], dtype=np.float32)
+        self.state = (self.T_indoor - self.T_min) / (self.T_max - self.T_min)
 
     def update_reward_cache(self, action):
         self.reward_cache["a_{tcl,t}"] = action
