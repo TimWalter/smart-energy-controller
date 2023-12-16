@@ -1,18 +1,19 @@
 from abc import ABC
 from datetime import datetime
 
-import numpy as np
 import pandas as pd
 
 
 class BaseDataLoader(ABC):
-    def __init__(self, file: str):
+    def __init__(self, file: str, synthetic_data: bool = False, episode_length: int = None):
         self.file = file
+        self.synthetic_data = synthetic_data
+        self.episode_length = episode_length
         self.episode = None
         self.time = None
 
     def set_episode(self, episode: int):
-        self.episode = pd.DataFrame(pd.read_hdf(self.file, key=f'eps_{episode}'))
+        self.episode = pd.DataFrame(pd.read_hdf(self.file, key=f'eps_{episode}'))[:self.episode_length]
         self.time = self.episode.index[0]
 
     def get_values(self, start: datetime, end: datetime = None):
@@ -24,10 +25,12 @@ class BaseDataLoader(ABC):
         if end is None:
             end = start
 
-        start_index = int(np.max([0, (self.episode.index[0] - start).total_seconds()])) // 60
-        end_index = int((self.episode.index[-1] - end).total_seconds() // 60)
-        if end_index >= 0:
-            end_index = None
+        start_index = 0
+        end_index = None
+        if start < self.episode.index[0]:
+            start_index = int((self.episode.index[0] - start).total_seconds() // 60)
+        if end > self.episode.index[-1]:
+            end_index = int((self.episode.index[-1] - end).total_seconds() // 60)
 
         try:
             values = values[start_index:end_index]

@@ -4,13 +4,13 @@ import gymnasium as gym
 import numpy as np
 from gymnasium.core import ObsType, ActType
 
-from src.adaptive_consumption import AdaptiveConsumption, AdaptiveConsumptionParameters
-from src.battery import Battery, BatteryParameters
-from src.consumption import Consumption
-from src.electricity_grid import ElectricityGrid
-from src.generation import Generation
-from src.information import Information
-from src.tcl import TCL, TCLParameters
+from environment.components.adaptive_consumption import AdaptiveConsumption, AdaptiveConsumptionParameters
+from environment.components.battery import Battery, BatteryParameters
+from environment.components.consumption import Consumption
+from environment.components.electricity_grid import ElectricityGrid
+from environment.components.generation import Generation
+from environment.components.information import Information
+from environment.components.tcl import TCL, TCLParameters
 
 
 def register(adaptive_consumption_params: AdaptiveConsumptionParameters = AdaptiveConsumptionParameters(),
@@ -34,11 +34,14 @@ def register(adaptive_consumption_params: AdaptiveConsumptionParameters = Adapti
 class SingleFamilyHome(gym.Env):
     def __init__(self, adaptive_consumption_params: AdaptiveConsumptionParameters = AdaptiveConsumptionParameters(),
                  battery_params: BatteryParameters = BatteryParameters(),
-                 tcl_parameters: TCLParameters = TCLParameters(), ):
+                 tcl_params: TCLParameters = TCLParameters(), synthetic_data: bool = False,
+                 episode_length: int = None):
 
         self.adaptive_consumption_params = adaptive_consumption_params
         self.battery_params = battery_params
-        self.tcl_parameters = tcl_parameters
+        self.tcl_parameters = tcl_params
+        self.synthetic_data = synthetic_data
+        self.episode_length = episode_length
 
         action_space_shape = 0
         observation_space = {
@@ -91,7 +94,9 @@ class SingleFamilyHome(gym.Env):
 
         if self.adaptive_consumption_params is not None:
             self.adaptive_consumption = AdaptiveConsumption(**self.adaptive_consumption_params.__dict__,
-                                                            episode=episode)
+                                                            episode=episode,
+                                                            synthetic_data=self.synthetic_data,
+                                                            episode_length=self.episode_length)
 
         if self.battery_params is not None:
             self.battery = Battery(**self.battery_params.__dict__)
@@ -99,13 +104,20 @@ class SingleFamilyHome(gym.Env):
         if self.tcl_parameters is not None:
             self.tcl = TCL(**self.tcl_parameters.__dict__)
 
-        self.consumption = Consumption(episode=episode)
+        self.consumption = Consumption(episode=episode,
+                                       synthetic_data=self.synthetic_data,
+                                       episode_length=self.episode_length)
 
-        self.electricity_grid = ElectricityGrid(episode=episode)
+        self.electricity_grid = ElectricityGrid(episode=episode,
+                                                synthetic_data=self.synthetic_data,
+                                                episode_length=self.episode_length)
 
-        self.generation = Generation(episode=episode)
+        self.generation = Generation(episode=episode,
+                                     synthetic_data=self.synthetic_data,
+                                     episode_length=self.episode_length)
 
-        self.information = Information(episode=episode)
+        self.information = Information(episode=episode,
+                                       episode_length=self.episode_length)
 
         observation = self._construct_observation()
         return observation, {}
@@ -126,10 +138,11 @@ class SingleFamilyHome(gym.Env):
         self.information.step()
 
         observation = self._construct_observation()
-        reward = self._calculate_reward()
+        reward, reward_cache = self._calculate_reward()
         terminated = self._calculate_done()
         truncated = False
-        info = {}
+
+        info = {"observation": observation, "action": action, "reward": reward, "reward_cache": reward_cache}
 
         return observation, reward, terminated, truncated, info
 
@@ -157,20 +170,32 @@ class SingleFamilyHome(gym.Env):
         return observation
 
     def _calculate_reward(self):
-        produced_energy = self.generation.reward_cache["G_t"]
-        consumed_energy = self.consumption.reward_cache["L_t"]
+        reward_cache = {
+            "G_t": self.generation.reward_cache["G_t"],
+            "L_t": self.consumption.reward_cache["L_t"],
+            "I_t": self.electricity_grid.reward_cache["I_t"],
+        }
+        produced_energy = self.generation.reward_cache["G_t"].copy()
+        consumed_energy = self.consumption.reward_cache["L_t"].copy()
         if self.adaptive_consumption_params is not None:
+            reward_cache["s_{a,t}"] = self.adaptive_consumption.reward_cache["s_{a,t}"]
             consumed_energy += self.adaptive_consumption.reward_cache["s_{a,t}"]
 
         if self.battery_params is not None:
+            reward_cache["C_t"] = self.battery.reward_cache["C_t"]
+            reward_cache["D_t"] = self.battery.reward_cache["D_t"]
             produced_energy += self.battery.reward_cache["D_t"]
             consumed_energy += self.battery.reward_cache["C_t"]
 
         if self.tcl_parameters is not None:
+            reward_cache["L_{TCL}"] = self.tcl.reward_cache["L_{TCL}"]
+            reward_cache["a_{tcl,t}"] = self.tcl.reward_cache["a_{tcl,t}"]
             consumed_energy += self.tcl.reward_cache["L_{TCL}"] * self.tcl.reward_cache["a_{tcl,t}"]
 
+        reward_cache["produced_energy"] = produced_energy
+        reward_cache["consumed_energy"] = consumed_energy
         reward = self.electricity_grid.reward_cache["I_t"] * (produced_energy - consumed_energy)
-        return float(reward[0])
+        return float(reward[0]), reward_cache
 
     def _calculate_done(self):
         return self.information.time >= self.information.episode.index[-1]

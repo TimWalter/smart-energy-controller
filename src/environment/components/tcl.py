@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from src.base.base_component import BaseComponent
+from src.environment.components.base.base_component import BaseComponent
 
 
 @dataclass

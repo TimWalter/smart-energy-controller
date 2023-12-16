@@ -1,13 +1,11 @@
-from datetime import datetime
-
-from src.base.base_component import BaseComponent
-from src.base.data_loader import BaseDataLoader
+from src.environment.components.base.base_component import BaseComponent
+from src.environment.components.base.data_loader import BaseDataLoader
 
 
 class Information(BaseComponent, BaseDataLoader):
 
-    def __init__(self, episode: int = 0):
-        BaseDataLoader.__init__(self, file='../data/minutely/information.h5')
+    def __init__(self, episode: int = 0, episode_length: int = None):
+        BaseDataLoader.__init__(self, file='../data/minutely/information.h5', episode_length=episode_length)
         self.set_episode(episode)
 
         self.update_state()

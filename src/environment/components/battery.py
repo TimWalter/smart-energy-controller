@@ -2,17 +2,17 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from base.base_component import BaseComponent
+from src.environment.components.base.base_component import BaseComponent
 
 
 @dataclass
 class BatteryParameters:
     capacity: float = 3000  # in kWmin
-    charge_rate_max: float = 30  # in kW
-    discharge_rate_max: float = 30
+    charge_rate_max: float = 60  # in kW
+    discharge_rate_max: float = 60
     round_trip_efficiency: float = 0.95
     self_discharge_rate: float = 0.99
-    initial_charge: float = 9.5
+    initial_charge: float = 600
 
 
 class Battery(BaseComponent):
@@ -39,13 +39,13 @@ class Battery(BaseComponent):
         possible_discharge = self.charge * self.self_discharge_rate * self.round_trip_efficiency_sqrt
         possible_charge = (self.capacity - self.charge * self.self_discharge_rate) / self.round_trip_efficiency_sqrt
 
-        lower_bound = np.max([-possible_discharge / self.discharge_rate_max, -1])
-        upper_bound = np.min([possible_charge / self.charge_rate_max, 1])
+        bound_action = np.clip(action[0],
+                               -possible_discharge / self.discharge_rate_max,
+                               possible_charge / self.charge_rate_max
+                               )
 
-        bound_action = np.clip(action[0], lower_bound, upper_bound)
-
-        charging_rate = min(max(bound_action, 0), self.charge_rate_max)
-        discharge_rate = min(max(-bound_action, 0), self.discharge_rate_max)
+        charging_rate = max(bound_action, 0) * self.charge_rate_max
+        discharge_rate = max(-bound_action, 0) * self.discharge_rate_max
 
         self.charge = (self.charge * self.self_discharge_rate
                        + charging_rate * self.round_trip_efficiency_sqrt

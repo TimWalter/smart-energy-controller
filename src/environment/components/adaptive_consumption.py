@@ -4,8 +4,8 @@ from datetime import timedelta
 import numpy as np
 import pandas as pd
 
-from src.base.base_component import BaseComponent
-from src.base.data_loader import BaseDataLoader
+from src.environment.components.base.base_component import BaseComponent
+from src.environment.components.base.data_loader import BaseDataLoader
 
 
 @dataclass
@@ -15,12 +15,18 @@ class AdaptiveConsumptionParameters:
 
 
 class AdaptiveConsumption(BaseComponent, BaseDataLoader):
-    def __init__(self, planning_horizon: int, patience: float, episode: int = 0):
+    def __init__(self,
+                 planning_horizon: int,
+                 patience: float,
+                 episode: int = 0,
+                 synthetic_data: bool = False,
+                 episode_length: int = None):
         self.planning_horizon = planning_horizon
         self.patience = patience
         self.timedelta = timedelta(minutes=planning_horizon)
 
-        BaseDataLoader.__init__(self, file='../data/minutely/adaptive_consumption.h5')
+        BaseDataLoader.__init__(self, file='../data/minutely/adaptive_consumption.h5',
+                                synthetic_data=synthetic_data, episode_length=episode_length)
         self.set_episode(episode)
 
         self.update_state()
@@ -53,6 +59,10 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
 
     def update_state(self):
         self.state = self.get_values(self.time - self.timedelta, self.time + self.timedelta)  # in kW
+        if self.synthetic_data:
+            # set all non zero values to 100
+            self.state["power"] = np.where(self.state["power"] != 0, 100, 0)
+
         rows_to_add = 2 * self.planning_horizon + 1 - self.state.shape[0]
 
         if rows_to_add > 0:
@@ -80,9 +90,17 @@ class AdaptiveConsumption(BaseComponent, BaseDataLoader):
 if __name__ == "__main__":
     gen = AdaptiveConsumption(**AdaptiveConsumptionParameters().__dict__)
     print(gen.state)
-    for i in range(21):
-        if i == 20:
+    for i in range(500):
+        if i == 0:
             print(gen.state)
-        gen.step(np.array([0, 0, 0, 1, 1]))
+        if i == 100:
+            print(gen.state)
+        if i == 995:
+            print(gen.state)
+        gen.step(gen.desired_behaviour)
     print(gen.state)
     print(gen.reward_cache)
+    import matplotlib.pyplot as plt
+
+    plt.plot(gen.episode.values)
+    plt.show()
