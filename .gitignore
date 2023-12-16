@@ -3,4 +3,4 @@ __pycache__
 doc/outline/*
 !doc/outline/outline.tex
 /sec/
-/src/tensorboard
+/src/tensorboardgit pul
