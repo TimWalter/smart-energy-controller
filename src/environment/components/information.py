@@ -8,12 +8,16 @@ class Information(BaseComponent, BaseDataLoader):
         BaseComponent.__init__(self,
                                normalise=normalise,
                                max_state=np.array({
+                                                      "day_of_year":365,
+                                                      "hour_of_day": 23,
                                                       "G(i)": 1082.1,
                                                       "H_sun": 64.41,
                                                       "T2m": 35.13,
                                                       "WS10m": 12.76
                                                   }.values()),
                                min_state=np.array({
+                                                      "day_of_year": 1,
+                                                      "hour_of_day": 0,
                                                       "G(i)": 0.0,
                                                       "H_sun": 0.0,
                                                       "T2m": -10.43,
@@ -32,7 +36,7 @@ class Information(BaseComponent, BaseDataLoader):
         self.update_state()
 
     def update_state(self):
-        self.state = self.get_values(self.time).values
+        self.state = np.array(self.get_values(self.time).values[0], dtype=np.float32)
         super().update_state()
 
     def update_reward_cache(self):
