@@ -214,4 +214,4 @@ class SingleFamilyHome(gym.Env):
         return reward, reward_cache
 
     def _calculate_done(self):
-        return self.components["information"].time >= self.components["information"].episode.index[-1]
+        return self.components["intensity"].time >= self.components["intensity"].episode.index[-1]
