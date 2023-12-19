@@ -178,7 +178,7 @@ class SingleFamilyHome(gym.Env):
             observation += [self.components["tcl"].state]
 
         if self.include_infos:
-            observation += [self.components["information"].state.values]
+            observation += list(self.components["information"].state)
         return np.array(observation, dtype=np.float32)
 
     def _calculate_reward(self):
