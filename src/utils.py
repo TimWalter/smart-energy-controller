@@ -1,4 +1,20 @@
 import matplotlib.pyplot as plt
+from stable_baselines3.common.callbacks import BaseCallback
+
+
+class LoggingCallback(BaseCallback):
+    def __init__(self, verbose=0):
+        super().__init__(verbose)
+        self.infos = []
+
+    def _on_step(self) -> bool:
+        self.infos.append(self.locals["infos"][0])
+        return True
+
+    def __call__(self, locals_, globals_):
+        self.locals = locals_
+        self.globals = globals_
+        self._on_step()
 
 
 def visualize_scenario(callback, env):
@@ -15,7 +31,7 @@ def visualize_scenario(callback, env):
 
 def visualize_battery_behaviour(callback, env):
     state_of_charge = [info["observation"][env.observation_slices["battery"]] for info in callback.infos]
-    battery_actions = [info["action"][env.action_slice["battery"]] for info in callback.infos]
+    battery_actions = [info["action"][env.action_slices["battery"]] for info in callback.infos]
 
     fig, ax1 = plt.subplots()
     color = 'tab:blue'
@@ -44,14 +60,14 @@ def visualize_reward(callback):
     color = 'tab:red'
     ax[0].set_xlabel('timestep')
     ax[0].set_ylabel('Reward', color=color)
-    ax[0].plot(rewards, color=color, label="Reward")
+    ax[0].plot(rewards, color=color, label="Reward", alpha=0.8)
     ax[0].tick_params(axis='y', labelcolor=color)
 
     ax1 = ax[0].twinx()  # instantiate a second axes that shares the same x-axis
 
     ax1.set_ylabel('Energy', color=color)  # we already handled the x-label with ax1
-    ax1.plot(produced_energy, color="yellow", label="Produced Energy")
-    ax1.plot(consumed_energy, color='black', label="Consumed Energy")
+    ax1.plot(produced_energy, color="yellow", label="Produced Energy", alpha=0.8)
+    ax1.plot(consumed_energy, color='black', label="Consumed Energy", alpha=0.8)
     ax1.tick_params(axis='y')
     ax1.legend(loc="upper right")
 

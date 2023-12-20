@@ -1,0 +1,32 @@
+{
+  "action_space": {
+    "type": "discrete",
+    "levels": [5, 2, 11]
+  },
+  "energy_storage_system": {
+    "capacity_in_kwmin": 810,
+    "maximum_charge_rate_in_kw": 5,
+    "maximum_discharge_rate_in_kw": 5,
+    "round_trip_efficiency": 0.925,
+    "self_discharge_rate": 0.999,
+    "initial_charge_in_kwmin": 0
+  },
+  "flexible_demand_response": {
+    "planning_horizon": 720,
+    "deterministic": false,
+    "patience": 100
+  },
+  "thermostatically_controlled_load": {
+    "initial_indoor_temperature": 20,
+    "initial_building_mass_temperature": 20,
+    "thermal_mass_air": 1500,
+    "thermal_mass_building": 600,
+    "unintentional_heat_gain": 0.0015,
+    "degree_generated_by_kwmin": 0.008,
+    "nominal_power": 20,
+    "minimal_temperature": 18,
+    "maximal_temperature": 23
+  },
+  "include_additional_information": true
+}
+

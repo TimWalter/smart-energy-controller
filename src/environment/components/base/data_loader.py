@@ -4,16 +4,18 @@ from datetime import datetime
 import pandas as pd
 
 
-class BaseDataLoader(ABC):
-    def __init__(self, file: str, synthetic_data: bool = False, episode_length: int = None):
+class DataLoader(ABC):
+    def __init__(self, file: str):
         self.file = file
-        self.synthetic_data = synthetic_data
-        self.episode_length = episode_length
         self.episode = None
         self.time = None
 
     def set_episode(self, episode: int):
-        self.episode = pd.DataFrame(pd.read_hdf(self.file, key=f'eps_{episode}'))[:self.episode_length]
+        try:
+            self.episode = pd.DataFrame(pd.read_hdf(self.file, key=f'eps_{episode}'))
+        except FileNotFoundError:
+            self.file = "../" + self.file
+            self.set_episode(episode)
         self.time = self.episode.index[0]
 
     def get_values(self, start: datetime, end: datetime = None):
