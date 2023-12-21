@@ -111,10 +111,10 @@ class SingleFamilyHome(gym.Env):
                 low += [-1]
                 high += [1]
             if self.flexible_demand_response_condition:
-                low += [0]
-                high += [1]
+                low += [-1] * (2 * self.config["flexible_demand_response"]["planning_horizon"] + 1)
+                high += [1] * (2 * self.config["flexible_demand_response"]["planning_horizon"] + 1)
             if self.thermostatically_controlled_load_condition:
-                low += [0]
+                low += [-1]
                 high += [1]
             return gym.spaces.Box(low=np.array(low), high=np.array(high), seed=42)
         else:
@@ -132,21 +132,36 @@ class SingleFamilyHome(gym.Env):
             action_slice["thermostatically_controlled_load"] = -1
         return action_slice
 
-    def _rescale_action(self, action: ActType) -> ActType:
+    def _rescale_discrete_action(self, action: ActType) -> ActType:
         rescaled_action = []
 
         if self.energy_storage_system_condition:
             energy_storage_system_action = action[self.action_slice["energy_storage_system"]]
             levels = self.action_space.nvec[self.action_slice["energy_storage_system"]]
-            rescaled_action += [2 * energy_storage_system_action / (levels - 1) - 1]  # [-1, 1]
+            rescaled_action += [2 * energy_storage_system_action / (levels - 1) - 1]  # [0, levels-1] -> [-1, 1]
         if self.flexible_demand_response_condition:
             flexible_demand_response_action = action[self.action_slice["flexible_demand_response"]]
             levels = self.action_space.nvec[self.action_slice["flexible_demand_response"]]
-            rescaled_action += list(flexible_demand_response_action / (levels - 1))  # [0, 1]
+            rescaled_action += list(flexible_demand_response_action / (levels - 1))  # [0, levels-1] -> [0, 1]
         if self.thermostatically_controlled_load_condition:
             thermostatically_controlled_load_action = action[self.action_slice["thermostatically_controlled_load"]]
             levels = self.action_space.nvec[self.action_slice["thermostatically_controlled_load"]]
-            rescaled_action += [thermostatically_controlled_load_action / (levels - 1)]  # [0, 1]
+            rescaled_action += [thermostatically_controlled_load_action / (levels - 1)]  # [0, levels-1] -> [0, 1]
+
+        return np.array(rescaled_action, dtype=np.float32)
+
+    def _rescale_continuous_action(self, action: ActType) -> ActType:
+        rescaled_action = []
+
+        if self.energy_storage_system_condition:
+            energy_storage_system_action = action[self.action_slice["energy_storage_system"]]
+            rescaled_action += [energy_storage_system_action]  # [-1, 1] -> [-1, 1]
+        if self.flexible_demand_response_condition:
+            flexible_demand_response_action = action[self.action_slice["flexible_demand_response"]]
+            rescaled_action += list((flexible_demand_response_action + 1) / 2)  # [-1, 1] -> [0, 1]
+        if self.thermostatically_controlled_load_condition:
+            thermostatically_controlled_load_action = action[self.action_slice["thermostatically_controlled_load"]]
+            rescaled_action += [(thermostatically_controlled_load_action + 1) / 2]  # [-1, 1] -> [0, 1]
 
         return np.array(rescaled_action, dtype=np.float32)
 
@@ -198,10 +213,9 @@ class SingleFamilyHome(gym.Env):
 
     def step(self, action: ActType) -> tuple[ObsType, float, bool, bool, dict]:
         if self.config["action_space"]["type"] == "discrete":
-            rescaled_action = self._rescale_action(action)
+            rescaled_action = self._rescale_discrete_action(action)
         else:
-            rescaled_action = action
-
+            rescaled_action = self._rescale_continuous_action(action)
         self.external_electricity_supply.step()
         self.household_energy_demand.step()
         self.rooftop_solar_array.step()
@@ -234,33 +248,53 @@ if __name__ == "__main__":
     from stable_baselines3.common.env_checker import check_env
     from stable_baselines3.common.monitor import Monitor
 
-    # Discrete
     env = Monitor(SingleFamilyHome())
     check_env(env)
 
     observation = env.reset()
     print(f"Observation: {observation}")
-    actions = [
-                  np.zeros(1442),
-              ] * 20
 
-    charge_action = np.zeros(1442)
-    charge_action[0] = 4
-    actions += [charge_action]
-    discharge_action = np.zeros(1442)
-    discharge_action[0] = 0
-    actions += [discharge_action]
+    if env.unwrapped.config["action_space"]["type"] == "discrete":
+        actions = [np.zeros(1442)] * 20
 
-    delay_action = np.zeros(1442)
-    delay_action[721] = 1
-    actions += [delay_action]
-    expedite_action = np.zeros(1442)
-    expedite_action[722] = 1
-    actions += [expedite_action]
+        charge_action = np.zeros(1442)
+        charge_action[0] = 4
+        actions += [charge_action]
+        discharge_action = np.zeros(1442)
+        discharge_action[0] = 0
+        actions += [discharge_action]
 
-    heating_action = np.zeros(1442)
-    heating_action[-1] = 1
-    actions += [heating_action]
+        delay_action = np.zeros(1442)
+        delay_action[721] = 1
+        actions += [delay_action]
+        expedite_action = np.zeros(1442)
+        expedite_action[722] = 1
+        actions += [expedite_action]
+
+        heating_action = np.zeros(1442)
+        heating_action[-1] = 10
+        actions += [heating_action]
+
+    elif env.unwrapped.config["action_space"]["type"] == "continuous":
+        actions = [-1 * np.ones(1442)] * 20
+
+        charge_action = -1 * np.ones(1442)
+        charge_action[0] = 1
+        actions += [charge_action]
+        discharge_action = -1 * np.ones(1442)
+        discharge_action[0] = -1
+        actions += [discharge_action]
+
+        delay_action = -1 * np.ones(1442)
+        delay_action[721] = 1
+        actions += [delay_action]
+        expedite_action = -1 * np.ones(1442)
+        expedite_action[722] = 1
+        actions += [expedite_action]
+
+        heating_action = -1 * np.ones(1442)
+        heating_action[-1] = 1
+        actions += [heating_action]
 
     for i, action in enumerate(actions):
         observation, reward, terminated, truncated, info = env.step(action)
