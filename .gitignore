@@ -5,3 +5,5 @@ doc/outline/*
 sec/
 src/tensorboard
 src/.neptune
+src/logs
+src/models

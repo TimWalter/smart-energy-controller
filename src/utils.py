@@ -1,3 +1,5 @@
+import pickle
+
 import matplotlib.pyplot as plt
 from stable_baselines3.common.callbacks import BaseCallback
 
@@ -5,6 +7,11 @@ from stable_baselines3.common.callbacks import BaseCallback
 class LoggingCallback(BaseCallback):
     def __init__(self, verbose=0):
         super().__init__(verbose)
+        self.infos = []
+
+    def dump(self, path: str):
+        with open(path, "wb") as f:
+            pickle.dump(self.infos, f)
         self.infos = []
 
     def _on_step(self) -> bool:

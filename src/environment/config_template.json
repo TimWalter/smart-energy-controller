@@ -1,6 +1,6 @@
 {
   "action_space": {
-    "type": "continuous",
+    "type": "discrete",
     "levels": [5, 2, 11]
   },
   "energy_storage_system": {
@@ -10,6 +10,11 @@
     "round_trip_efficiency": 0.925,
     "self_discharge_rate": 0.999,
     "initial_charge_in_kwmin": 0
+  },
+  "flexible_demand_response": {
+    "planning_horizon": 720,
+    "deterministic": false,
+    "patience": 100
   },
   "thermostatically_controlled_load": {
     "initial_indoor_temperature": 20,
