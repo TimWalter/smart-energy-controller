@@ -24,6 +24,14 @@ class SingleFamilyHome(gym.Env):
     weather_and_time_data: WeatherAndTimeData
 
     def __init__(self):
+        self.next_episode = 0
+        self.episode_set = [0]
+
+        self.develop_set = [0]
+        self.test_set = [25, 50, 75, 100]
+        self.train_set = np.random.choice(np.setdiff1d(np.arange(0, 104), self.test_set), 95, replace=False)
+        self.eval_set = np.setdiff1d(np.setdiff1d(np.arange(0, 104), self.test_set), self.train_set)
+
         try:
             self.config = json.load(open("environment/config.json", "r"))
         except FileNotFoundError:
@@ -36,6 +44,22 @@ class SingleFamilyHome(gym.Env):
         self.observation_space = self._observation_space()
         self.action_space = self._action_space()
         self.action_slice = self._action_slice()
+
+    def develop(self):
+        self.next_episode = 0
+        self.episode_set = self.develop_set
+
+    def train(self):
+        self.next_episode = 0
+        self.episode_set = self.train_set
+
+    def eval(self):
+        self.next_episode = 0
+        self.episode_set = self.eval_set
+
+    def test(self):
+        self.next_episode = 0
+        self.episode_set = self.test_set
 
     def _observation_space(self) -> gym.spaces.Dict:
         spaces = {
@@ -188,7 +212,9 @@ class SingleFamilyHome(gym.Env):
     def reset(self, seed: int | None = 42, options: dict[str, Any] | None = None, ) -> tuple[ObsType, dict[str, Any]]:
         super().reset(seed=seed)
 
-        episode = 0
+        # randomize initial charge and temperature?
+        episode = self.episode_set[self.next_episode]
+        self.next_episode = (self.next_episode + 1) % len(self.episode_set)
 
         self.external_electricity_supply = ExternalElectricitySupply(episode=episode)
         self.household_energy_demand = HouseholdEnergyDemand(episode=episode)

@@ -21,7 +21,7 @@ def train(name: str, agent: Callable, policy: str, eval_epochs: int, train_epoch
         callback = LoggingCallback()
 
     log(f"Starting training for {name} with {agent.__name__} and {policy} policy")
-    env = Monitor(SingleFamilyHome(), filename=f"./logs/{name}")
+    env = Monitor(SingleFamilyHome())
 
     if check:
         log("Checking environment")
@@ -47,18 +47,17 @@ def train(name: str, agent: Callable, policy: str, eval_epochs: int, train_epoch
     model.save(f"./models/{name}")
 
     if logging:
-        callback.dump(f"./logs/{name}.json")
+        callback.dump(f"./logs/{name}.pkl")
 
     return results
 
 
 if __name__ == "__main__":
     from stable_baselines3 import SAC
+    from baselines.idle import Idle
 
-    #results = train("SAC_1", SAC, "MultiInputPolicy", 1, 1)
+    results = train("Idle", Idle, "MultiInputPolicy", 1, 1)
 
-    #print(results)
+    print(results)
 
-    env = Monitor(SingleFamilyHome(), filename=f"./logs/test")
-    env.reset()
-    env.step(env.action_space.sample())
+

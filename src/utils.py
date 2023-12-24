@@ -1,6 +1,7 @@
 import pickle
 
 import matplotlib.pyplot as plt
+import numpy as np
 from stable_baselines3.common.callbacks import BaseCallback
 
 
@@ -25,20 +26,30 @@ class LoggingCallback(BaseCallback):
 
 
 def visualize_scenario(callback, env):
-    intensities = [info["observation"][env.observation_slices["intensity"]] for info in callback.infos]
-    plt.plot(intensities, label="Intensity", alpha=0.8)
-    consumptions = [info["observation"][env.observation_slices["consumption"]] for info in callback.infos]
-    plt.plot(consumptions, label="Consumption", alpha=0.8)
-    generations = [info["observation"][env.observation_slices["generation"]] for info in callback.infos]
-    plt.plot(generations, label="Generation", alpha=0.8)
+    intensities = [info["next_observation"]["carbon_intensity"] for info in callback.infos]
+    consumptions = [info["next_observation"]["household_energy_demand"] for info in callback.infos]
+    generations = [info["next_observation"]["rooftop_solar_generation"] for info in callback.infos]
 
-    plt.legend()
+    fig, ax1 = plt.subplots()
+    color = 'tab:blue'
+    ax1.set_xlabel('timestep')
+    ax1.set_ylabel('Carbon Intensity', color=color)
+    ax1.plot(intensities, color=color, label="Carbon Intensity", alpha=0.8)
+    ax1.tick_params(axis='y', labelcolor=color)
+
+    ax2 = ax1.twinx()
+
+    ax2.set_ylabel('Energy', color="red")  # we already handled the x-label with ax1
+    ax2.plot(np.array(generations) - np.array(consumptions), color="red", label="Generation-Consumption", alpha=0.8)
+    ax2.tick_params(axis='y', labelcolor=color)
+
+    fig.tight_layout()
     plt.show()
 
 
 def visualize_battery_behaviour(callback, env):
-    state_of_charge = [info["observation"][env.observation_slices["battery"]] for info in callback.infos]
-    battery_actions = [info["action"][env.action_slices["battery"]] for info in callback.infos]
+    state_of_charge = [info["next_observation"]["battery_state_of_charge"] for info in callback.infos]
+    battery_actions = [info["action"][env.action_slice["energy_storage_system"]] for info in callback.infos]
 
     fig, ax1 = plt.subplots()
     color = 'tab:blue'
@@ -58,47 +69,57 @@ def visualize_battery_behaviour(callback, env):
     plt.show()
 
 
-def visualize_reward(callback):
-    rewards = [info["reward"] for info in callback.infos]
-    produced_energy = [info["reward_cache"]["PE_t"] for info in callback.infos]
-    consumed_energy = [info["reward_cache"]["CE_t"] for info in callback.infos]
+def visualize_tcl_behaviour(callback, env):
+    tcl_temperatures = [info["next_observation"]["tcl_state_of_charge"] for info in callback.infos]
+    tcl_actions = [info["action"][env.action_slice["thermostatically_controlled_load"]] for info in callback.infos]
 
-    fig, ax = plt.subplots(1, 3, figsize=(15, 5))
+    fig, ax1 = plt.subplots()
+    color = 'tab:blue'
+    ax1.set_xlabel('timestep')
+    ax1.set_ylabel('State of Charge', color=color)
+    ax1.plot(tcl_temperatures, color=color, label="State of Charge")
+    ax1.tick_params(axis='y', labelcolor=color)
+
+    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+
     color = 'tab:red'
-    ax[0].set_xlabel('timestep')
-    ax[0].set_ylabel('Reward', color=color)
-    ax[0].plot(rewards, color=color, label="Reward", alpha=0.8)
-    ax[0].tick_params(axis='y', labelcolor=color)
+    ax2.set_ylabel('TCL Action', color=color)  # we already handled the x-label with ax1
+    ax2.plot(tcl_actions, color=color, label="TCL Action")
+    ax2.tick_params(axis='y', labelcolor=color)
 
-    ax1 = ax[0].twinx()  # instantiate a second axes that shares the same x-axis
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    plt.show()
 
-    ax1.set_ylabel('Energy', color=color)  # we already handled the x-label with ax1
-    ax1.plot(produced_energy, color="yellow", label="Produced Energy", alpha=0.8)
-    ax1.plot(consumed_energy, color='black', label="Consumed Energy", alpha=0.8)
-    ax1.tick_params(axis='y')
-    ax1.legend(loc="upper right")
 
-    ax[1].plot(produced_energy, label="Produced Energy", alpha=0.8, color="yellow")
-    g_t = [info["reward_cache"]["G_t"] for info in callback.infos]
-    ax[1].plot(g_t, label="G_t", alpha=0.8)
-    if "D_t" in callback.infos[0]["reward_cache"].keys():
-        d_t = [info["reward_cache"]["D_t"] for info in callback.infos]
-        ax[1].plot(d_t, label="D_t", alpha=0.8)
-    ax[1].legend()
+def visualize_reward(callback, env):
+    rewards = [info["reward"] for info in callback.infos]
+    household_energy_demand = [info["next_observation"]["household_energy_demand"] for info in callback.infos]
+    rooftop_solar_generation = [info["next_observation"]["rooftop_solar_generation"] for info in callback.infos]
+    if "energy_storage_system" in env.action_slice.keys():
+        battery_actions = [info["action"][env.action_slice["energy_storage_system"]] for info in callback.infos]
 
-    ax[2].plot(consumed_energy, label="Consumed Energy", alpha=0.8, color="black")
-    l_t = [info["reward_cache"]["L_t"] for info in callback.infos]
-    ax[2].plot(l_t, label="L_t", alpha=0.8)
-    if "C_t" in callback.infos[0]["reward_cache"].keys():
-        c_t = [info["reward_cache"]["C_t"] for info in callback.infos]
-        ax[2].plot(c_t, label="C_t", alpha=0.8)
-    if "s_{a,t}" in callback.infos[0]["reward_cache"].keys():
-        s_at = [info["reward_cache"]["s_{a,t}"] for info in callback.infos]
-        ax[2].plot(s_at, label="s_{a,t}", alpha=0.8)
-    if "a_{tcl,t}" in callback.infos[0]["reward_cache"].keys():
-        a_tcl_t = [info["reward_cache"]["a_{tcl,t}"] * info["reward_cache"]["L_{TCL}"] for info in callback.infos]
-        ax[2].plot(a_tcl_t, label="a_{tcl,t}*L_{TCL}", alpha=0.8)
-    ax[2].legend()
+    if "thermostatically_controlled_load" in env.action_slice.keys():
+        tcl_actions = [info["action"][env.action_slice["thermostatically_controlled_load"]] for info in callback.infos]
 
-    plt.tight_layout()
+    fig, ax1 = plt.subplots()
+    color = 'tab:green'
+    ax1.set_xlabel('timestep')
+    ax1.set_ylabel('Reward', color=color)
+    ax1.plot(rewards, color=color, label="Reward")
+    ax1.tick_params(axis='y', labelcolor=color)
+
+    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
+    if "energy_storage_system" in env.action_slice.keys():
+        ax2.plot(battery_actions, color="blue", label="Battery Action")
+    if "thermostatically_controlled_load" in env.action_slice.keys():
+        ax2.plot(tcl_actions, color="purple", label="TCL Action")
+    ax2.legend(loc="upper right")
+
+    ax3 = ax1.twinx()
+    ax3.set_ylabel('Energy', color="orange")  # we already handled the x-label with ax1
+    ax3.tick_params(axis='y', labelcolor="orange")
+    ax3.plot(np.array(rooftop_solar_generation) - np.array(household_energy_demand), color="orange",
+             label="Generation-Consumption", alpha=0.8)
+
+    fig.tight_layout()  # otherwise the right y-label is slightly clipped
     plt.show()
