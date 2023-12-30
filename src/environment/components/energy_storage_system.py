@@ -10,7 +10,8 @@ class EnergyStorageSystem(Component):
                  maximum_discharge_rate_in_kw: float,
                  round_trip_efficiency: float,
                  self_discharge_rate: float,
-                 initial_charge_in_kwmin: float
+                 initial_charge_in_kwmin: float,
+                 shuffle: bool = False
                  ):
         """
         From now on units are dropped and expected to be in kWmin for energy and kW for power.
@@ -31,7 +32,10 @@ class EnergyStorageSystem(Component):
         self.round_trip_efficiency_sqrt = np.sqrt(round_trip_efficiency)
         self.self_discharge_rate = self_discharge_rate
 
-        self.charge = initial_charge_in_kwmin
+        if shuffle:
+            self.charge = np.random.uniform(0, capacity_in_kwmin * 0.2)
+        else:
+            self.charge = initial_charge_in_kwmin
 
         self.update_state()
 
@@ -45,16 +49,16 @@ class EnergyStorageSystem(Component):
         """
         if action < 0:  # Discharge
             charge_rate = 0
-            possible_discharge = self.charge * self.self_discharge_rate * self.round_trip_efficiency_sqrt
+            possible_discharge = np.max([self.charge - self.self_discharge_rate, 0]) * self.round_trip_efficiency_sqrt
             discharge_rate = np.clip(-action * self.maximum_discharge_rate, 0, possible_discharge)
         else:  # Charge
             discharge_rate = 0
-            possible_charge = (self.capacity - self.charge * self.self_discharge_rate) / self.round_trip_efficiency_sqrt
+            possible_charge = (self.capacity - self.charge + self.self_discharge_rate) / self.round_trip_efficiency_sqrt
             charge_rate = np.clip(action * self.maximum_charge_rate, 0, possible_charge)
 
-        self.charge = (self.charge * self.self_discharge_rate
-                       + charge_rate * self.round_trip_efficiency_sqrt
-                       - discharge_rate / self.round_trip_efficiency_sqrt)
+        self.charge = np.max([self.charge - self.self_discharge_rate
+                              + charge_rate * self.round_trip_efficiency_sqrt
+                              - discharge_rate / self.round_trip_efficiency_sqrt, 0])
 
         self.update_state()
         self.update_reward_cache(charge_rate, discharge_rate)

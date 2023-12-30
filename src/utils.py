@@ -12,6 +12,13 @@ class LoggingCallback(BaseCallback):
 
     def dump(self, path: str):
         with open(path, "wb") as f:
+            self.infos = {
+                key: {key_inner: [info[key][key_inner] for info in self.infos] for key_inner in self.infos[0][key].keys()}
+                if isinstance(self.infos[0][key], dict)
+                else [info[key] for info in self.infos]
+                for key in self.infos[0].keys()
+            }
+
             pickle.dump(self.infos, f)
         self.infos = []
 
@@ -98,6 +105,9 @@ def visualize_reward(callback, env):
     if "energy_storage_system" in env.action_slice.keys():
         battery_actions = [info["action"][env.action_slice["energy_storage_system"]] for info in callback.infos]
 
+    if "flexible_demand_response" in env.action_slice.keys():
+        fdr_actions = [info["action"][env.action_slice["flexible_demand_response"]] for info in callback.infos]
+
     if "thermostatically_controlled_load" in env.action_slice.keys():
         tcl_actions = [info["action"][env.action_slice["thermostatically_controlled_load"]] for info in callback.infos]
 
@@ -111,6 +121,8 @@ def visualize_reward(callback, env):
     ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
     if "energy_storage_system" in env.action_slice.keys():
         ax2.plot(battery_actions, color="blue", label="Battery Action")
+    if "flexible_demand_response" in env.action_slice.keys():
+        ax2.plot(fdr_actions, color="red", label="FDR Action")
     if "thermostatically_controlled_load" in env.action_slice.keys():
         ax2.plot(tcl_actions, color="purple", label="TCL Action")
     ax2.legend(loc="upper right")

@@ -42,17 +42,15 @@ class FlexibleDemandResponse(Component, DataLoader):
 
         self.update_state()
 
-    def step(self, actions: np.ndarray):
+    def step(self, action: float):
         """
         Perform a step in the environment.
 
         Args:
-            actions (np.ndarray): The actions are in [0, 1].
-            if usage was scheduled in the past 1 corresponds to maximum delay,
-            if usage is scheduled in the future 1 corresponds to maximum expedite.
+            action (np.ndarray): The action is in [-1, 1]. -1 maximum delay, 1 maximum expedite.
         """
-        execution_probability = np.clip(self.schedule + actions * self.weighting, 0, 1)
-        coins = np.random.uniform(0, 1, actions.shape)
+        execution_probability = np.clip(self.schedule + action * self.weighting, 0, 1)
+        coins = np.random.uniform(0, 1, self.schedule.shape)
 
         executed_actions = coins < execution_probability
 

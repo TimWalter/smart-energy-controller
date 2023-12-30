@@ -24,6 +24,16 @@ class SingleFamilyHome(gym.Env):
     weather_and_time_data: WeatherAndTimeData
 
     def __init__(self):
+        try:
+            self.config = json.load(open("environment/config.json", "r"))
+        except FileNotFoundError:
+            self.config = json.load(open("config.json", "r"))
+
+        self.energy_storage_system_condition = "energy_storage_system" in self.config.keys()
+        self.flexible_demand_response_condition = "flexible_demand_response" in self.config.keys()
+        self.thermostatically_controlled_load_condition = "thermostatically_controlled_load" in self.config.keys()
+        self.additional_information_condition = "include_additional_information" in self.config.keys()
+
         self.next_episode = 0
         self.episode_set = [0]
 
@@ -32,14 +42,15 @@ class SingleFamilyHome(gym.Env):
         self.train_set = np.random.choice(np.setdiff1d(np.arange(0, 104), self.test_set), 95, replace=False)
         self.eval_set = np.setdiff1d(np.setdiff1d(np.arange(0, 104), self.test_set), self.train_set)
 
-        try:
-            self.config = json.load(open("environment/config.json", "r"))
-        except FileNotFoundError:
-            self.config = json.load(open("config.json", "r"))
-        self.energy_storage_system_condition = "energy_storage_system" in self.config.keys()
-        self.flexible_demand_response_condition = "flexible_demand_response" in self.config.keys()
-        self.thermostatically_controlled_load_condition = "thermostatically_controlled_load" in self.config.keys()
-        self.additional_information_condition = "include_additional_information" in self.config.keys()
+        self.shuffle = False
+        self.shuffled_initial_conditions = [
+            np.random.uniform(0, self.config["energy_storage_system"]["capacity_in_kwmin"] * 0.2,
+                              95) if self.energy_storage_system_condition else None,
+            np.random.uniform(0, (self.config["thermostatically_controlled_load"]["maximal_temperature"] -
+                                  self.config["thermostatically_controlled_load"]["maximal_temperature"]) * 0.2 +
+                              self.config["thermostatically_controlled_load"]["maximal_temperature"],
+                              95) if self.thermostatically_controlled_load_condition else None
+        ]
 
         self.observation_space = self._observation_space()
         self.action_space = self._action_space()
@@ -48,18 +59,22 @@ class SingleFamilyHome(gym.Env):
     def develop(self):
         self.next_episode = 0
         self.episode_set = self.develop_set
+        self.shuffle = False
 
     def train(self):
         self.next_episode = 0
         self.episode_set = self.train_set
+        self.shuffle = True
 
     def eval(self):
         self.next_episode = 0
         self.episode_set = self.eval_set
+        self.shuffle = True
 
     def test(self):
         self.next_episode = 0
         self.episode_set = self.test_set
+        self.shuffle = True
 
     def _observation_space(self) -> gym.spaces.Dict:
         spaces = {
@@ -73,7 +88,7 @@ class SingleFamilyHome(gym.Env):
 
         if self.flexible_demand_response_condition:
             dim = self.config["flexible_demand_response"]["planning_horizon"] * 2 + 1
-            spaces["flexible_demand_schedule"] = gym.spaces.Box(low=0.0, high=8.5839, shape=(dim,))
+            spaces["flexible_demand_schedule"] = gym.spaces.Box(low=0.0, high=8.5839 * dim)
 
         if self.thermostatically_controlled_load_condition:
             spaces["tcl_state_of_charge"] = gym.spaces.Box(low=0.0, high=1.0)
@@ -99,7 +114,7 @@ class SingleFamilyHome(gym.Env):
             observation["battery_state_of_charge"] = self.energy_storage_system.state
 
         if self.flexible_demand_response_condition:
-            observation["flexible_demand_schedule"] = self.flexible_demand_response.state
+            observation["flexible_demand_schedule"] = np.sum(self.flexible_demand_response.state)
 
         if self.thermostatically_controlled_load_condition:
             observation["tcl_state_of_charge"] = self.thermostatically_controlled_load.state
@@ -123,8 +138,7 @@ class SingleFamilyHome(gym.Env):
             if self.energy_storage_system_condition:
                 nvec += [self.config["action_space"]["levels"][0]]
             if self.flexible_demand_response_condition:
-                nvec += [self.config["action_space"]["levels"][1 if self.energy_storage_system_condition else 0]] * \
-                        (2 * self.config["flexible_demand_response"]["planning_horizon"] + 1)
+                nvec += [self.config["action_space"]["levels"][1 if self.energy_storage_system_condition else 0]]
             if self.thermostatically_controlled_load_condition:
                 nvec += [self.config["action_space"]["levels"][-1]]
             return gym.spaces.MultiDiscrete(nvec, seed=42)
@@ -135,8 +149,8 @@ class SingleFamilyHome(gym.Env):
                 low += [-1]
                 high += [1]
             if self.flexible_demand_response_condition:
-                low += [-1] * (2 * self.config["flexible_demand_response"]["planning_horizon"] + 1)
-                high += [1] * (2 * self.config["flexible_demand_response"]["planning_horizon"] + 1)
+                low += [-1]
+                high += [1]
             if self.thermostatically_controlled_load_condition:
                 low += [-1]
                 high += [1]
@@ -144,14 +158,12 @@ class SingleFamilyHome(gym.Env):
         else:
             raise ValueError("Invalid action space type.")
 
-    def _action_slice(self) -> dict[str, slice]:
+    def _action_slice(self) -> dict[str, slice | int]:
         action_slice = {}
         if self.energy_storage_system_condition:
             action_slice["energy_storage_system"] = 0
         if self.flexible_demand_response_condition:
-            start = 1 if self.energy_storage_system_condition else 0
-            stop = start + 2 * self.config["flexible_demand_response"]["planning_horizon"] + 1
-            action_slice["flexible_demand_response"] = slice(start, stop)
+            action_slice["flexible_demand_response"] = 1 if self.energy_storage_system_condition else 0
         if self.thermostatically_controlled_load_condition:
             action_slice["thermostatically_controlled_load"] = -1
         return action_slice
@@ -166,7 +178,7 @@ class SingleFamilyHome(gym.Env):
         if self.flexible_demand_response_condition:
             flexible_demand_response_action = action[self.action_slice["flexible_demand_response"]]
             levels = self.action_space.nvec[self.action_slice["flexible_demand_response"]]
-            rescaled_action += list(flexible_demand_response_action / (levels - 1))  # [0, levels-1] -> [0, 1]
+            rescaled_action += [2 * flexible_demand_response_action / (levels - 1) - 1]  # [0, levels-1] -> [-1, 1]
         if self.thermostatically_controlled_load_condition:
             thermostatically_controlled_load_action = action[self.action_slice["thermostatically_controlled_load"]]
             levels = self.action_space.nvec[self.action_slice["thermostatically_controlled_load"]]
@@ -182,7 +194,7 @@ class SingleFamilyHome(gym.Env):
             rescaled_action += [energy_storage_system_action]  # [-1, 1] -> [-1, 1]
         if self.flexible_demand_response_condition:
             flexible_demand_response_action = action[self.action_slice["flexible_demand_response"]]
-            rescaled_action += list((flexible_demand_response_action + 1) / 2)  # [-1, 1] -> [0, 1]
+            rescaled_action += [flexible_demand_response_action]  # [-1, 1] -> [-1, 1]
         if self.thermostatically_controlled_load_condition:
             thermostatically_controlled_load_action = action[self.action_slice["thermostatically_controlled_load"]]
             rescaled_action += [(thermostatically_controlled_load_action + 1) / 2]  # [-1, 1] -> [0, 1]
@@ -192,6 +204,7 @@ class SingleFamilyHome(gym.Env):
     def _calculate_reward(self) -> float:
         produced_energy = self.rooftop_solar_array.reward_cache["rooftop_solar_generation"]
         consumed_energy = self.household_energy_demand.reward_cache["household_energy_demand"]
+
         if self.energy_storage_system_condition:
             produced_energy += self.energy_storage_system.reward_cache["discharge_rate"]
             consumed_energy += self.energy_storage_system.reward_cache["charge_rate"]
@@ -212,7 +225,6 @@ class SingleFamilyHome(gym.Env):
     def reset(self, seed: int | None = 42, options: dict[str, Any] | None = None, ) -> tuple[ObsType, dict[str, Any]]:
         super().reset(seed=seed)
 
-        # randomize initial charge and temperature?
         episode = self.episode_set[self.next_episode]
         self.next_episode = (self.next_episode + 1) % len(self.episode_set)
 
@@ -222,6 +234,9 @@ class SingleFamilyHome(gym.Env):
 
         if self.energy_storage_system_condition:
             self.energy_storage_system = EnergyStorageSystem(**self.config["energy_storage_system"])
+            if self.shuffle:
+                self.energy_storage_system.charge = self.shuffled_initial_conditions[0][episode]
+                self.energy_storage_system.update_state()
 
         if self.flexible_demand_response_condition:
             self.flexible_demand_response = FlexibleDemandResponse(**self.config["flexible_demand_response"],
@@ -230,6 +245,11 @@ class SingleFamilyHome(gym.Env):
         if self.thermostatically_controlled_load_condition:
             self.thermostatically_controlled_load = ThermostaticallyControlledLoad(
                 **self.config["thermostatically_controlled_load"])
+            if self.shuffle:
+                self.thermostatically_controlled_load.indoor_temperature = self.shuffled_initial_conditions[1][episode]
+                self.thermostatically_controlled_load.building_mass_temperature = self.shuffled_initial_conditions[1][
+                    episode]
+                self.thermostatically_controlled_load.update_state()
 
         if self.additional_information_condition or self.thermostatically_controlled_load_condition:
             self.weather_and_time_data = WeatherAndTimeData(episode=episode)
@@ -265,7 +285,29 @@ class SingleFamilyHome(gym.Env):
         terminated = self._calculate_done()
         truncated = False
 
-        info = {"next_observation": observation, "action": rescaled_action, "reward": reward}
+        info = {"next_observation": observation, "action": rescaled_action, "reward": reward,
+                "cache": {
+                    "given_reward": self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                            self.rooftop_solar_array.reward_cache["rooftop_solar_generation"] -
+                            self.household_energy_demand.reward_cache["household_energy_demand"]),
+                    "battery_reward": self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                            self.energy_storage_system.reward_cache["discharge_rate"] -
+                            self.energy_storage_system.reward_cache["charge_rate"]),
+                    "fdr_reward": -self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                        self.flexible_demand_response.reward_cache["flexible_demand_response"]),
+                    "tcl_reward": -self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                            self.thermostatically_controlled_load.reward_cache["nominal_power"] *
+                            self.thermostatically_controlled_load.reward_cache["tcl_action"]),
+                }}
+
+        if terminated and self.flexible_demand_response_condition:
+            # add left over fdr
+            temp = self.external_electricity_supply.reward_cache["carbon_intensity"] * np.sum(
+                self.flexible_demand_response.state)
+
+            reward -= temp
+            info["cache"]["fdr_reward"] -= temp
+            info["reward"] -= temp
 
         return observation, reward, terminated, truncated, info
 
@@ -277,52 +319,56 @@ if __name__ == "__main__":
     env = Monitor(SingleFamilyHome())
     check_env(env)
 
-    observation = env.reset()
-    print(f"Observation: {observation}")
+    observation = env.reset()[0]
+    print(f"[RESET] battery_state_of_charge: {observation['battery_state_of_charge']}",
+          f" flexible_demand_schedule: {observation['flexible_demand_schedule']}",
+          f" tcl_state_of_charge: {observation['tcl_state_of_charge']}")
 
     if env.unwrapped.config["action_space"]["type"] == "discrete":
-        actions = [np.zeros(1442)] * 20
+        actions = [np.zeros(3)] * 20
 
-        charge_action = np.zeros(1442)
-        charge_action[0] = 4
+        charge_action = np.zeros(3)
+        charge_action[0] = 100
         actions += [charge_action]
-        discharge_action = np.zeros(1442)
+        discharge_action = np.zeros(3)
         discharge_action[0] = 0
         actions += [discharge_action]
 
-        delay_action = np.zeros(1442)
-        delay_action[721] = 1
+        delay_action = np.zeros(3)
+        delay_action[1] = 0
         actions += [delay_action]
-        expedite_action = np.zeros(1442)
-        expedite_action[722] = 1
+        expedite_action = np.zeros(3)
+        expedite_action[1] = 100
         actions += [expedite_action]
 
-        heating_action = np.zeros(1442)
-        heating_action[-1] = 10
+        heating_action = np.zeros(3)
+        heating_action[-1] = 100
         actions += [heating_action]
 
     elif env.unwrapped.config["action_space"]["type"] == "continuous":
-        actions = [-1 * np.ones(1442)] * 20
+        actions = [-1 * np.ones(3)] * 20
 
         charge_action = -1 * np.ones(1442)
         charge_action[0] = 1
         actions += [charge_action]
-        discharge_action = -1 * np.ones(1442)
+        discharge_action = -1 * np.ones(3)
         discharge_action[0] = -1
         actions += [discharge_action]
 
-        delay_action = -1 * np.ones(1442)
-        delay_action[721] = 1
+        delay_action = -1 * np.ones(3)
+        delay_action[1] = -1
         actions += [delay_action]
-        expedite_action = -1 * np.ones(1442)
-        expedite_action[722] = 1
+        expedite_action = -1 * np.ones(3)
+        expedite_action[1] = 1
         actions += [expedite_action]
 
-        heating_action = -1 * np.ones(1442)
+        heating_action = -1 * np.ones(3)
         heating_action[-1] = 1
         actions += [heating_action]
 
     for i, action in enumerate(actions):
         observation, reward, terminated, truncated, info = env.step(action)
-        print(f"[{i}] Observation: {observation}, Reward: {reward}, Terminated: {terminated}, Truncated: {truncated}, "
-              f"Info: {info}")
+        print(f"[{i}] battery_state_of_charge: {observation['battery_state_of_charge']}"
+              f" flexible_demand_schedule: {observation['flexible_demand_schedule']}"
+              f" tcl_state_of_charge: {observation['tcl_state_of_charge']}"
+              f", Reward: {reward} Action: {info['action']}")

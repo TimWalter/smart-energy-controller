@@ -28,21 +28,27 @@ def train(name: str, agent: Callable, policy: str, eval_epochs: int, train_epoch
         check_env(env)
         log("Environment checked")
 
-    model = agent(policy, env, tensorboard_log=f"./tensorboard/")
+    model = agent(policy, env)
 
     log("Evaluating untrained model")
-
+    #env.unwrapped.eval()
     results["untrained_accumulated_reward"] = \
-    evaluate_policy(model, env, n_eval_episodes=eval_epochs, callback=callback)[0]
+        evaluate_policy(model, env, n_eval_episodes=eval_epochs, callback=callback)
     log("Untrained model evaluated")
+    log(f"Untrained accumulated reward: {results['untrained_accumulated_reward']}")
 
     log("Starting training")
-    model.learn(total_timesteps=train_epochs * 10080, callback=callback)
-    log("Training finished")
+    for epoch in range(train_epochs):
+        log(f"Training epoch {epoch + 1}/{train_epochs}")
+        #env.unwrapped.train()
+        model.learn(total_timesteps=10080, callback=callback)
 
-    log("Evaluating trained model")
-    results["trained_accumulated_reward"] = evaluate_policy(model, env, n_eval_episodes=eval_epochs, callback=callback)[0]
-    log("Trained model evaluated")
+        #env.unwrapped.eval()
+        results[f"epoch_{epoch}_accumulated_reward"] = \
+            evaluate_policy(model, env, n_eval_episodes=eval_epochs, callback=callback)
+        log(f"Epoch {epoch + 1}/{train_epochs} finished")
+        log(f"Accumulated reward: {results[f'epoch_{epoch}_accumulated_reward']}")
+    log("Training finished")
 
     model.save(f"./models/{name}")
 
@@ -53,11 +59,11 @@ def train(name: str, agent: Callable, policy: str, eval_epochs: int, train_epoch
 
 
 if __name__ == "__main__":
-    from stable_baselines3 import SAC
+    import pickle
+    from stable_baselines3 import SAC, PPO
     from baselines.idle import Idle
+    from baselines.single_threshold import SingleThreshold
 
-    results = train("Idle", Idle, "MultiInputPolicy", 1, 1)
-
-    print(results)
-
-
+    name = "single_threshold_develop_discrete"
+    results = train(name, SingleThreshold, "MultiInputPolicy", 1, 0, check=False)
+    pickle.dump(results, open(f"./logs/results_only/{name}", "wb"))

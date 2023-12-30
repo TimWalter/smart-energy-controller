@@ -1,3 +1,4 @@
+import numpy as np
 from src.environment.components.base.component import Component
 
 
@@ -9,15 +10,16 @@ class ThermostaticallyControlledLoad(Component):
         """
 
     def __init__(self,
-                 initial_indoor_temperature,
-                 initial_building_mass_temperature,
-                 thermal_mass_air,
-                 thermal_mass_building,
-                 unintentional_heat_gain,
-                 degree_generated_by_kwmin,
-                 nominal_power,
-                 minimal_temperature,
-                 maximal_temperature
+                 initial_indoor_temperature: float,
+                 initial_building_mass_temperature: float,
+                 thermal_mass_air: float,
+                 thermal_mass_building: float,
+                 unintentional_heat_gain: float,
+                 degree_generated_by_kwmin: float,
+                 nominal_power: float,
+                 minimal_temperature: float,
+                 maximal_temperature: float,
+                 shuffle: bool = False
                  ):
         """
         Initializes the ThermostaticallyControlledLoad.
@@ -34,8 +36,12 @@ class ThermostaticallyControlledLoad(Component):
             maximal_temperature (float): The maximal temperature.
         """
         super().__init__()
-        self.indoor_temperature = initial_indoor_temperature
-        self.building_mass_temperature = initial_building_mass_temperature
+        if shuffle:
+            self.indoor_temperature = np.random.random() * 0.2 * (maximal_temperature - minimal_temperature) + minimal_temperature
+            self.building_mass_temperature = np.random.random() * 0.2 * (maximal_temperature - minimal_temperature) + minimal_temperature
+        else:
+            self.indoor_temperature = initial_indoor_temperature
+            self.building_mass_temperature = initial_building_mass_temperature
 
         self.minimal_temperature = minimal_temperature
         self.maximal_temperature = maximal_temperature
@@ -58,7 +64,6 @@ class ThermostaticallyControlledLoad(Component):
             action (float): The action to be taken [0, 1]. 0 is no heating, 1 is full heating.
             outdoor_temperature (float): The outdoor temperature in degree Celsius.
         """
-        # expect [0,1] as action
         if self.indoor_temperature > self.maximal_temperature:
             action = 0
         elif self.indoor_temperature < self.minimal_temperature:
