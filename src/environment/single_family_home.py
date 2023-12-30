@@ -184,7 +184,7 @@ class SingleFamilyHome(gym.Env):
             levels = self.action_space.nvec[self.action_slice["thermostatically_controlled_load"]]
             rescaled_action += [thermostatically_controlled_load_action / (levels - 1)]  # [0, levels-1] -> [0, 1]
 
-        return np.array(rescaled_action, dtype=np.float32)
+        return np.array(rescaled_action, dtype=np.float32).flatten()
 
     def _rescale_continuous_action(self, action: ActType) -> ActType:
         rescaled_action = []
@@ -199,22 +199,20 @@ class SingleFamilyHome(gym.Env):
             thermostatically_controlled_load_action = action[self.action_slice["thermostatically_controlled_load"]]
             rescaled_action += [(thermostatically_controlled_load_action + 1) / 2]  # [-1, 1] -> [0, 1]
 
-        return np.array(rescaled_action, dtype=np.float32)
+        return np.array(rescaled_action, dtype=np.float32).flatten()
 
     def _calculate_reward(self) -> float:
         produced_energy = self.rooftop_solar_array.reward_cache["rooftop_solar_generation"]
         consumed_energy = self.household_energy_demand.reward_cache["household_energy_demand"]
 
         if self.energy_storage_system_condition:
-            produced_energy += self.energy_storage_system.reward_cache["discharge_rate"]
-            consumed_energy += self.energy_storage_system.reward_cache["charge_rate"]
+            consumed_energy += self.energy_storage_system.reward_cache["consumed_energy"]
 
         if self.flexible_demand_response_condition:
-            consumed_energy += self.flexible_demand_response.reward_cache["flexible_demand_response"]
+            consumed_energy += self.flexible_demand_response.reward_cache["consumed_and_discounted_energy"]
 
         if self.thermostatically_controlled_load_condition:
-            consumed_energy += self.thermostatically_controlled_load.reward_cache["nominal_power"] * \
-                               self.thermostatically_controlled_load.reward_cache["tcl_action"]
+            consumed_energy += self.thermostatically_controlled_load.reward_cache["consumed_energy"]
 
         reward = self.external_electricity_supply.reward_cache["carbon_intensity"] * (produced_energy - consumed_energy)
         return reward
@@ -290,24 +288,16 @@ class SingleFamilyHome(gym.Env):
                     "given_reward": self.external_electricity_supply.reward_cache["carbon_intensity"] * (
                             self.rooftop_solar_array.reward_cache["rooftop_solar_generation"] -
                             self.household_energy_demand.reward_cache["household_energy_demand"]),
-                    "battery_reward": self.external_electricity_supply.reward_cache["carbon_intensity"] * (
-                            self.energy_storage_system.reward_cache["discharge_rate"] -
-                            self.energy_storage_system.reward_cache["charge_rate"]),
-                    "fdr_reward": -self.external_electricity_supply.reward_cache["carbon_intensity"] * (
-                        self.flexible_demand_response.reward_cache["flexible_demand_response"]),
-                    "tcl_reward": -self.external_electricity_supply.reward_cache["carbon_intensity"] * (
-                            self.thermostatically_controlled_load.reward_cache["nominal_power"] *
-                            self.thermostatically_controlled_load.reward_cache["tcl_action"]),
                 }}
-
-        if terminated and self.flexible_demand_response_condition:
-            # add left over fdr
-            temp = self.external_electricity_supply.reward_cache["carbon_intensity"] * np.sum(
-                self.flexible_demand_response.state)
-
-            reward -= temp
-            info["cache"]["fdr_reward"] -= temp
-            info["reward"] -= temp
+        if self.energy_storage_system_condition:
+            info["cache"]["battery_reward"] = self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                    -self.energy_storage_system.reward_cache["consumed_energy"])
+        if self.flexible_demand_response_condition:
+            info["cache"]["fdr_reward"] = self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                    -self.flexible_demand_response.reward_cache["consumed_and_discounted_energy"])
+        if self.thermostatically_controlled_load_condition:
+            info["cache"]["tcl_reward"] = self.external_electricity_supply.reward_cache["carbon_intensity"] * (
+                    -self.thermostatically_controlled_load.reward_cache["consumed_energy"])
 
         return observation, reward, terminated, truncated, info
 

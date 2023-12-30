@@ -35,10 +35,17 @@ class FlexibleDemandResponse(Component, DataLoader):
         self.timedelta = timedelta(minutes=planning_horizon)
         self.schedule = np.concatenate([np.ones(self.planning_horizon + 1), np.zeros(self.planning_horizon)])
         if self.deterministic:
-            self.weighting = np.ones_like(self.schedule)
+            self.patience_weighting = np.ones_like(self.schedule)
         else:
-            self.weighting = np.exp(-1 / self.patience * np.abs(np.arange(len(self.schedule)) - self.planning_horizon))
-            self.weighting *= np.concatenate([-1*np.ones(self.planning_horizon + 1), np.ones(self.planning_horizon)])
+            self.patience_weighting = np.exp(
+                -1 / self.patience * np.abs(np.arange(len(self.schedule)) - self.planning_horizon))
+            self.patience_weighting *= np.concatenate(
+                [-1 * np.ones(self.planning_horizon + 1), np.ones(self.planning_horizon)])
+
+        self.consume_weighting = np.concatenate(
+            [np.arange(1 / self.planning_horizon, 1+1 / self.planning_horizon, 1 / self.planning_horizon), np.ones(self.planning_horizon + 1)])
+        self.discount_weighting = np.concatenate(
+            [np.ones(self.planning_horizon) / self.planning_horizon, np.zeros(self.planning_horizon + 1)])
 
         self.update_state()
 
@@ -49,21 +56,17 @@ class FlexibleDemandResponse(Component, DataLoader):
         Args:
             action (np.ndarray): The action is in [-1, 1]. -1 maximum delay, 1 maximum expedite.
         """
-        execution_probability = np.clip(self.schedule + action * self.weighting, 0, 1)
+        execution_probability = np.clip(self.schedule + action * self.patience_weighting, 0, 1)
         coins = np.random.uniform(0, 1, self.schedule.shape)
 
         executed_actions = coins < execution_probability
 
-        power = np.sum(self.state[executed_actions])
+        self.update_reward_cache(executed_actions)
 
-        # Set power to 0 for executed actions
+        # Set power to 0 for executed actions and discount the delayed actions
         self.state[executed_actions] = 0
         self.set_values(self.state, self.time - self.timedelta, self.time + self.timedelta, "energy")
 
-        # Delay beyond time_horizon results in deterministic execution
-        power += self.state[0]
-
-        self.update_reward_cache(power)
         self.step_time()
         self.update_state()
 
@@ -92,32 +95,36 @@ class FlexibleDemandResponse(Component, DataLoader):
 
         self.state = self.state["energy"].values
 
-    def update_reward_cache(self, power):
+    def update_reward_cache(self, executed_actions: np.ndarray) -> np.ndarray:
         """
         Update the reward cache with the power.
 
         Args:
-            power (float): The power in kW.
+            executed_actions (ndarray): The executed actions.
         """
-        self.reward_cache["flexible_demand_response"] = power
+        executed_mask = np.zeros_like(self.state, dtype=bool)
+        executed_mask[executed_actions] = 1
+
+        consumed_energy = self.state * executed_mask
+        delayed_energy = self.state * (~executed_mask)
+        consumed_and_discounted_energy = consumed_energy * self.consume_weighting + delayed_energy * self.discount_weighting
+
+        self.reward_cache["consumed_and_discounted_energy"] = np.sum(consumed_and_discounted_energy)
+
+        return consumed_and_discounted_energy
 
 
 if __name__ == "__main__":
     import json
 
     config = json.load(open("../config.json"))
-    config["flexible_demand_response"]["planning_horizon"] = 3
+    config["flexible_demand_response"]["planning_horizon"] = 4
 
     fdr = FlexibleDemandResponse(**config["flexible_demand_response"])
-    for i in range(20):
-        fdr.step(np.zeros(7))
-    actions = [
-        np.array([0, 0, 0, 0, 0, 0, 0]),
-        np.array([0, 0, 0, 1, 1, 0, 0]),
-        np.array([0, 0, 1, 0, 1, 1, 1]),
-        np.array([1, 0, 0, 0, 0, 0, 0]),
-        np.array([0, 0, 0, 0, 0, 0, 1]),
-    ]
+    fdr.episode.values[0:100] = np.zeros_like(fdr.episode.values[0:100])
+    fdr.episode.values[0:3] = 1
+    fdr.update_state()
+    actions = [-1] * 20
     for action in actions:
         print(f"Action: {action}, Previous State: {fdr.state}")
         fdr.step(action)

@@ -72,8 +72,7 @@ class EnergyStorageSystem(Component):
             charge_rate (float): The charge rate in kW.
             discharge_rate (float): The discharge rate in kW.
         """
-        self.reward_cache["charge_rate"] = charge_rate
-        self.reward_cache["discharge_rate"] = discharge_rate
+        self.reward_cache["consumed_energy"] = charge_rate - discharge_rate
 
 
 if __name__ == "__main__":

@@ -49,8 +49,6 @@ class ThermostaticallyControlledLoad(Component):
 
         self.update_state()
 
-        self.reward_cache = {"nominal_power": nominal_power}
-
     def step(self, action: float, outdoor_temperature: float):
         """
         Perform a step in the environment.
@@ -90,7 +88,7 @@ class ThermostaticallyControlledLoad(Component):
         Args:
             action (float): The action performed.
         """
-        self.reward_cache["tcl_action"] = action
+        self.reward_cache["consumed_energy"] = action * self.nominal_power
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ import numpy as np
 
 
 class SingleThreshold:
-    def __init__(self, policy, env, tensorboard_log=None):
+    def __init__(self, policy, env, **kwargs):
         self.action_dim = env.action_space.shape[0]
         self.type = env.unwrapped.config["action_space"]["type"]
         self.levels = env.unwrapped.config["action_space"]["levels"]
