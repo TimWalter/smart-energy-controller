@@ -11,7 +11,6 @@ class EnergyStorageSystem(Component):
                  round_trip_efficiency: float,
                  self_discharge_rate: float,
                  initial_charge_in_kwmin: float,
-                 shuffle: bool = False
                  ):
         """
         From now on units are dropped and expected to be in kWmin for energy and kW for power.
@@ -31,11 +30,7 @@ class EnergyStorageSystem(Component):
         self.maximum_discharge_rate = maximum_discharge_rate_in_kw
         self.round_trip_efficiency_sqrt = np.sqrt(round_trip_efficiency)
         self.self_discharge_rate = self_discharge_rate
-
-        if shuffle:
-            self.charge = np.random.uniform(0, capacity_in_kwmin * 0.2)
-        else:
-            self.charge = initial_charge_in_kwmin
+        self.charge = initial_charge_in_kwmin
 
         self.update_state()
 

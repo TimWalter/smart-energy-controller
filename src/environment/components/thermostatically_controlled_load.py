@@ -19,7 +19,6 @@ class ThermostaticallyControlledLoad(Component):
                  nominal_power: float,
                  minimal_temperature: float,
                  maximal_temperature: float,
-                 shuffle: bool = False
                  ):
         """
         Initializes the ThermostaticallyControlledLoad.
@@ -36,13 +35,9 @@ class ThermostaticallyControlledLoad(Component):
             maximal_temperature (float): The maximal temperature.
         """
         super().__init__()
-        if shuffle:
-            self.indoor_temperature = np.random.random() * 0.2 * (maximal_temperature - minimal_temperature) + minimal_temperature
-            self.building_mass_temperature = np.random.random() * 0.2 * (maximal_temperature - minimal_temperature) + minimal_temperature
-        else:
-            self.indoor_temperature = initial_indoor_temperature
-            self.building_mass_temperature = initial_building_mass_temperature
 
+        self.indoor_temperature = initial_indoor_temperature
+        self.building_mass_temperature = initial_building_mass_temperature
         self.minimal_temperature = minimal_temperature
         self.maximal_temperature = maximal_temperature
 
