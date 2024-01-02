@@ -60,9 +60,9 @@ class EnergyStorageSystem(Component):
 
     def update_state(self):
         """
-        Update the state of charge.
+        Update the state.
         """
-        self.state = self.charge / self.capacity
+        self.state = self.charge
 
     def update_reward_cache(self, charge_rate: float, discharge_rate: float):
         """

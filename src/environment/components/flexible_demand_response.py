@@ -39,8 +39,6 @@ class FlexibleDemandResponse(Component, DataLoader):
         else:
             self.patience_weighting = np.exp(
                 -1 / self.patience * np.abs(np.arange(len(self.schedule)) - self.planning_horizon))
-            self.patience_weighting *= np.concatenate(
-                [-1 * np.ones(self.planning_horizon + 1), np.ones(self.planning_horizon)])
 
         self.consume_weighting = np.concatenate(
             [np.arange(1 / self.planning_horizon, 1+1 / self.planning_horizon, 1 / self.planning_horizon), np.ones(self.planning_horizon + 1)])
@@ -121,6 +119,9 @@ if __name__ == "__main__":
     config["flexible_demand_response"]["planning_horizon"] = 4
 
     fdr = FlexibleDemandResponse(**config["flexible_demand_response"])
+
+    print(fdr.patience_weighting)
+    exit()
     fdr.episode.values[0:100] = np.zeros_like(fdr.episode.values[0:100])
     fdr.episode.values[0:3] = 1
     fdr.update_state()

@@ -19,6 +19,7 @@ class ThermostaticallyControlledLoad(Component):
                  nominal_power: float,
                  minimal_temperature: float,
                  maximal_temperature: float,
+                 penalty_factor: float,
                  ):
         """
         Initializes the ThermostaticallyControlledLoad.
@@ -33,6 +34,7 @@ class ThermostaticallyControlledLoad(Component):
             nominal_power (float): The nominal power in kW.
             minimal_temperature (float): The minimal temperature.
             maximal_temperature (float): The maximal temperature.
+            penalty_factor (float): The penalty factor for the reward.
         """
         super().__init__()
 
@@ -46,6 +48,7 @@ class ThermostaticallyControlledLoad(Component):
         self.unintentional_heat_gain = unintentional_heat_gain
         self.degree_generated_by_kwmin = degree_generated_by_kwmin
         self.nominal_power = nominal_power
+        self.penalty_factor = penalty_factor
 
         self.update_state()
 
@@ -76,10 +79,9 @@ class ThermostaticallyControlledLoad(Component):
 
     def update_state(self):
         """
-        Update the state charge of the thermostatically controlled load.
+        Update the state.
         """
-        self.state = (self.indoor_temperature - self.minimal_temperature) / (
-                self.maximal_temperature - self.minimal_temperature)
+        self.state = self.indoor_temperature
 
     def update_reward_cache(self, action):
         """
@@ -89,6 +91,7 @@ class ThermostaticallyControlledLoad(Component):
             action (float): The action performed.
         """
         self.reward_cache["consumed_energy"] = action * self.nominal_power
+        self.reward_cache["indoor_temperature"] = self.indoor_temperature
 
 
 if __name__ == "__main__":

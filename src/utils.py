@@ -1,8 +1,49 @@
 import pickle
 
+import gymnasium as gym
 import matplotlib.pyplot as plt
 import numpy as np
+from gymnasium.wrappers.normalize import RunningMeanStd
 from stable_baselines3.common.callbacks import BaseCallback
+
+
+class NormalizeDictObservation(gym.Wrapper, gym.utils.RecordConstructorArgs):
+    """This wrapper will normalize observations s.t. each coordinate is centered with unit variance.
+
+    Note:
+        The normalization depends on past trajectories and observations will not be normalized correctly if the wrapper was
+        newly instantiated or the policy was changed recently.
+    """
+
+    def __init__(self, env: gym.Env, epsilon: float = 1e-8):
+        """This wrapper will normalize observations s.t. each coordinate is centered with unit variance.
+
+        Args:
+            env (Env): The environment to apply the wrapper
+            epsilon: A stability parameter that is used when scaling the observations.
+        """
+        gym.utils.RecordConstructorArgs.__init__(self, epsilon=epsilon)
+        gym.Wrapper.__init__(self, env)
+
+        self.obs_rms = RunningMeanStd(shape=len(self.observation_space))
+        self.epsilon = epsilon
+
+    def step(self, action):
+        """Steps through the environment and normalizes the observation."""
+        obs, reward, terminated, truncated, info = self.env.step(action)
+        obs = self.normalize(obs)
+        return obs, reward, terminated, truncated, info
+
+    def reset(self, **kwargs):
+        """Resets the environment and normalizes the observation."""
+        obs, info = self.env.reset(**kwargs)
+        return self.normalize(obs), info
+
+    def normalize(self, obs):
+        """Normalises the observation using the running mean and variance of the observations."""
+        self.obs_rms.update(np.array([el[0] for el in obs.values()]))
+        return {key: (obs[key] - self.obs_rms.mean[i]) / np.sqrt(self.obs_rms.var[i] + self.epsilon) for i, key in
+                enumerate(obs.keys())}
 
 
 class LoggingCallback(BaseCallback):
@@ -13,7 +54,8 @@ class LoggingCallback(BaseCallback):
     def dump(self, path: str):
         with open(path, "wb") as f:
             self.infos = {
-                key: {key_inner: [info[key][key_inner] for info in self.infos] for key_inner in self.infos[0][key].keys()}
+                key: {key_inner: [info[key][key_inner] for info in self.infos] for key_inner in
+                      self.infos[0][key].keys()}
                 if isinstance(self.infos[0][key], dict)
                 else [info[key] for info in self.infos]
                 for key in self.infos[0].keys()
@@ -30,6 +72,18 @@ class LoggingCallback(BaseCallback):
         self.locals = locals_
         self.globals = globals_
         self._on_step()
+
+
+def print_rewards(data):
+    print(f'Full: {np.sum(data["reward"][-10079:])}')
+    print(f'Given: {np.sum(data["cache"]["given_reward"][-10079:])}')
+    if "battery_reward" in data["cache"].keys():
+        print(f'Battery: {np.sum(data["cache"]["battery_reward"][-10079:])}')
+    if "fdr_reward" in data["cache"].keys():
+        print(f'FDR: {np.sum(data["cache"]["fdr_reward"][-10079:])}')
+    if "tcl_reward" in data["cache"].keys():
+        print(f'TCL: {np.sum(data["cache"]["tcl_reward"][-10079:])}')
+        print(f'Discomfort: {np.sum(data["cache"]["discomfort"][-10079:])}')
 
 
 def visualize_scenario(callback, env):
