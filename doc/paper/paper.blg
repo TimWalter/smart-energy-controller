@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: paper.aux
+Reallocating 'name_of_file' (item size: 1) to 15 items.
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: icml2023.bst
+Database file #1: literature.bib
+Warning--to sort, need author or key in .29.12.2023
+Warning--empty journal in Boyson.2007
+Warning--empty year in Castellanos.04.12.2022
+Warning--empty year in GeorgesHebrail.2006
+You've used 18 entries,
+            2773 wiz_defined-function locations,
+            741 strings with 9802 characters,
+and the built_in function-call counts, 10045 in all, are:
+= -- 876
+> -- 774
+< -- 5
++ -- 261
+- -- 243
+* -- 920
+:= -- 1604
+add.period$ -- 79
+call.type$ -- 18
+change.case$ -- 134
+chr.to.int$ -- 18
+cite$ -- 41
+duplicate$ -- 361
+empty$ -- 666
+format.name$ -- 262
+if$ -- 2047
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 13
+newline$ -- 123
+num.names$ -- 68
+pop$ -- 245
+preamble$ -- 1
+purify$ -- 117
+quote$ -- 0
+skip$ -- 320
+stack$ -- 0
+substring$ -- 264
+swap$ -- 29
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 198
+warning$ -- 4
+while$ -- 68
+width$ -- 0
+write$ -- 283
+(There were 4 warnings)
