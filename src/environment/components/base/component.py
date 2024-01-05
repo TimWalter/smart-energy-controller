@@ -15,5 +15,9 @@ class Component(ABC):
         pass
 
     @abstractmethod
+    def reset(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
     def step(self, *args, **kwargs):
         pass

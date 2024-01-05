@@ -9,7 +9,7 @@ class HouseholdEnergyDemand(Component, DataLoader):
     This class inherits from the Component and DataLoader classes.
     """
 
-    def __init__(self, episode: int = 0):
+    def __init__(self, resolution: str):
         """
         Initializes the HouseholdEnergyDemand.
 
@@ -17,9 +17,13 @@ class HouseholdEnergyDemand(Component, DataLoader):
             episode (int): The current episode. Defaults to 0.
         """
         Component.__init__(self)
-        DataLoader.__init__(self, file='../data/minutely/household_energy_demand.h5')
-        self.set_episode(episode)
+        DataLoader.__init__(self, file=f'../data/{resolution}/household_energy_demand.h5', resolution=resolution)
 
+    def reset(self, episode: int):
+        """
+        Resets the external electricity supply.
+        """
+        self.set_episode(episode)
         self.update_state()
 
     def step(self):
@@ -44,8 +48,8 @@ class HouseholdEnergyDemand(Component, DataLoader):
 
 
 if __name__ == "__main__":
-    household_energy_demand = HouseholdEnergyDemand(0)
-
+    household_energy_demand = HouseholdEnergyDemand("hourly")
+    household_energy_demand.reset(episode=0)
     print(f"State: {household_energy_demand.state}, Reward Cache: {household_energy_demand.reward_cache}")
     household_energy_demand.step()
     print(f"State: {household_energy_demand.state}, Reward Cache: {household_energy_demand.reward_cache}")

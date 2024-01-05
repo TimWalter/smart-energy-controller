@@ -5,10 +5,13 @@ import pandas as pd
 
 
 class DataLoader(ABC):
-    def __init__(self, file: str):
+    def __init__(self, file: str, resolution: str):
         self.file = file
         self.episode = None
         self.time = None
+        self.resolution = resolution
+        self.second_to_resolution = 60 if resolution == "minutely" else 3600
+        self.one_timestep_delta = pd.Timedelta(seconds=self.second_to_resolution)
 
     def set_episode(self, episode: int):
         try:
@@ -30,9 +33,9 @@ class DataLoader(ABC):
         start_index = 0
         end_index = None
         if start < self.episode.index[0]:
-            start_index = int((self.episode.index[0] - start).total_seconds() // 60)
+            start_index = int((self.episode.index[0] - start).total_seconds() // self.second_to_resolution)
         if end > self.episode.index[-1]:
-            end_index = int((self.episode.index[-1] - end).total_seconds() // 60)
+            end_index = int((self.episode.index[-1] - end).total_seconds() // self.second_to_resolution)
 
         try:
             values = values[start_index:end_index]
@@ -56,4 +59,4 @@ class DataLoader(ABC):
             raise ValueError
 
     def step_time(self):
-        self.time += pd.Timedelta(minutes=1)
+        self.time += self.one_timestep_delta

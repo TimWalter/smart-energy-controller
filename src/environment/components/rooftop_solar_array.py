@@ -9,7 +9,7 @@ class RooftopSolarArray(Component, DataLoader):
     This class inherits from the Component and DataLoader classes.
     """
 
-    def __init__(self, episode: int = 0):
+    def __init__(self, resolution: str):
         """
         Initializes the RooftopSolarArray.
 
@@ -17,9 +17,13 @@ class RooftopSolarArray(Component, DataLoader):
             episode (int): The current episode. Defaults to 0.
         """
         Component.__init__(self)
-        DataLoader.__init__(self, file='../data/minutely/rooftop_solar_array.h5')
-        self.set_episode(episode)
+        DataLoader.__init__(self, file=f'../data/{resolution}/rooftop_solar_array.h5', resolution=resolution)
 
+    def reset(self, episode: int):
+        """
+        Resets the external electricity supply.
+        """
+        self.set_episode(episode)
         self.update_state()
 
     def step(self):
@@ -44,7 +48,8 @@ class RooftopSolarArray(Component, DataLoader):
 
 
 if __name__ == "__main__":
-    rooftop_solar_array = RooftopSolarArray(0)
+    rooftop_solar_array = RooftopSolarArray("hourly")
+    rooftop_solar_array.reset(0)
 
     print(f"State: {rooftop_solar_array.state}, Reward Cache: {rooftop_solar_array.reward_cache}")
     rooftop_solar_array.step()

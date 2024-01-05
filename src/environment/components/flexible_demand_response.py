@@ -14,7 +14,7 @@ class FlexibleDemandResponse(Component, DataLoader):
     This class inherits from the Component and DataLoader classes.
     """
 
-    def __init__(self, planning_horizon: int, deterministic: bool, patience: float, episode: int = 0):
+    def __init__(self, planning_horizon: int, deterministic: bool, patience: float, resolution: str):
         """
         Initializes the FlexibleDemandResponse. All energy expenditures are in kWmin.
 
@@ -25,14 +25,14 @@ class FlexibleDemandResponse(Component, DataLoader):
             episode (int): The current episode. Defaults to 0.
         """
         Component.__init__(self)
-        DataLoader.__init__(self, file='../data/minutely/flexible_demand_response.h5')
-        self.set_episode(episode)
+        DataLoader.__init__(self, file=f'../data/{resolution}/flexible_demand_response.h5', resolution=resolution)
 
         self.planning_horizon = planning_horizon
         self.deterministic = deterministic
         self.patience = patience
+        self.resolution = resolution
 
-        self.timedelta = timedelta(minutes=planning_horizon)
+        self.planning_timedelta = timedelta(seconds=planning_horizon * self.second_to_resolution)
         self.schedule = np.concatenate([np.ones(self.planning_horizon + 1), np.zeros(self.planning_horizon)])
         if self.deterministic:
             self.patience_weighting = np.ones_like(self.schedule)
@@ -41,10 +41,13 @@ class FlexibleDemandResponse(Component, DataLoader):
                 -1 / self.patience * np.abs(np.arange(len(self.schedule)) - self.planning_horizon))
 
         self.consume_weighting = np.concatenate(
-            [np.arange(1 / self.planning_horizon, 1+1 / self.planning_horizon, 1 / self.planning_horizon), np.ones(self.planning_horizon + 1)])
+            [np.arange(1 / self.planning_horizon, 1 + 1 / self.planning_horizon, 1 / self.planning_horizon),
+             np.ones(self.planning_horizon + 1)])
         self.discount_weighting = np.concatenate(
             [np.ones(self.planning_horizon) / self.planning_horizon, np.zeros(self.planning_horizon + 1)])
 
+    def reset(self, episode: int):
+        self.set_episode(episode)
         self.update_state()
 
     def step(self, action: float):
@@ -63,7 +66,7 @@ class FlexibleDemandResponse(Component, DataLoader):
 
         # Set power to 0 for executed actions and discount the delayed actions
         self.state[executed_actions] = 0
-        self.set_values(self.state, self.time - self.timedelta, self.time + self.timedelta, "energy")
+        self.set_values(self.state, self.time - self.planning_timedelta, self.time + self.planning_timedelta, "energy")
 
         self.step_time()
         self.update_state()
@@ -72,22 +75,22 @@ class FlexibleDemandResponse(Component, DataLoader):
         """
         Update the the flexible demand response window.
         """
-        self.state = self.get_values(self.time - self.timedelta, self.time + self.timedelta)  # in kW
+        self.state = self.get_values(self.time - self.planning_timedelta, self.time + self.planning_timedelta)  # in kW
 
         rows_to_add = len(self.schedule) - self.state.shape[0]
 
         # Ensure zero padding
         if rows_to_add > 0:
-            if self.time - self.timedelta < self.state.index[0]:
+            if self.time - self.planning_timedelta < self.state.index[0]:
                 # If time is before the start of the state DataFrame, prepend the rows
                 zero_data = pd.DataFrame({"energy": [0] * rows_to_add},
-                                         index=pd.date_range(end=self.state.index[0] - pd.Timedelta(minutes=1),
+                                         index=pd.date_range(end=self.state.index[0] - self.one_timestep_delta,
                                                              periods=rows_to_add, freq='min'))
                 self.state = pd.concat([zero_data, self.state])
             else:
                 # If time is after the end of the state DataFrame, append the rows
                 zero_data = pd.DataFrame({"energy": [0] * rows_to_add},
-                                         index=pd.date_range(start=self.state.index[-1] + pd.Timedelta(minutes=1),
+                                         index=pd.date_range(start=self.state.index[-1] + self.one_timestep_delta,
                                                              periods=rows_to_add, freq='min'))
                 self.state = pd.concat([self.state, zero_data])
 
