@@ -36,6 +36,8 @@ class Baseline(ABC):
         if self.type == "discrete":
             action = list((np.array(action) + 1 / 2) * (np.array(self.levels) - 1))
 
+        if len(action) == 1:
+            action = [action]
         return np.array(action), None
 
     @abstractmethod

@@ -101,8 +101,8 @@ class SingleFamilyHome(gym.Env):
     def _observation_space(self) -> gym.spaces.Dict:
         spaces = {
             "carbon_intensity": gym.spaces.Box(low=0.0512*(1 if self.resolution=="minutely" else 60), high=2.373*(1 if self.resolution=="minutely" else 60)),
-            "household_energy_demand": gym.spaces.Box(low=0.0, high=10.1619 if self.resolution == "minutely" else 6.0138),
-            "rooftop_solar_generation": gym.spaces.Box(low=-0.4269, high=44.0072)
+            #"household_energy_demand": gym.spaces.Box(low=0.0, high=10.1619 if self.resolution == "minutely" else 6.0138),
+            #"rooftop_solar_generation": gym.spaces.Box(low=-0.4269, high=44.0072)
         }
 
         if self.ess_condition:
@@ -134,8 +134,8 @@ class SingleFamilyHome(gym.Env):
     def _construct_observation(self) -> ObsType:
         observation = {
             "carbon_intensity": self.ees.state,
-            "household_energy_demand": self.hed.state,
-            "rooftop_solar_generation": self.rsa.state
+            #"household_energy_demand": self.hed.state,
+            #"rooftop_solar_generation": self.rsa.state
         }
 
         if self.ess_condition:
@@ -231,8 +231,8 @@ class SingleFamilyHome(gym.Env):
         return np.array(rescaled_action, dtype=np.float32).flatten()
 
     def _calculate_reward(self) -> float:
-        produced_energy = self.rsa.reward_cache["rooftop_solar_generation"]
-        consumed_energy = self.hed.reward_cache["household_energy_demand"]
+        produced_energy = 0#self.rsa.reward_cache["rooftop_solar_generation"]
+        consumed_energy = 0#self.hed.reward_cache["household_energy_demand"]
 
         if self.ess_condition:
             consumed_energy += self.ess.reward_cache["consumed_energy"]

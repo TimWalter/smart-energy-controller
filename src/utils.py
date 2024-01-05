@@ -86,10 +86,11 @@ class LoggingCallback(BaseCallback):
         self._on_step()
 
 
-class CustomEvalCallback(EvalCallback):
+class TrainCallback(EvalCallback):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.results = {}
+        self.infos = []
         self.epoch = 0
 
     def _on_step(self) -> bool:
@@ -97,4 +98,6 @@ class CustomEvalCallback(EvalCallback):
         if self.eval_freq > 0 and self.n_calls % self.eval_freq == 0:
             self.results[f"epoch_{self.epoch}_accumulated_reward"] = self.last_mean_reward
             self.epoch += 1
+        else:
+            self.infos.append(self.locals["infos"][0])
         return True
