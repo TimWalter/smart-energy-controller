@@ -1,0 +1,17 @@
+{
+  "resolution": "hourly",
+  "action_space": {
+    "type": "continuous",
+    "levels": [101, 101, 101]
+  },
+  "energy_storage_system": {
+    "capacity": 13.5,
+    "maximum_charge_rate_in_kw": 5,
+    "maximum_discharge_rate_in_kw": 5,
+    "round_trip_efficiency": 0.925,
+    "self_discharge_rate": 1e-2,
+    "initial_charge": 0
+  },
+  "include_additional_information": false
+}
+

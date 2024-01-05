@@ -1,0 +1,34 @@
+{
+  "resolution": "hourly",
+  "action_space": {
+    "type": "continuous",
+    "levels": [101, 101, 101]
+  },
+  "energy_storage_system": {
+    "capacity": 13.5,
+    "maximum_charge_rate_in_kw": 5,
+    "maximum_discharge_rate_in_kw": 5,
+    "round_trip_efficiency": 0.925,
+    "self_discharge_rate": 1e-2,
+    "initial_charge": 0
+  },
+  "flexible_demand_response": {
+    "planning_horizon": 12,
+    "deterministic": true,
+    "patience": 20
+  },
+  "thermostatically_controlled_load": {
+    "penalty_factor": 5,
+    "initial_indoor_temperature": 20,
+    "initial_building_mass_temperature": 20,
+    "thermal_mass_air": 25,
+    "thermal_mass_building": 10,
+    "unintentional_heat_gain": 0.05,
+    "degree_generated_by_kw": 0.5,
+    "nominal_power": 5,
+    "minimal_temperature": 18,
+    "maximal_temperature": 23
+  },
+  "include_additional_information": true
+}
+

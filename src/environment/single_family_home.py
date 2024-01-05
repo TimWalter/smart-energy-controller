@@ -23,12 +23,11 @@ class SingleFamilyHome(gym.Env):
     tcl: ThermostaticallyControlledLoad
     wtd: WeatherAndTimeData
 
-    def __init__(self, config: str = "environment/config.json"):
+    def __init__(self, config: str):
         try:
             self.config = json.load(open(config, "r"))
         except FileNotFoundError:
             print(config)
-            self.config = json.load(open("config.json", "r"))
 
         self.resolution = self.config["resolution"]
         self.number_of_episodes = 101 if self.resolution == "minutely" else 102

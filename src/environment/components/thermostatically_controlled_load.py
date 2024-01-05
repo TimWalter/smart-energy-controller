@@ -108,7 +108,7 @@ class ThermostaticallyControlledLoad(Component):
 if __name__ == "__main__":
     import json
 
-    config = json.load(open("../config.json"))
+    config = json.load(open("../configs/config_tcl.json"))
     thermostatically_controlled_load = ThermostaticallyControlledLoad(**config["thermostatically_controlled_load"])
 
     outdoor_temperatures = [20, -1, 25, 20, 20, 20]

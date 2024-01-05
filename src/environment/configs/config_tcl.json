@@ -1,0 +1,21 @@
+{
+  "resolution": "hourly",
+  "action_space": {
+    "type": "continuous",
+    "levels": [101, 101, 101]
+  },
+  "thermostatically_controlled_load": {
+    "penalty_factor": 5,
+    "initial_indoor_temperature": 20,
+    "initial_building_mass_temperature": 20,
+    "thermal_mass_air": 25,
+    "thermal_mass_building": 10,
+    "unintentional_heat_gain": 0.05,
+    "degree_generated_by_kw": 0.5,
+    "nominal_power": 5,
+    "minimal_temperature": 18,
+    "maximal_temperature": 23
+  },
+  "include_additional_information": false
+}
+

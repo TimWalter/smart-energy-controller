@@ -10,7 +10,8 @@ class WeatherAndTimeData(Component, DataLoader):
 
         This class inherits from the Component and DataLoader classes.
     """
-    def __init__(self, episode: int = 0):
+
+    def __init__(self, episode: int = 0, resolution: str = 'minutely'):
         """
         Initializes the WeatherAndTimeData.
 
@@ -18,9 +19,13 @@ class WeatherAndTimeData(Component, DataLoader):
             episode (int): The current episode. Defaults to 0.
         """
         Component.__init__(self)
-        DataLoader.__init__(self, file='../data/minutely/weather_and_time.h5')
-        self.set_episode(episode)
+        DataLoader.__init__(self, file=f'../data/{resolution}/weather_and_time.h5', resolution=resolution)
 
+    def reset(self, episode: int):
+        """
+        Resets the external electricity supply.
+        """
+        self.set_episode(episode)
         self.update_state()
 
     def step(self):

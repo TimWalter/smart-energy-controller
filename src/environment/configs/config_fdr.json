@@ -1,0 +1,14 @@
+{
+  "resolution": "hourly",
+  "action_space": {
+    "type": "continuous",
+    "levels": [101, 101, 101]
+  },
+  "flexible_demand_response": {
+    "planning_horizon": 12,
+    "deterministic": true,
+    "patience": 20
+  },
+  "include_additional_information": false
+}
+

@@ -83,7 +83,7 @@ class EnergyStorageSystem(Component):
 if __name__ == "__main__":
     import json
 
-    config = json.load(open("../config.json"))
+    config = json.load(open("../configs/config_ess.json"))
     energy_storage_system = EnergyStorageSystem(**config["energy_storage_system"])
     charges = [0, 0, 0, 10, 1, 808]
     actions = [0, -1, 1, 1, -1, 1]

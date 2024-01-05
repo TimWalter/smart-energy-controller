@@ -118,7 +118,7 @@ class FlexibleDemandResponse(Component, DataLoader):
 if __name__ == "__main__":
     import json
 
-    config = json.load(open("../config.json"))
+    config = json.load(open("../configs/config_fdr.json"))
     config["flexible_demand_response"]["planning_horizon"] = 4
 
     fdr = FlexibleDemandResponse(**config["flexible_demand_response"])
