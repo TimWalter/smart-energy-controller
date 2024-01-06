@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
     folder_path = "environment/configs/config_"
     for path in ["ess", "fdr", "tcl"]:
-        for name, train_epochs in zip(["ppo_hypo2"],[250]):
+        for name, train_epochs in zip(["single-threshold_hypo3", "idle_hypo3", "sac_hypo3"],[0,0,250]):
             train(
                 path,
                 name,

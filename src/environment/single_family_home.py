@@ -108,7 +108,7 @@ class SingleFamilyHome(gym.Env):
         spaces = {
             "carbon_intensity": gym.spaces.Box(low=0.0512*(1 if self.resolution=="minutely" else 60), high=2.373*(1 if self.resolution=="minutely" else 60)),
             "timestep": gym.spaces.Box(low=0, high=10079 if self.resolution == "minutely" else 167),
-            "co2_emitted":gym.spaces.Box(low=-10000, high=np.inf),
+            #"co2_emitted":gym.spaces.Box(low=-10000, high=np.inf),
             #"household_energy_demand": gym.spaces.Box(low=0.0, high=10.1619 if self.resolution == "minutely" else 6.0138),
             #"rooftop_solar_generation": gym.spaces.Box(low=-0.4269, high=44.0072)
         }
@@ -142,7 +142,7 @@ class SingleFamilyHome(gym.Env):
         observation = {
             "carbon_intensity": self.ees.state,
             "timestep": self.counter,
-            "co2_emitted": self.co2_emitted,
+            #"co2_emitted": self.co2_emitted,
             #"household_energy_demand": self.hed.state,
             #"rooftop_solar_generation": self.rsa.state
         }
@@ -303,10 +303,9 @@ class SingleFamilyHome(gym.Env):
         self.co2_emitted -= self._calculate_reward()
 
         observation = self._construct_observation()
-        #reward = self._calculate_reward()
+        reward = self._calculate_reward()
         terminated = self._calculate_done()
         truncated = False
-        reward = 0 if not terminated else -self.co2_emitted
 
         info = {"next_observation": observation, "action": rescaled_action, "reward": reward,
                 "cache": {

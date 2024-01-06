@@ -1,7 +1,7 @@
 {
   "resolution": "hourly",
   "action_space": {
-    "type": "discrete",
+    "type": "continuous",
     "levels": [11, 11, 11]
   },
   "energy_storage_system": {
