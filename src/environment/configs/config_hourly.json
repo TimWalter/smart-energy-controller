@@ -14,7 +14,7 @@
   },
   "flexible_demand_response": {
     "planning_horizon": 12,
-    "deterministic": false,
+    "deterministic": true,
     "patience": 20
   },
   "thermostatically_controlled_load": {

@@ -186,8 +186,8 @@ class SingleFamilyHome(gym.Env):
                 low += [-1]
                 high += [1]
             if self.fdr_condition:
-                low += [-1] * (2*self.fdr.planning_horizon+1)
-                high += [1] * (2*self.fdr.planning_horizon+1)
+                low += [-1]
+                high += [1]
             if self.tcl_condition:
                 low += [-1]
                 high += [1]
@@ -200,7 +200,7 @@ class SingleFamilyHome(gym.Env):
         if self.ess_condition:
             action_slice["energy_storage_system"] = 0
         if self.fdr_condition:
-            action_slice["flexible_demand_response"] = slice(1 if self.ess_condition else 0, -1 if self.tcl_condition else None)
+            action_slice["flexible_demand_response"] = 1 if self.ess_condition else 0
         if self.tcl_condition:
             action_slice["thermostatically_controlled_load"] = -1
         return action_slice

@@ -52,13 +52,14 @@ Since the algorithms were widely tested and used in other domains, the problem i
 The first issue investigated, was the FDR formulation. The problem of scheduling using RL is already challenging \cite{Zhang.23.10.2020} but is further complicated since the agent has only stochastic control. Furthermore, the action space and observation space dimensionality was extremely high, especially in minutely resolution, since the desired planning horizon was 24 hours. This could lead to a curse of dimensionality \cite{Sutton.2018} and was especially poor since the dimensionality would depend on the parametrization of the environment both in terms of $H$ and the resolution. 
 \par
 The attempted solution was to simplify the task, by allowing the agent to control the FDR deterministically and only give a scalar signal for all components. These changes are equivalent to the assumption that the optimal policy is invariant to $U_e$ as long as the sum is maintained and that $\beta = \infty$.
-% little bit of result talk?
+% TODO little bit of result talk?
 \subsection{Hypothesis 2: Hard Exploration}
 Another difficulty of the environment, is its vast exploration space, given by the continuity of the action and observation space, the length of the episodes, especially in minutely resolution, and the fact that the agent has to perform multiple actions per timestep. The task is furter complicated by the noise from the RSA and HED on the reward. Moreover, a lot of observables are only relevant for estimating the future carbon intensity. 
 \par
 To address these concerns the minutely resolution was omitted from now on. In addition, the action space for PPO was discretized into 11 bins for each component, the HED and RSA were removed from the observables and reward calculation, and the policies were trained separatly for every subtask. Moreover, observables that did not impact the reward directly besides, the timestep were removed. Lastly, the replay buffer for SAC was initialized with one episode of transitions of the threshold algorithm, providing a warm start \cite{Wang.20.06.2023}.
-
-% Hypothesis
-% 2. Exploration problem:  warm start, no additonal informato
-% 4. Delayed Reward problem: sparse reward, reward tuning
-% Furthermore, the rewards might be deceptive, since the possible actions for the ESS and FDR are only effective if used in the right combination. Discharging the battery only makes sense after charging it, delaying usages makes only sense if they are expedited later, and so on. However, a lot of the necessary actions produce only negative rewards.
+% TODO little bit of result talk?
+\subsection{Hypothesis 3: Delayed or Deceptive reward}
+Currently, the last idea to explain the poor performance of the algorithms is the reward structure for charging the ESS, expediting the FDR and heating or cooling the TCL. The rewards of those actions always occur delayed and only if the respective counter action is performed at a higher carbon intensity, which can be problematic \cite{Sutton.1984}. Moreover, the rewards might even be deceptive, since those actions are necessary for an effective policy but only ever receive negative reward.
+\par
+To address the time missmatch between action and reward, the reward was accumulating over time and given as an observable, however only actuated as a reward in the terminal state of the episode, which should encourage the agent to evaluate the entire trajectory of an episode together.
+% TODO little bit of result talk?

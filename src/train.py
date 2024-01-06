@@ -110,13 +110,13 @@ if __name__ == "__main__":
 
     folder_path = "environment/configs/config_"
     for path in ["hourly"]:
-        for name, train_epochs in zip(["single-threshold_full", "idle_full", "ppo_full", "sac_full"],[0,0,250,250]):
+        for name, train_epochs in zip(["single-threshold_hypo1", "idle_hypo1", "ppo_hypo1", "sac_hypo1"],[0,0,250,250]):
             train(
                 path,
                 name,
                 agents[name.split("_")[0]],
                 "MultiInputPolicy",
-                3,
+                1,
                 train_epochs,
                 False,
                 f"environment/configs/config_{path}.json",
