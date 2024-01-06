@@ -13,7 +13,7 @@ def gather_experiences(agent, env, num_steps):
     experiences = []
     for _ in range(num_steps):
         action, _ = agent.predict(obs)
-        next_obs, reward, done, _, _ = env.step(action)
+        next_obs, reward, done, _, _ = env.step(action[0])
         experiences.append((obs, next_obs, action, reward, done, [{}]))
         obs = next_obs if not done else env.reset()[0]
     return experiences

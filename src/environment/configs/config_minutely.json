@@ -1,8 +1,8 @@
 {
   "resolution": "minutely",
   "action_space": {
-    "type": "continuous",
-    "levels": [101, 101, 101]
+    "type": "discrete",
+    "levels": [11, 11, 11]
   },
   "energy_storage_system": {
     "capacity": 810,

@@ -52,7 +52,7 @@ def train(
         model = agent(policy, train_env, seed=15, target_kl=0.5, n_steps=167, batch_size=167)
     else:
         model = agent(policy, train_env, seed=15)
-    if warm_start:
+    if warm_start and agent == SAC:
         warmup_agent = SingleThreshold(None, eval_env)
         initial_experiences = gather_experiences(warmup_agent, eval_env, episode_length)
         for experience in initial_experiences:
@@ -109,8 +109,8 @@ if __name__ == "__main__":
     }
 
     folder_path = "environment/configs/config_"
-    for path in ["hourly"]:
-        for name, train_epochs in zip(["single-threshold_hypo1", "idle_hypo1", "ppo_hypo1", "sac_hypo1"],[0,0,250,250]):
+    for path in ["ess", "fdr", "tcl"]:
+        for name, train_epochs in zip(["ppo_hypo2"],[250]):
             train(
                 path,
                 name,
@@ -120,4 +120,4 @@ if __name__ == "__main__":
                 train_epochs,
                 False,
                 f"environment/configs/config_{path}.json",
-                False)
+                True)

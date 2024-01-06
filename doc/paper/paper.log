@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  6 JAN 2024 19:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  6 JAN 2024 21:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -715,27 +715,12 @@ File: omlptm.fd
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 107.
- (sections/0_abstract.tex)
-Underfull \hbox (badness 2080) in paragraph at lines 1--110
-\OT1/ptm/m/n/10 (+20) flexibility, and alleviate grid pressure from
+ (sections/0_abstract.tex) (sections/1_introduction.tex
+Underfull \hbox (badness 1960) in paragraph at lines 8--9
+\OT1/ptm/m/n/10 (+20) economic incentive for inhabitants. As the energy
  []
 
-
-Underfull \hbox (badness 1558) in paragraph at lines 1--110
-\OT1/ptm/m/n/10 (+20) fluctuating renewable energy sources. The
- []
-
-
-Underfull \hbox (badness 2772) in paragraph at lines 1--110
-\OT1/ptm/m/n/10 (+20) controller also enables the sale of cleanly
- []
-
-
-Underfull \hbox (badness 1360) in paragraph at lines 1--110
-\OT1/ptm/m/n/10 (+20) benchmarked against traditional thresholding
- []
-
-(sections/1_introduction.tex) (sections/2_related_work.tex)
+) (sections/2_related_work.tex)
 Underfull \hbox (badness 3701) in paragraph at lines 1--117
 []\OT1/ptm/m/n/10 (+20) The application field of smart energy management
  []
@@ -772,31 +757,26 @@ Underfull \hbox (badness 1817) in paragraph at lines 13--14
 \OT1/ptm/m/n/10 (+20) panel specifications from the CEC database ([][]Dobos[][],
  []
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 <figures/static_components.png, id=83, 498.663pt x 281.1303pt>
 File: figures/static_components.png Graphic file (type png)
 <use figures/static_components.png>
 Package pdftex.def Info: figures/static_components.png  used on input line 25.
 (pdftex.def)             Requested size: 219.51863pt x 123.75777pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [2
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.50 
+l.40 
       <./figures/static_components.png>] [3
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.149 \par
-          
-pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.149 \par
-          ]) (sections/4_algorithms.tex
-<figures/idle_reward.png, id=145, 467.5869pt x 268.1217pt>
+l.136 
+      ]) (sections/4_algorithms.tex
+<figures/idle_reward.png, id=142, 467.5869pt x 268.1217pt>
 File: figures/idle_reward.png Graphic file (type png)
 <use figures/idle_reward.png>
 Package pdftex.def Info: figures/idle_reward.png  used on input line 14.
@@ -808,7 +788,17 @@ LaTeX Font Warning: Command \normalsize invalid in math mode on input line 32.
 
 LaTeX Font Warning: Command \normalsize invalid in math mode on input line 32.
 
-) (sections/5_experiments.tex
+) [4
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.124 \section
+              {Experiments}\label{sec:limitations}
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.124 \section
+              {Experiments}\label{sec:limitations} <./figures/idle_reward.png>] (sections/5_experiments.tex
 Underfull \hbox (badness 1189) in paragraph at lines 35--36
 \OT1/ptm/m/n/10 (+20) Furthermore, the initial conditions, the initial indoor
  []
@@ -818,23 +808,7 @@ Underfull \hbox (badness 1360) in paragraph at lines 48--51
 []\OT1/ptm/m/n/10 (+20) Unfortunately, to date the task has not been solved
  []
 
-[4
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.51 \subsection
-                {Hypothesis 1: Scheduling, Stochasticity, and Space Dimensio... <./figures/idle_reward.png>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5
-pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.126 
-      ] (sections/6_discussion.tex) (paper.bbl
+) (sections/6_discussion.tex) (paper.bbl
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 11.
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -859,83 +833,94 @@ Underfull \hbox (badness 2903) in paragraph at lines 16--22
  []
 
 
-Underfull \hbox (badness 3989) in paragraph at lines 96--104
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+Underfull \hbox (badness 1281) in paragraph at lines 95--98
+[]\OT1/ptm/m/n/10 (+20) IEA.  Buildings - energy system - iea, 06.01.2024.
+ []
+
+
+Underfull \hbox (badness 3989) in paragraph at lines 101--109
 []\OT1/ptm/m/n/10 (+20) Javier Arroyo, Carlo Manna, Fred Spiessens, and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--104
+Underfull \hbox (badness 10000) in paragraph at lines 101--109
 \OT1/ptm/m/n/10 (+20) Lieve Helsen.  Reinforced model predictive
  []
 
 
-Underfull \hbox (badness 2990) in paragraph at lines 96--104
+Underfull \hbox (badness 2990) in paragraph at lines 101--109
 \OT1/ptm/m/n/10 (+20) control (rl-mpc) for building energy management.
  []
 
 
-Underfull \hbox (badness 1755) in paragraph at lines 96--104
+Underfull \hbox (badness 1755) in paragraph at lines 101--109
 \OT1/ptm/m/it/10 (+20) Applied Energy\OT1/ptm/m/n/10 (+20) , 309:118346, 2022.  ISSN 0306-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--104
+Underfull \hbox (badness 10000) in paragraph at lines 101--109
 \OT1/ptm/m/n/10 (+20) 2619.  doi: $10 . 1016 / j . apenergy . 2021 . 118346$.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 96--104
+Underfull \hbox (badness 10000) in paragraph at lines 101--109
 \OT1/ptm/m/n/10 (+20) URL [][]$\OT1/pcr/m/n/10 https : / / www . sciencedirect . com /
  []
 
-
-Underfull \hbox (badness 4366) in paragraph at lines 124--127
+[6
+pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.126 
+      ]
+Underfull \hbox (badness 4366) in paragraph at lines 129--132
 \OT1/ptm/m/n/10 (+20) and Klimov, O.  Proximal policy optimization
  []
 
 
-Underfull \hbox (badness 1117) in paragraph at lines 140--144
+Underfull \hbox (badness 1117) in paragraph at lines 145--149
 \OT1/ptm/m/it/10 (+20) An Introduction\OT1/ptm/m/n/10 (+20) .  The MIT Press, second edition,
  []
 
 
-Underfull \hbox (badness 1248) in paragraph at lines 140--144
+Underfull \hbox (badness 1248) in paragraph at lines 145--149
 \OT1/ptm/m/n/10 (+20) 2018.  URL [][]$\OT1/pcr/m/n/10 http : / / incompleteideas . net /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--155
+Underfull \hbox (badness 10000) in paragraph at lines 152--160
 \OT1/ptm/m/n/10 (+20) A new solar radiation database for estimating
  []
 
 
-Underfull \hbox (badness 6220) in paragraph at lines 147--155
+Underfull \hbox (badness 6220) in paragraph at lines 152--160
 \OT1/ptm/m/n/10 (+20) pv performance in europe and africa.  \OT1/ptm/m/it/10 (+20) Solar
  []
 
 
-Underfull \hbox (badness 7221) in paragraph at lines 147--155
+Underfull \hbox (badness 7221) in paragraph at lines 152--160
 \OT1/ptm/m/it/10 (+20) Energy\OT1/ptm/m/n/10 (+20) , 86(6):1803--1815, 2012.  ISSN 0038-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--155
+Underfull \hbox (badness 10000) in paragraph at lines 152--160
 \OT1/ptm/m/n/10 (+20) 092X.  doi: $10 . 1016 / j . solener . 2012 . 03 . 006$.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--155
+Underfull \hbox (badness 10000) in paragraph at lines 152--160
 \OT1/ptm/m/n/10 (+20) URL [][]$\OT1/pcr/m/n/10 https : / / www . sciencedirect . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--167
+Underfull \hbox (badness 10000) in paragraph at lines 163--172
 \OT1/ptm/m/n/10 (+20) URL [][]$\OT1/pcr/m/n/10 https : / / www . sciencedirect . com /
  []
 
-[6]) [7
-
-] [8
+) [7] [8
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
@@ -947,17 +932,17 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26666 strings out of 480553
- 499800 string characters out of 2895249
- 804949 words of memory out of 3000000
- 43753 multiletter control sequences out of 15000+600000
- 508830 words of font info for 228 fonts, out of 8000000 for 9000
+ 26676 strings out of 480553
+ 499936 string characters out of 2895249
+ 799978 words of memory out of 3000000
+ 43756 multiletter control sequences out of 15000+600000
+ 509068 words of font info for 232 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 99i,16n,94p,1297b,495s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 99i,16n,94p,1297b,485s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Program Files/LaTeX/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (8 pages, 383016 bytes).
+Output written on paper.pdf (8 pages, 385841 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 85 named destinations out of 1000 (max. 500000)
+ 345 PDF objects out of 1000 (max. 8388607)
+ 86 named destinations out of 1000 (max. 500000)
  65047 words of extra memory for PDF output out of 74296 (max. 10000000)
 
