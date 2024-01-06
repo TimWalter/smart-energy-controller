@@ -34,7 +34,7 @@ class EnergyStorageSystem(Component):
         self.self_discharge_rate = self_discharge_rate
         self.charge = initial_charge
 
-    def reset(self, initial_charge:float = None):
+    def reset(self, initial_charge: float = None):
         """
         Reset the energy storage system.
         """
@@ -49,7 +49,6 @@ class EnergyStorageSystem(Component):
             action (np.ndarray): The action to be taken [-1, 1]. -1 is full discharge, 1 is full charge.
             The action is clipped to the possible charge and discharge rates.
         """
-
         possible_discharge = np.max([self.charge - self.self_discharge_rate, 0]) * self.round_trip_efficiency_sqrt
         discharge_rate = np.clip(-action * self.maximum_discharge_rate, 0, possible_discharge)
 

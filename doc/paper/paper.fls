@@ -657,6 +657,17 @@ INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\amscls\amsthm.s
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\amscls\amsthm.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\amscls\amsthm.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\cleveref\cleveref.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\cleveref\cleveref.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\cleveref\cleveref.sty
@@ -1117,34 +1128,37 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmro7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro8r.tfm
-INPUT .\sections\4_limitations.tex
-INPUT .\sections\4_limitations.tex
-INPUT .\sections\4_limitations.tex
-INPUT sections\4_limitations.tex
-INPUT .\sections\4_limitations.tex
-INPUT .\sections\4_limitations.tex
-INPUT sections\4_limitations.tex
-INPUT .\sections\5_algorithms.tex
-INPUT .\sections\5_algorithms.tex
-INPUT .\sections\5_algorithms.tex
-INPUT sections\5_algorithms.tex
-INPUT .\sections\5_algorithms.tex
-INPUT .\sections\5_algorithms.tex
-INPUT sections\5_algorithms.tex
-INPUT .\sections\6_results.tex
-INPUT .\sections\6_results.tex
-INPUT .\sections\6_results.tex
-INPUT sections\6_results.tex
-INPUT .\sections\6_results.tex
-INPUT .\sections\6_results.tex
-INPUT sections\6_results.tex
-INPUT .\sections\7_discussion.tex
-INPUT .\sections\7_discussion.tex
-INPUT .\sections\7_discussion.tex
-INPUT sections\7_discussion.tex
-INPUT .\sections\7_discussion.tex
-INPUT .\sections\7_discussion.tex
-INPUT sections\7_discussion.tex
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmrc7t.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT .\sections\4_algorithms.tex
+INPUT .\sections\4_algorithms.tex
+INPUT .\sections\4_algorithms.tex
+INPUT sections\4_algorithms.tex
+INPUT .\sections\4_algorithms.tex
+INPUT .\sections\4_algorithms.tex
+INPUT sections\4_algorithms.tex
+INPUT .\figures\idle_reward.png
+INPUT .\figures\idle_reward.png
+INPUT figures\idle_reward.png
+INPUT .\figures\idle_reward.png
+INPUT .\figures\idle_reward.png
+INPUT .\figures\idle_reward.png
+INPUT .\figures\idle_reward.png
+INPUT .\sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT sections\5_experiments.tex
+INPUT .\sections\6_discussion.tex
+INPUT .\sections\6_discussion.tex
+INPUT .\sections\6_discussion.tex
+INPUT sections\6_discussion.tex
+INPUT .\sections\6_discussion.tex
+INPUT .\sections\6_discussion.tex
+INPUT sections\6_discussion.tex
 INPUT .\paper.bbl
 INPUT paper.bbl
 INPUT .\paper.bbl
@@ -1159,9 +1173,6 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmbi7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmbi7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmbi8r.tfm
 INPUT paper.aux
 INPUT .\paper.out
 INPUT .\paper.out
@@ -1180,6 +1191,10 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi9.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr5.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
@@ -1194,8 +1209,6 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmb8a.pfb
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmbi8a.pfb
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmbi8a.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmr8a.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\times\utmr8a.pfb

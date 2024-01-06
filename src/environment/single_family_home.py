@@ -28,6 +28,7 @@ class SingleFamilyHome(gym.Env):
             self.config = json.load(open(config, "r"))
         except FileNotFoundError:
             print(config)
+            raise FileNotFoundError
 
         self.resolution = self.config["resolution"]
         self.number_of_episodes = 101 if self.resolution == "minutely" else 102
@@ -57,9 +58,6 @@ class SingleFamilyHome(gym.Env):
             if self.tcl_condition else None
         ]
 
-        self.observation_space = self._observation_space()
-        self.action_space = self._action_space()
-        self.action_slice = self._action_slice()
 
         self.ees = ExternalElectricitySupply(resolution=self.resolution)
         self.hed = HouseholdEnergyDemand(resolution=self.resolution)
@@ -76,7 +74,15 @@ class SingleFamilyHome(gym.Env):
                 **self.config["thermostatically_controlled_load"])
 
         if self.wtd_condition or self.tcl_condition:
-            self.wtd = WeatherAndTimeData()
+            self.wtd = WeatherAndTimeData(resolution=self.resolution)
+
+        self.observation_space = self._observation_space()
+        self.action_space = self._action_space()
+        self.action_slice = self._action_slice()
+
+        ## TODO
+        self.counter = 0
+        self.co2_emitted = 0
 
     def develop(self):
         self.next_episode = 0
@@ -101,8 +107,10 @@ class SingleFamilyHome(gym.Env):
     def _observation_space(self) -> gym.spaces.Dict:
         spaces = {
             "carbon_intensity": gym.spaces.Box(low=0.0512*(1 if self.resolution=="minutely" else 60), high=2.373*(1 if self.resolution=="minutely" else 60)),
-            #"household_energy_demand": gym.spaces.Box(low=0.0, high=10.1619 if self.resolution == "minutely" else 6.0138),
-            #"rooftop_solar_generation": gym.spaces.Box(low=-0.4269, high=44.0072)
+            "timestep": gym.spaces.Box(low=0, high=10079 if self.resolution == "minutely" else 167),
+            "co2_emitted":gym.spaces.Box(low=-10000, high=np.inf),
+            "household_energy_demand": gym.spaces.Box(low=0.0, high=10.1619 if self.resolution == "minutely" else 6.0138),
+            "rooftop_solar_generation": gym.spaces.Box(low=-0.4269, high=44.0072)
         }
 
         if self.ess_condition:
@@ -122,8 +130,7 @@ class SingleFamilyHome(gym.Env):
             )
 
         if self.wtd_condition:
-            spaces["day_of_year"] = gym.spaces.Box(low=1, high=365)
-            spaces["hour_of_day"] = gym.spaces.Box(low=0, high=23)
+            spaces["month_of_year"] = gym.spaces.Box(low=1, high=12)
             spaces["solar_irradiation"] = gym.spaces.Box(low=0.0, high=1082.1)
             spaces["solar_elevation"] = gym.spaces.Box(low=0.0, high=64.41)
             spaces["temperature"] = gym.spaces.Box(low=-10.43, high=35.13)
@@ -134,8 +141,10 @@ class SingleFamilyHome(gym.Env):
     def _construct_observation(self) -> ObsType:
         observation = {
             "carbon_intensity": self.ees.state,
-            #"household_energy_demand": self.hed.state,
-            #"rooftop_solar_generation": self.rsa.state
+            "timestep": self.counter,
+            "co2_emitted": self.co2_emitted,
+            "household_energy_demand": self.hed.state,
+            "rooftop_solar_generation": self.rsa.state
         }
 
         if self.ess_condition:
@@ -148,7 +157,7 @@ class SingleFamilyHome(gym.Env):
             observation["tcl_indoor_temperature"] = self.tcl.state
 
         if self.wtd_condition:
-            keys = ["day_of_year", "hour_of_day", "solar_irradiation", "solar_elevation", "temperature", "wind_speed"]
+            keys = ["month_of_year", "solar_irradiation", "solar_elevation", "temperature", "wind_speed"]
             for i, key in enumerate(keys):
                 observation[key] = self.wtd.state[i]
 
@@ -177,8 +186,8 @@ class SingleFamilyHome(gym.Env):
                 low += [-1]
                 high += [1]
             if self.fdr_condition:
-                low += [-1]
-                high += [1]
+                low += [-1] * (2*self.fdr.planning_horizon+1)
+                high += [1] * (2*self.fdr.planning_horizon+1)
             if self.tcl_condition:
                 low += [-1]
                 high += [1]
@@ -191,7 +200,7 @@ class SingleFamilyHome(gym.Env):
         if self.ess_condition:
             action_slice["energy_storage_system"] = 0
         if self.fdr_condition:
-            action_slice["flexible_demand_response"] = 1 if self.ess_condition else 0
+            action_slice["flexible_demand_response"] = slice(1 if self.ess_condition else 0, -1 if self.tcl_condition else None)
         if self.tcl_condition:
             action_slice["thermostatically_controlled_load"] = -1
         return action_slice
@@ -215,25 +224,10 @@ class SingleFamilyHome(gym.Env):
 
         return np.array(rescaled_action, dtype=np.float32).flatten()
 
-    def _rescale_continuous_action(self, action: ActType) -> ActType:
-        rescaled_action = []
-
-        if self.ess_condition:
-            energy_storage_system_action = action[self.action_slice["energy_storage_system"]]
-            rescaled_action += [energy_storage_system_action]  # [-1, 1] -> [-1, 1]
-        if self.fdr_condition:
-            flexible_demand_response_action = action[self.action_slice["flexible_demand_response"]]
-            rescaled_action += [flexible_demand_response_action]  # [-1, 1] -> [-1, 1]
-        if self.tcl_condition:
-            thermostatically_controlled_load_action = action[self.action_slice["thermostatically_controlled_load"]]
-            rescaled_action += [thermostatically_controlled_load_action]  # [-1, 1] -> [-1, 1]
-
-        return np.array(rescaled_action, dtype=np.float32).flatten()
-
     def _calculate_reward(self) -> float:
-        produced_energy = 0#self.rsa.reward_cache["rooftop_solar_generation"]
-        consumed_energy = 0#self.hed.reward_cache["household_energy_demand"]
-
+        produced_energy = self.rsa.reward_cache["rooftop_solar_generation"]
+        consumed_energy = self.hed.reward_cache["household_energy_demand"]
+        reward = 0
         if self.ess_condition:
             consumed_energy += self.ess.reward_cache["consumed_energy"]
 
@@ -245,44 +239,49 @@ class SingleFamilyHome(gym.Env):
             discomfort = self.tcl.penalty_factor * np.exp(
                 np.abs(self.tcl.reward_cache["indoor_temperature"] - self.tcl.desired_temperature))
 
-        reward = self.ees.reward_cache["carbon_intensity"] * (produced_energy - consumed_energy)
+        reward += self.ees.reward_cache["carbon_intensity"] * (produced_energy - consumed_energy)
         if self.tcl_condition:
             reward -= discomfort
+
         return reward
 
     def _calculate_done(self) -> bool:
         return self.ees.time >= self.ees.episode.index[-1]
 
     def reset(self, seed: int | None = 42, options: dict[str, Any] | None = None, ) -> tuple[ObsType, dict[str, Any]]:
+        self.counter= 0
+        self.co2_emitted = 0
         super().reset(seed=seed)
 
         episode = self.episode_set[self.next_episode]
-        self.next_episode = (self.next_episode + 1) % len(self.episode_set)
+
 
         self.ees.reset(episode=episode)
         self.hed.reset(episode=episode)
         self.rsa.reset(episode=episode)
 
         if self.ess_condition:
-            self.ess.reset(self.shuffled_initial_conditions[0][episode] if self.shuffle else None)
+            self.ess.reset(self.shuffled_initial_conditions[0][self.next_episode] if self.shuffle else None)
 
         if self.fdr_condition:
             self.fdr.reset(episode=episode)
 
         if self.tcl_condition:
-            self.tcl.reset(self.shuffled_initial_conditions[1][episode] if self.shuffle else None)
+            self.tcl.reset(self.shuffled_initial_conditions[1][self.next_episode] if self.shuffle else None)
 
         if self.wtd_condition or self.tcl_condition:
             self.wtd.reset(episode=episode)
 
+        self.next_episode = (self.next_episode + 1) % len(self.episode_set)
         observation = self._construct_observation()
         return observation, {}
 
     def step(self, action: ActType) -> tuple[ObsType, float, bool, bool, dict]:
+        self.counter += 1
         if self.config["action_space"]["type"] == "discrete":
             rescaled_action = self._rescale_discrete_action(action)
         else:
-            rescaled_action = self._rescale_continuous_action(action)
+            rescaled_action = action
         self.ees.step()
         self.hed.step()
         self.rsa.step()
@@ -301,10 +300,13 @@ class SingleFamilyHome(gym.Env):
         if self.wtd_condition or self.tcl_condition:
             self.wtd.step()
 
+        self.co2_emitted -= self._calculate_reward()
+
         observation = self._construct_observation()
-        reward = self._calculate_reward()
+        #reward = self._calculate_reward()
         terminated = self._calculate_done()
         truncated = False
+        reward = 0 if not terminated else -self.co2_emitted
 
         info = {"next_observation": observation, "action": rescaled_action, "reward": reward,
                 "cache": {

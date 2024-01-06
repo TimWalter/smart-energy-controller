@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -74,6 +74,13 @@ Dobos, A.~P.
 {Georges Hebrail}, A.~B.
 \newblock Individual household electric power consumption.
 
+\bibitem[Haarnoja et~al.()Haarnoja, Zhou, Abbeel, and
+  Levine]{Haarnoja.04.01.2018}
+Haarnoja, T., Zhou, A., Abbeel, P., and Levine, S.
+\newblock Soft actor-critic: Off-policy maximum entropy deep reinforcement
+  learning with a stochastic actor.
+\newblock URL \url{http://arxiv.org/pdf/1801.01290.pdf}.
+
 \bibitem[H{\"o}rsch et~al.(2018)H{\"o}rsch, Hofmann, Schlachtberger, and
   Brown]{Horsch.2018}
 H{\"o}rsch, J., Hofmann, F., Schlachtberger, D., and Brown, T.
@@ -112,11 +119,23 @@ Nakabi, T.~A. and Toivanen, P.
 \newblock ISSN 23524677.
 \newblock \doi{10.1016/j.segan.2020.100413}.
 
+\bibitem[Schulman et~al.()Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{Schulman.20.07.2017}
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O.
+\newblock Proximal policy optimization algorithms.
+\newblock URL \url{http://arxiv.org/pdf/1707.06347.pdf}.
+
 \bibitem[Sonderegger(1978)]{Sonderegger.1978}
 Sonderegger, R.~C.
 \newblock \emph{Dynamic models of house heating based on equivalent thermal
   parameters}.
 \newblock PhD thesis, {Princeton University, New Jersey}, 1978.
+
+\bibitem[Sutton \& Barto(2018)Sutton and Barto]{Sutton.2018}
+Sutton, R.~S. and Barto, A.~G.
+\newblock \emph{Reinforcement Learning: An Introduction}.
+\newblock {The MIT Press}, second edition, 2018.
+\newblock URL \url{http://incompleteideas.net/book/the-book-2nd.html}.
 
 \bibitem[{Thomas Huld} et~al.(2012){Thomas Huld}, {Richard M{\"u}ller}, and
   {Attilio Gambardella}]{ThomasHuld.2012}
@@ -150,6 +169,18 @@ Towers, M., Terry, J.~K., Kwiatkowski, A., Balis, J.~U., de~Cola, G., Deleu,
   O.~G.
 \newblock Gymnasium, 2023.
 \newblock URL \url{https://zenodo.org/record/8127025}.
+
+\bibitem[Wang et~al.()Wang, Lin, and Zhang]{Wang.20.06.2023}
+Wang, H., Lin, S., and Zhang, J.
+\newblock Warm-start actor-critic: From approximation error to sub-optimality
+  gap.
+\newblock URL \url{http://arxiv.org/pdf/2306.11271.pdf}.
+
+\bibitem[Zhang et~al.()Zhang, Song, Cao, Zhang, Tan, and Xu]{Zhang.23.10.2020}
+Zhang, C., Song, W., Cao, Z., Zhang, J., Tan, P.~S., and Xu, C.
+\newblock Learning to dispatch for job shop scheduling via deep reinforcement
+  learning.
+\newblock URL \url{http://arxiv.org/pdf/2010.12367.pdf}.
 
 \bibitem[Zhu et~al.(2022)Zhu, Yang, Liu, Wang, Ma, and Guan]{Zhu.2022}
 Zhu, D., Yang, B., Liu, Y., Wang, Z., Ma, K., and Guan, X.

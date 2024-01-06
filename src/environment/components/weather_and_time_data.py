@@ -11,7 +11,7 @@ class WeatherAndTimeData(Component, DataLoader):
         This class inherits from the Component and DataLoader classes.
     """
 
-    def __init__(self, episode: int = 0, resolution: str = 'minutely'):
+    def __init__(self, resolution: str):
         """
         Initializes the WeatherAndTimeData.
 
@@ -40,7 +40,7 @@ class WeatherAndTimeData(Component, DataLoader):
         """
         Updates day of year, hour of day, and weather data.
         """
-        self.state = np.array([self.time.dayofyear, self.time.hour])
+        self.state = np.array([self.time.month])
         self.state = np.concatenate((self.state, self.get_values(self.time).values[0]))
 
     def update_reward_cache(self):

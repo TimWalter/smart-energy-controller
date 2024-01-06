@@ -4,7 +4,7 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-episode_length = 10079
+episode_length = 168
 
 
 def overview(data_dict=None, path='./logs/minutely'):
@@ -33,8 +33,6 @@ def load_data(path):
         if os.path.isfile(item_path):
             data_dict[item.split(".")[0]] = pickle.load(open(item_path, 'rb'))
 
-    global episode_length
-    episode_length = len(data_dict["idle"]["reward"])
     data_dict = {k: v for k, v in
                  sorted(data_dict.items(), key=lambda item: np.sum(item[1]["reward"][-episode_length:]))}
 
@@ -69,6 +67,7 @@ def reward_over_epochs(figsize=(20, 7), subplot=None, path=None):
     ax.set_ylabel("Accumulated Reward")
     ax.set_xlabel("Epoch")
     ax.set_title("Accumulated Reward over Epochs")
+    #ax.set_ylim(bottom=0, top=1000)
 
     if subplot is None:
         plt.show()

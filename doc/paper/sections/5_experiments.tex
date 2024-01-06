@@ -1,0 +1,64 @@
+\begin{table*}[t]
+\label{tab:experiments}
+\caption{Accumulated rewards split by origin per experiment}
+\vskip 0.15in
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lccccr}
+\toprule
+Experiment & Algorithm & ESS & FDR & TCL & Discomfort \\
+\midrule
+\multirow{4}{*}{Full Environment} & Idle & 0.00 & 0.00 & 0.00 & 0.00 \\
+& Threshold & 0.00 & 0.00 & 0.00 & 0.00 \\
+& PPO & 0.00 & 0.00 & 0.00 & 0.00 \\
+& SAC & 0.00 & 0.00 & 0.00 & 0.00 \\
+\multirow{4}{*}{Hypothesis 1} & Idle & 0.00 & 0.00 & 0.00 & 0.00 \\
+& Threshold & 0.00 & 0.00 & 0.00 & 0.00 \\
+& PPO & 0.00 & 0.00 & 0.00 & 0.00 \\
+& SAC & 0.00 & 0.00 & 0.00 & 0.00 \\
+\multirow{4}{*}{Hypothesis 2} & Idle & 0.00 & 0.00 & 0.00 & 0.00 \\
+& Threshold & 0.00 & 0.00 & 0.00 & 0.00 \\
+& PPO & 0.00 & 0.00 & 0.00 & 0.00 \\
+& SAC & 0.00 & 0.00 & 0.00 & 0.00 \\
+\multirow{4}{*}{Hypothesis 3} & Idle & 0.00 & 0.00 & 0.00 & 0.00 \\
+& Threshold & 0.00 & 0.00 & 0.00 & 0.00 \\
+& PPO & 0.00 & 0.00 & 0.00 & 0.00 \\
+& SAC & 0.00 & 0.00 & 0.00 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\vskip -0.1in
+\end{table*}
+To investigate the ease of the given problem initially, the first experiments were replaying only a single epsiode. Furthermore, the initial conditions, the initial indoor temperature $T_0$, building mass temperature $T_{b,0}$, and initial charge $B_0$, were deterministic for every training episode, but would be shuffled later.
+\par
+Since the task can be split nicely into distinct subtasks for each dynamic component, the rewards were tracked separatly to allow the analysis of performance of each subtask explicitly.
+This split the reward into the following components:
+\begin{flalign}
+    r_{noise} &= I_t (G_t - L_t) && \\
+    r_{ESS} &= I_t (D_t - C_t) && \\
+    r_{FDR} &= I_t (-\sum_{p \in U_e} p_r - \sum_{p \in U_d} \frac{2p}{H-1}) && \\
+    r_{TCL} &= I_t (-\frac{1}{r_h} L_{TCL} a_{tcl,t}) && \\ 
+    r_{discomfort} &=- \delta exp(|T_t - \frac{T_{max} + T_{min}}{2}) &&
+\end{flalign}
+The reward for TCL was split, since maintaining the temperature is a very different task than minimizing the energy consumption. The result of all experiments are shown in \ref{tab:experiments}.
+\par
+Unfortunately, to date the task has not been solved successfully, as the RL algorithms are not outperforming the baselines. 
+% Potentially policy collapse curve showing? 
+Since the algorithms were widely tested and used in other domains, the problem is likely to be in the formulation of the problem. Therefore, three hypothesis are formulated to explain the poor performance of the algorithms and attempts to solve them are discussed in the following. The experiments were run with cumultating changes. The training details can be found in \ref{sec:training_procedure}.
+\subsection{Hypothesis 1: Scheduling, Stochasticity, and Space Dimensionality}
+The first issue investigated, was the FDR formulation. The problem of scheduling using RL is already challenging \cite{Zhang.23.10.2020} but is further complicated since the agent has only stochastic control. Furthermore, the action space and observation space dimensionality was extremely high, especially in minutely resolution, since the desired planning horizon was 24 hours. This could lead to a curse of dimensionality \cite{Sutton.2018} and was especially poor since the dimensionality would depend on the parametrization of the environment both in terms of $H$ and the resolution. 
+\par
+The attempted solution was to simplify the task, by allowing the agent to control the FDR deterministically and only give a scalar signal for all components. These changes are equivalent to the assumption that the optimal policy is invariant to $U_e$ as long as the sum is maintained and that $\beta = \infty$.
+% little bit of result talk?
+\subsection{Hypothesis 2: Hard Exploration}
+Another difficulty of the environment, is its vast exploration space, given by the continuity of the action and observation space, the length of the episodes, especially in minutely resolution, and the fact that the agent has to perform multiple actions per timestep. The task is furter complicated by the noise from the RSA and HED on the reward. Moreover, a lot of observables are only relevant for estimating the future carbon intensity. 
+\par
+To address these concerns the minutely resolution was omitted from now on. In addition, the action space for PPO was discretized into 11 bins for each component, the HED and RSA were removed from the observables and reward calculation, and the policies were trained separatly for every subtask. Moreover, observables that did not impact the reward directly besides, the timestep were removed. Lastly, the replay buffer for SAC was initialized with one episode of transitions of the threshold algorithm, providing a warm start \cite{Wang.20.06.2023}.
+
+% Hypothesis
+% 2. Exploration problem:  warm start, no additonal informato
+% 4. Delayed Reward problem: sparse reward, reward tuning
+% Furthermore, the rewards might be deceptive, since the possible actions for the ESS and FDR are only effective if used in the right combination. Discharging the battery only makes sense after charging it, delaying usages makes only sense if they are expedited later, and so on. However, a lot of the necessary actions produce only negative rewards.

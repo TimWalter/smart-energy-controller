@@ -1,4 +1,4 @@
-The key contribution of this work is to build an environment for a single family household, consisting of a rooftop solar array for energy generation, an energy storage system, a thermostatically controlled load and flexible demand response. The enviroment is built on a mixture of simulated and real data and dynamic components. It is used to optimize the CO2eq emissions of the household. The environment is built on the Gymansium framework \cite{Towers.2023} and is available on GitHub\footnote{https://github.com/TimWalter/smart-energy-controller}
+The main contribution of this work is to build an environment for a single family household, consisting of a rooftop solar array for energy generation, an energy storage system, a thermostatically controlled load and flexible demand response. The enviroment is built on a mixture of simulated and real data and dynamic components. It is used to optimize the CO2eq emissions of the household. The environment is built on the Gymansium framework \cite{Towers.2023} and is available on GitHub\footnote{https://github.com/TimWalter/smart-energy-controller}
 \par
 The training environment was chosen to be episodic to accomodate the environment framework\cite{Towers.2023} and algorithm framework\cite{AntoninRaffin.2021}. The episodes are organized into weeks, with either minutely or hourly resolution, to capture the daily and weekly patterns of the household. The timeframe chosen, was 07.01.2007 - 28.12.2008, although some episodes had to be left out due to missing data. Overall there were more than 100 episodes, of which 95 were used for training, 4 for testing and the rest for training. The power was standarized to kilowatts, while the energy was simply kWmin or kWh depending on the resolution. As the agents is operating on equidistant timesteps anyway, there is no real difference between energy and power, as the power is always assumed to be constant over the timestep. The location of the house was in France near Paris.
 
@@ -39,14 +39,14 @@ The energy storage system (ESS) is directly chargable and dischargeable from eit
 Here, $B_t \in [0, B_{max}]$ is the charge at time $t$ and $B_{max}$ is the capacity. Furthermore, $\nu$ denotes the round trip efficiency, $D_s$ the self-discharge rate, $C_t \in [0, C_{max}]$ the charge rate with maximum $C_{max}$ and $D_t \in [0, D_{max}]$ the discharge rate with its maximum  $D_{max}$. The rates can be further constrained by the current charge and capacity, such that actually $C_t \in [0, \min\{C_{max}, \frac{B_{max} - B_t + D_s}{\sqrt{\nu}}\}]$ and $D_t \in [0, \min\{D_{max}, (B_t - D_S) \sqrt{\nu}\}]$.
 
 \subsubsection{Flexible Demand Response}
-Flexible Demand Response (FDR) denotes the shifting of load in time. This is modelled as a desired schedule of usage, as described in \ref{sssec:household_energy_demand}. A timeframe centred around the current timestep of the schedule is influenced stochatistacally by a scalar signal $a_{fdr, t} \in [-1 , 1]$. Whether a usage is executed is determined by a Bernoulli process, with probabilities $p$ calculated from the desired schedule, the signal and an exponential weighting, which is centered around the scheduled time of usage. The probabilities are given by:
+Flexible Demand Response (FDR) denotes the shifting of load in time. This is modelled as a desired schedule of usage, as described in \ref{sssec:household_energy_demand}. A timeframe centred around the current timestep of the schedule is influenced stochatistacally by a  signal $a_{fdr, t} \in [-1 , 1]^H$, where $H$ is the length of the timeframe. Whether a usage is executed is determined by a Bernoulli process, with probabilities $p$ calculated from the desired schedule, the signal and an exponential weighting, which is centered around the scheduled time of usage. The probabilities are given by:
 \begin{equation}
     p_t = \max\{0, \min\{1, s + a_{fdr, t} * \exp(\frac{-1}{\beta}|t - t_{s}|)\}\}
 \end{equation}
 where $s \in \{0,1\}^{H}$ is the vector of the desired schedule with elements $s_i = \begin{cases}
     1 & \text{if } t_i \leq t \\
     0 & \text{else}
-\end{cases}$ and $H$ the number of usages in the timeframe, $\beta$ is a patience parameter, and $t_{s} \in \mathbb{R}^{H}$ is the vector of desired execution times in the current timeframe. If a usage is executed its power is completely drawn in the current timestep. However, if a usage is not executed after being delayed once, it will consume a discounted amount of power in each timestep, such that if it is never exectued it will consume the same amount of power as if it was executed once. This aims to facilitate learning by preventing infinite delays or a large negative reward at the end of the episode. To do so the  power consumption of a usage after the first delay is $\frac{2p}{H-1}$, which is also discounted from the remaining power.
+\end{cases}$ $\beta$ is a patience parameter, and $t_{s} \in \mathbb{R}^{H}$ is the vector of desired execution times in the current timeframe. If a usage is executed its power is completely drawn in the current timestep. However, if a usage is not executed after being delayed once, it will consume a discounted amount of power in each timestep, such that if it is never exectued it will consume the same amount of power as if it was executed once. This aims to facilitate learning by preventing infinite delays or a large negative reward at the end of the episode. To do so the  power consumption of a usage after the first delay is $\frac{2p}{H-1}$, which is also discounted from the remaining power.
 
 \subsubsection{Thermostatically Controlled Load}
 The Thermostatically Controlled Load (TCL) encapsulates all devices that aim to maintain the temperature of a given heat mass. To utilize such loads as energy storage, the temperature of the heat mass is allowed to fluctuate within a given range. The TCL is modeled as a second-order system \cite{Sonderegger.1978} that has the following update procedure:
@@ -77,42 +77,61 @@ The data in combination with the dynamic components allows the formulation of a 
 
 \subsubsection{Observation Space}
 The observation space is a bounded subset of $\mathbb{R}^{12}$, with the observables given in \ref{tab:observation_space}. 
+
 \begin{table}[H]
-    \centering
-    \begin{tabular}{lll}
-    \textbf{Observable} & \textbf{Symbol} \\
-    \hline
-    Carbon Intensity & $I$\\
+\label{tab:observation_space}
+\caption{Observation Space}
+\vskip 0.15in
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lcr}
+\toprule
+Observable & Symbol \\
+\midrule
+Carbon Intensity & $I$\\
     Household Energy Demand & $L_{HED}$ \\
     Rooftop Solar Generation & $G$ \\
     ESS Charge & $B$ \\
     FDR power in current timeframe & $L_{FDR}$ \\
     Indoor temperature & $T$ \\
-    Day of Year & $DoY$ \\
-    Hour of Day & $HoD$ \\
+    Timestep & $t$ \\
+    Month of Year & $MoY$ \\
     Solar Irradiation & $SI$ \\
     Solar Elevation & $SE$ \\
     Outdor temperature & $T_a$ \\
     Wind Speed & $WS$ \\
-    \end{tabular}
-    \caption{Observation Space}
-    \label{tab:observation_space}
+\bottomrule
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\vskip -0.1in
 \end{table}
 
 \subsubsection{Action Space}
 The agent can influence the components of \ref{ssec:dynamic_components}, through the signals $a_{fdr}$, $a_{tcl}$ and $a_{ess}$. For $a_{ess}$ the charging and discharging rates are combined into a single signal, since the ESS can either be charged or discharged at any given timestep. 
 All signal are normalized to $[-1, 1]$ and can be discretized into bins, if the algorithm require a discrete action space. The action space is summarized in table \ref{tab:action_space}.
 \begin{table}[H]
-    \centering
-    \begin{tabular}{lll}
-    \textbf{Action} & \textbf{Min. Meaning} & \textbf{Max. Meaning}\\
-    \hline
-    $a_{ess}$ & Discharge & Charge \\ 
+\label{tab:action_space}
+\caption{Action Space}
+\vskip 0.15in
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lcr}
+\toprule
+Action & Min. Meaning & Max. Meaning\\
+\midrule
+$a_{ess}$ & Discharge & Charge \\ 
     $a_{fdr}$ & Delay     & Expedite \\
     $a_{tcl}$ & No heating& Heating\\
-    \end{tabular}
-    \caption{Action Space}
-    \label{tab:action_space}
+\bottomrule
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\vskip -0.1in
 \end{table}
 
 \subsubsection{Reward Function}
@@ -130,8 +149,8 @@ where $PE$ is the energy produced, $CE$ is the energy produced, $U_e$ is the set
 \par
 Moreover, since the task is episodically formulated, there is a correction necessary at the end of the episode to account for e.g. differences in charge left. The correction of the final reward is given as:
 \begin{flalign}
-    reward &\mathrel{+}= I_t * B_t && \\
-    reward &\mathrel{+}= I_t * (- \sum_{p \in U} p_r) && \\
-    reward &\mathrel{+}= I_t * (- r_h|T_t - \frac{T_{max}+T_{min}}{2}|) && 
+    reward &\mathrel{+}= I_t B_t && \\
+    reward &\mathrel{+}= I_t (- \sum_{p \in U} p_r) && \\
+    reward &\mathrel{+}= I_t (- r_h|T_t - \frac{T_{max}+T_{min}}{2}|) && 
 \end{flalign}
 where $U$ is the set of left over usages. Every equation is correcting for one type of left over energy in the system.

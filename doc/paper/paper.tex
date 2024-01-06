@@ -28,7 +28,7 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{amsthm}
-
+\usepackage{multirow}
 % if you use cleveref..
 \usepackage[capitalize,noabbrev]{cleveref}
 
@@ -118,17 +118,14 @@
 \section{Environment}\label{sec:environment}
 \input{sections/3_environment}
 
-\section{Limitations}\label{sec:limitations}
-\input{sections/4_limitations}
-
 \section{Algorithms}\label{sec:algorithms}
-\input{sections/5_algorithms}
+\input{sections/4_algorithms}
 
-\section{Results}\label{sec:results}
-\input{sections/6_results}
+\section{Experiments}\label{sec:limitations}
+\input{sections/5_experiments}
 
 \section{Discussion}\label{sec:discussion}
-\input{sections/7_discussion}
+\input{sections/6_discussion}
 
 \bibliography{literature.bib}
 \bibliographystyle{icml2023}
@@ -142,11 +139,46 @@
 \newpage
 \appendix
 \onecolumn
-\section{You \emph{can} have an appendix here.}
+\section{Training Procedure} \label{sec:training_procedure}
 
-You can have as much text here as you want. The main body must be at most $8$ pages long.
-For the final version, one more page can be added.
-If you want, you can use an appendix like this one, even using the one-column format.
+All experiments were run for 250 episodes and in hourly resolution. The training parameters are shown in \ref{tab:training_parameters}. 
+\begin{table}[H]
+\label{tab:training_parameters}
+\caption{Training Parameters}
+\vskip 0.15in
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lr}
+\toprule
+Parameter & Value\\
+\midrule
+$B_{max}$ & 13.5 \\
+$C_{max}$ & 1 \\
+$D_{max}$ & 1 \\
+$\nu$ & 0.95 \\
+$D_s$ & 0.01 \\
+$B_0$ & 0 \\
+$H$ & 25 \\
+$\beta$ & 20 \\
+$\delta$ & 5 \\
+$T_{0}$ & 20 \\
+$T_{b,0}$ & 20 \\
+$r_{a}$ & 0.04 \\
+$r_{b}$ & 0.1 \\
+$r_{h}$ & 0.05 \\
+$q$ & 0.05 \\
+$L_{TCL}$ & 5 \\
+$T_{max}$ & 23 \\
+$T_{min}$ & 18 \\
+\bottomrule
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\vskip -0.1in
+\end{table}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

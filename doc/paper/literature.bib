@@ -84,6 +84,20 @@
 }
 
 
+@article{Ecoffet.2021,
+ abstract = {Reinforcement learning promises to solve complex sequential-decision problems autonomously by specifying a high-level reward function only. However, reinforcement learning algorithms struggle when, as is often the case, simple and intuitive rewards provide sparse1 and deceptive2 feedback. Avoiding these pitfalls requires a thorough exploration of the environment, but creating algorithms that can do~so remains one of the central challenges of the field. Here we hypothesize that the main impediment to effective exploration originates from algorithms forgetting how to reach previously visited states (detachment) and failing to first return to a state before exploring from it (derailment). We introduce Go-Explore, a family of algorithms that addresses these two challenges directly through the simple principles of explicitly 'remembering' promising states and returning to such states before intentionally exploring. Go-Explore solves all previously unsolved Atari games and surpasses the state of the art on all hard-exploration games1, with orders-of-magnitude improvements on the grand challenges of Montezuma's Revenge and Pitfall. We also demonstrate the practical potential of Go-Explore on a sparse-reward pick-and-place robotics task. Additionally, we show that adding a goal-conditioned policy can further improve Go-Explore's exploration efficiency and enable it to handle stochasticity throughout training. The substantial performance gains from Go-Explore suggest that the simple principles of remembering states, returning to them, and exploring from them are a powerful and general approach to exploration-an insight that may prove critical to the creation of truly intelligent learning agents.},
+ author = {Ecoffet, Adrien and Huizinga, Joost and Lehman, Joel and Stanley, Kenneth O. and Clune, Jeff},
+ year = {2021},
+ title = {First return, then explore},
+ pages = {580--586},
+ volume = {590},
+ number = {7847},
+ journal = {Nature},
+ doi = {10.1038/s41586-020-03157-9},
+ file = {1901.10995:Attachments/1901.10995.pdf:application/pdf}
+}
+
+
 @article{F.Holmgren.2018,
  author = {{F. Holmgren}, William and {W. Hansen}, Clifford and {A. Mikofski}, Mark},
  year = {2018},
@@ -103,6 +117,16 @@
  title = {Individual household electric power consumption},
  publisher = {{UCI Machine Learning Repository}},
  doi = {10.24432/C58K54}
+}
+
+
+@misc{Haarnoja.04.01.2018,
+ abstract = {Model-free deep reinforcement learning (RL) algorithms have been demonstrated on a range of challenging decision making and control tasks. However, these methods typically suffer from two major challenges: very high sample complexity and brittle convergence properties, which necessitate meticulous hyperparameter tuning. Both of these challenges severely limit the applicability of such methods to complex, real-world domains. In this paper, we propose soft actor-critic, an off-policy actor-critic deep RL algorithm based on the maximum entropy reinforcement learning framework. In this framework, the actor aims to maximize expected reward while also maximizing entropy. That is, to succeed at the task while acting as randomly as possible. Prior deep RL methods based on this framework have been formulated as Q-learning methods. By combining off-policy updates with a stable stochastic actor-critic formulation, our method achieves state-of-the-art performance on a range of continuous control benchmark tasks, outperforming prior on-policy and off-policy methods. Furthermore, we demonstrate that, in contrast to other off-policy algorithms, our approach is very stable, achieving very similar performance across different random seeds.},
+ author = {Haarnoja, Tuomas and Zhou, Aurick and Abbeel, Pieter and Levine, Sergey},
+ date = {04.01.2018},
+ title = {Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement  Learning with a Stochastic Actor},
+ url = {http://arxiv.org/pdf/1801.01290.pdf},
+ file = {Haarnoja, Zhou et al. 04.01.2018 - Soft Actor-Critic:Attachments/Haarnoja, Zhou et al. 04.01.2018 - Soft Actor-Critic.pdf:application/pdf}
 }
 
 
@@ -160,12 +184,32 @@
 }
 
 
+@misc{Schulman.20.07.2017,
+ abstract = {We propose a new family of policy gradient methods for reinforcement learning, which alternate between sampling data through interaction with the environment, and optimizing a {\textquotedbl}surrogate{\textquotedbl} objective function using stochastic gradient ascent. Whereas standard policy gradient methods perform one gradient update per data sample, we propose a novel objective function that enables multiple epochs of minibatch updates. The new methods, which we call proximal policy optimization (PPO), have some of the benefits of trust region policy optimization (TRPO), but they are much simpler to implement, more general, and have better sample complexity (empirically). Our experiments test PPO on a collection of benchmark tasks, including simulated robotic locomotion and Atari game playing, and we show that PPO outperforms other online policy gradient methods, and overall strikes a favorable balance between sample complexity, simplicity, and wall-time.},
+ author = {Schulman, John and Wolski, Filip and Dhariwal, Prafulla and Radford, Alec and Klimov, Oleg},
+ date = {20.07.2017},
+ title = {Proximal Policy Optimization Algorithms},
+ url = {http://arxiv.org/pdf/1707.06347.pdf},
+ file = {Schulman, Wolski et al. 20.07.2017 - Proximal Policy Optimization Algorithms:Attachments/Schulman, Wolski et al. 20.07.2017 - Proximal Policy Optimization Algorithms.pdf:application/pdf}
+}
+
+
 @phdthesis{Sonderegger.1978,
  author = {Sonderegger, R. C.},
  year = {1978},
  title = {Dynamic models of house heating based on equivalent thermal parameters},
  keywords = {Analog Circuits;Computerized Simulation;Construction;Conversion;Dynamic Models;Energy Consumption;Energy Production;Heating Equipment;Residential Areas;Solar Heating;Thermal Diffusion},
  school = {{Princeton University, New Jersey}}
+}
+
+
+@book{Sutton.2018,
+ author = {Sutton, Richard S. and Barto, Andrew G.},
+ year = {2018},
+ title = {Reinforcement Learning: An Introduction},
+ url = {http://incompleteideas.net/book/the-book-2nd.html},
+ edition = {Second},
+ publisher = {{The MIT Press}}
 }
 
 
@@ -209,6 +253,26 @@
  urldate = {2023-07-08},
  publisher = {Zenodo},
  doi = {10.5281/zenodo.8127026}
+}
+
+
+@misc{Wang.20.06.2023,
+ abstract = {Warm-Start reinforcement learning (RL), aided by a prior policy obtained from offline training, is emerging as a promising RL approach for practical applications. Recent empirical studies have demonstrated that the performance of Warm-Start RL can be improved \textit{quickly} in some cases but become \textit{stagnant} in other cases, especially when the function approximation is used. To this end, the primary objective of this work is to build a fundamental understanding on ``\textit{whether and when online learning can be significantly accelerated by a warm-start policy from offline RL?}''. Specifically, we consider the widely used Actor-Critic (A-C) method with a prior policy. We first quantify the approximation errors in the Actor update and the Critic update, respectively. Next, we cast the Warm-Start A-C algorithm as Newton's method with perturbation, and study the impact of the approximation errors on the finite-time learning performance with inaccurate Actor/Critic updates. Under some general technical conditions, we derive the upper bounds, which shed light on achieving the desired finite-learning performance in the Warm-Start A-C algorithm. In particular, our findings reveal that it is essential to reduce the algorithm bias in online learning.  We also obtain lower bounds on the sub-optimality gap of the Warm-Start A-C algorithm to quantify the impact of the bias and error propagation.},
+ author = {Wang, Hang and Lin, Sen and Zhang, Junshan},
+ date = {20.06.2023},
+ title = {Warm-Start Actor-Critic: From Approximation Error to Sub-optimality Gap},
+ url = {http://arxiv.org/pdf/2306.11271.pdf},
+ file = {Wang, Lin et al. 20.06.2023 - Warm-Start Actor-Critic:Attachments/Wang, Lin et al. 20.06.2023 - Warm-Start Actor-Critic.pdf:application/pdf}
+}
+
+
+@misc{Zhang.23.10.2020,
+ abstract = {Priority dispatching rule (PDR) is widely used for solving real-world Job-shop scheduling problem (JSSP). However, the design of effective PDRs is a tedious task, requiring a myriad of specialized knowledge and often delivering limited performance. In this paper, we propose to automatically learn PDRs via an end-to-end deep reinforcement learning agent. We exploit the disjunctive graph representation of JSSP, and propose a Graph Neural Network based scheme to embed the states encountered during solving. The resulting policy network is size-agnostic, effectively enabling generalization on large-scale instances. Experiments show that the agent can learn high-quality PDRs from scratch with elementary raw features, and demonstrates strong performance against the best existing PDRs. The learned policies also perform well on much larger instances that are unseen in training.},
+ author = {Zhang, Cong and Song, Wen and Cao, Zhiguang and Zhang, Jie and Tan, Puay Siew and Xu, Chi},
+ date = {23.10.2020},
+ title = {Learning to Dispatch for Job Shop Scheduling via Deep Reinforcement  Learning},
+ url = {http://arxiv.org/pdf/2010.12367.pdf},
+ file = {Zhang, Song et al. 23.10.2020 - Learning to Dispatch for Job:Attachments/Zhang, Song et al. 23.10.2020 - Learning to Dispatch for Job.pdf:application/pdf}
 }
 
 
