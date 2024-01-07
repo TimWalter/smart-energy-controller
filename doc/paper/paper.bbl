@@ -1,4 +1,4 @@
-\begin{thebibliography}{25}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -140,12 +140,6 @@ Sonderegger, R.~C.
 Sutton, R.~S.
 \newblock \emph{Temporal Credit Assignment in Reinforcement Learning}.
 \newblock PhD thesis, 1984.
-
-\bibitem[Sutton \& Barto(2018)Sutton and Barto]{Sutton.2018}
-Sutton, R.~S. and Barto, A.~G.
-\newblock \emph{Reinforcement Learning: An Introduction}.
-\newblock {The MIT Press}, second edition, 2018.
-\newblock URL \url{http://incompleteideas.net/book/the-book-2nd.html}.
 
 \bibitem[{Thomas Huld} et~al.(2012){Thomas Huld}, {Richard M{\"u}ller}, and
   {Attilio Gambardella}]{ThomasHuld.2012}

@@ -1112,7 +1112,6 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmrc7t.tfm
 INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
 INPUT figures\static_components.png
@@ -1121,23 +1120,20 @@ INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmro7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmrc7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
-INPUT .\sections\4_algorithms.tex
-INPUT .\sections\4_algorithms.tex
-INPUT .\sections\4_algorithms.tex
-INPUT sections\4_algorithms.tex
-INPUT .\sections\4_algorithms.tex
-INPUT .\sections\4_algorithms.tex
-INPUT sections\4_algorithms.tex
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmro7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro8r.tfm
+INPUT .\sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT .\sections\5_experiments.tex
+INPUT sections\5_experiments.tex
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmbc7t.tfm
 INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
 INPUT figures\idle_reward.png
@@ -1145,13 +1141,15 @@ INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
-INPUT .\sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT sections\5_experiments.tex
+INPUT .\figures\training_curve.png
+INPUT .\figures\training_curve.png
+INPUT figures\training_curve.png
+INPUT .\figures\training_curve.png
+INPUT .\figures\training_curve.png
+INPUT .\figures\training_curve.png
+INPUT .\figures\training_curve.png
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT .\sections\6_discussion.tex
 INPUT .\sections\6_discussion.tex
 INPUT .\sections\6_discussion.tex
@@ -1169,6 +1167,8 @@ INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.f
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmbc7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf

@@ -1,55 +1,44 @@
-The main contribution of this work is to build an environment for a single family household, consisting of a rooftop solar array for energy generation, an energy storage system, a thermostatically controlled load and flexible demand response. The enviroment is built on a mixture of simulated and real data and dynamic components. It is used to optimize the CO2eq emissions of the household. The environment is built on the Gymansium framework \cite{Towers.2023} and is available on GitHub\footnote{https://github.com/TimWalter/smart-energy-controller}
+The main contribution of this work is an environment for a single family household, consisting of a Rooftop Solar Array (RSA), an Energy Storage System (ESS), a Thermostatically Controlled Load (TCL) and Flexible Demand Response (FDR). The environment is a mixture of replayed data and dynamic components. The objective is minimizing the CO2eq emissions. The environment is built on the Gymnasium framework \cite{Towers.2023} and available on GitHub\footnote{https://github.com/TimWalter/smart-energy-controller}. The task is split into episodes of weeks, with either minutely or hourly resolution, to capture the daily and weekly patterns of the demand and generation.
 \par
-The training environment was chosen to be episodic to accomodate the environment framework\cite{Towers.2023} and algorithm framework\cite{AntoninRaffin.2021}. The episodes are organized into weeks, with either minutely or hourly resolution, to capture the daily and weekly patterns of the household. The timeframe chosen, was 07.01.2007 - 28.12.2008, although some episodes had to be left out due to missing data. Overall there were more than 100 episodes, of which 95 were used for training, 4 for testing and the rest for training. The power was standarized to kilowatts, while the energy was simply kWmin or kWh depending on the resolution. As the agents is operating on equidistant timesteps anyway, there is no real difference between energy and power, as the power is always assumed to be constant over the timestep. The location of the house was in France near Paris.
+The RL paradigm requires the formulation as a Markov Decision Process, consisting of a transition function, action and observation spaces, and a reward function. The transition function is given by the replayed data and the dynamics of the components in the following. The observation space is a bounded subset of $\mathbb{R}^{11+H}$, with the observables given in \cref{tab:observation_space}. The action space is summarized in  \cref{tab:action_space}. The reward function is described in \cref{ssec:reward_function}.
 
-
-\subsection{Static Components}\label{ssec:static_components}
-The static components are the parts of the environment that are not reactive to the agent's actions. These are auxillary information, the generation of the rooftop solar array, the household energy demand and the external electricity supply. The data was either given in hourly or minutely resolution, and was adapted to the missing resolution using linear interpolation or averaging.
-
-\subsubsection{Auxillary Information}\label{sssec:auxillary_information}
-As auxillary information, weather and time data was given, which was sourced from the Photovoltaic Geographical Information System (PVGIS) \cite{ThomasHuld.2012}. They had no direct influence on the reward and only provided means for the agent to predict the carbon intensity of the electricity mix. The only exception was the outdoor temperature, which influenced the thermostatically controlled load. The actual observables of this component are given in table \ref{tab:observation_space}.
-
-\subsubsection{Rooftop Solar Array (RSA)}
-The generated energy was simulated using the PVLIB library \cite{F.Holmgren.2018}. The simulation used the weather data described in \ref{sssec:auxillary_information} and the solar panel specifications from the CEC database \cite{Dobos.2012}\cite{Boyson.2007}.
-
-\subsubsection{Household Energy Demand}\label{sssec:household_energy_demand}
-The household energy demand was sourced from the UCI archive \cite{GeorgesHebrail.2006}. Since the consumption was unraveled for different rooms, the kitchen, electric water heater and air conditioner were modelled as inflexible demand, while the laundry room was modelled as flexible demand.
-
-\subsubsection{External Electricity Supply (EES)}
-The direct carbon intensity of the electricity mix at any given time was sourced from electricity maps \cite{.29.12.2023} for France. However, only data from 2021 and 2022 was available, so the carbon intensity might be biased, since the electricity mix might have drifted over the years. However, the daily, weekly and yearly frequencies should still be captured, although potentially drifted. The unit of carbon intensity is gramm of CO\textsubscript{2} equivalent emissions per kWh or kWmin.
-
-To showcase the scenario and patterns the static components are visualized for the first 24 hours in figure \ref{fig:static_components}, excluding the auxillary information.
+\subsection{Replayed Data}\label{ssec:static_components}
+The data was either given in hourly or minutely resolution, and was adapted to the missing resolution using linear interpolation or averaging. The most relevant observables are displayed exemplary in \cref{fig:static_components}.
+\par
+The auxiliary information included weather and time data, which provided means for the agent to predict the carbon intensity of the electricity mix and the heating demand. It was sourced from the Photovoltaic Geographical Information System (PVGIS) \cite{ThomasHuld.2012}.
+\par
+The RSA was simulated using the PVLIB library \cite{F.Holmgren.2018}, with panel specifications from the CEC database \cite{Dobos.2012}\cite{Boyson.2007}.
+\par
+The household's energy demand was sourced from the UCI archive \cite{GeorgesHebrail.2006}. Since the consumption was unraveled for different rooms, the kitchen, electric water heater and air conditioner were modeled as inflexible demand, while the laundry room as flexible demand.
+\par
+The direct carbon intensity of the electricity mix at any given time was sourced from Electricity Maps \cite{.29.12.2023}. 
 \begin{figure}[H]
     \centering
     \setlength{\abovecaptionskip}{0pt}
     \includegraphics[width=0.45\textwidth]{figures/static_components.png}
-    \caption{Static components for the first 24 hours}
+    \caption{Replayed data for the first 24 hours}
     \label{fig:static_components}
 \end{figure}
 
-
-\subsection{Dynamic Components}\label{ssec:dynamic_components}
-The dynamic components consist of an energy storage system, flexible demand response and thermostatically controlled load.
-
-\subsubsection{Energy Storage System}
-The energy storage system (ESS) is directly chargable and dischargeable from either the EES or the RSA. The charge is subject to the followng dynamics:
+\subsection{Energy Storage System}
+The ESS is connected to the grid and the RSA. The charge is subject to the following dynamics
 \begin{equation}
     B_t = \max\{0, B_{t-1} - D_s + C_t \sqrt{\nu} - \frac{D_t}{\sqrt{\nu}}\}
 \end{equation}
-Here, $B_t \in [0, B_{max}]$ is the charge at time $t$ and $B_{max}$ is the capacity. Furthermore, $\nu$ denotes the round trip efficiency, $D_s$ the self-discharge rate, $C_t \in [0, C_{max}]$ the charge rate with maximum $C_{max}$ and $D_t \in [0, D_{max}]$ the discharge rate with its maximum  $D_{max}$. The rates can be further constrained by the current charge and capacity, such that actually $C_t \in [0, \min\{C_{max}, \frac{B_{max} - B_t + D_s}{\sqrt{\nu}}\}]$ and $D_t \in [0, \min\{D_{max}, (B_t - D_S) \sqrt{\nu}\}]$.
+Here, $B_t \in [0, B_{max}]$ is the charge at time $t$ and $B_{max}$ is the capacity. Furthermore, $\nu$ denotes the round trip efficiency, $D_s$ the self-discharge rate, $C_t \in [0, C_{max}]$ the charge rate with maximum $C_{max}$ and $D_t \in [0, D_{max}]$ the discharge rate with its maximum  $D_{max}$. 
 
-\subsubsection{Flexible Demand Response}
-Flexible Demand Response (FDR) denotes the shifting of load in time. This is modelled as a desired schedule of usage, as described in \ref{sssec:household_energy_demand}. A timeframe centred around the current timestep of the schedule is influenced stochatistacally by a  signal $a_{fdr, t} \in [-1 , 1]^H$, where $H$ is the length of the timeframe. Whether a usage is executed is determined by a Bernoulli process, with probabilities $p$ calculated from the desired schedule, the signal and an exponential weighting, which is centered around the scheduled time of usage. The probabilities are given by:
+\subsection{Flexible Demand Response}
+The FDR can be influenced stochastically in a running time window of length $H$ by a signal $a_{fdr, t} \in [-1 , 1]^H$. Whether the power is consumed is determined by a Bernoulli process, with probabilities
 \begin{equation}
     p_t = \max\{0, \min\{1, s + a_{fdr, t} * \exp(\frac{-1}{\beta}|t - t_{s}|)\}\}
 \end{equation}
-where $s \in \{0,1\}^{H}$ is the vector of the desired schedule with elements $s_i = \begin{cases}
+where $s \in \{0,1\}^{H}$ indicates the desired consumption with elements $s_i = \begin{cases}
     1 & \text{if } t_i \leq t \\
     0 & \text{else}
-\end{cases}$ $\beta$ is a patience parameter, and $t_{s} \in \mathbb{R}^{H}$ is the vector of desired execution times in the current timeframe. If a usage is executed its power is completely drawn in the current timestep. However, if a usage is not executed after being delayed once, it will consume a discounted amount of power in each timestep, such that if it is never exectued it will consume the same amount of power as if it was executed once. This aims to facilitate learning by preventing infinite delays or a large negative reward at the end of the episode. To do so the  power consumption of a usage after the first delay is $\frac{2p}{H-1}$, which is also discounted from the remaining power.
+\end{cases}$ $\beta$ is a patience parameter, and $t_{s} \in \mathbb{R}^{H}$ is the desired consumption time. If consumption is delayed more than once, $\frac{2}{H-1}$ of the power is consumed in each time step to ensure that all power has been consumed after the time window. This aims to facilitate learning by preventing infinite delays or a large correction at episode termination.
 
-\subsubsection{Thermostatically Controlled Load}
-The Thermostatically Controlled Load (TCL) encapsulates all devices that aim to maintain the temperature of a given heat mass. To utilize such loads as energy storage, the temperature of the heat mass is allowed to fluctuate within a given range. The TCL is modeled as a second-order system \cite{Sonderegger.1978} that has the following update procedure:
+\subsection{Thermostatically Controlled Load}\label{ssec:tcl}
+The TCL encapsulates all devices that aim to maintain the temperature of a given heat mass. To utilize such loads as energy storage, the temperature of the heat mass is allowed to fluctuate within a given range. The TCL is modeled as a second-order system \cite{Sonderegger.1978} with the following dynamics:
 \begin{equation}
     \begin{split}
         T_t &= T_{t-1} + \frac{1}{r_a} (T_{a, t} - T_{t-1}) \\
@@ -72,35 +61,29 @@ $a_{tcl_t} \in [-1, 1]$ is the heating signal, and $q$ is the unintentional heat
 \end{equation}
 where $T_{max}$ and $T_{min}$ define the desired temperature range. 
 
-\subsection{Markov Decision Process}
-The data in combination with the dynamic components allows the formulation of a Markov Decision Process (MDP), necessary for the RL paradigm. This requires the definition of an observation space, action space, a reward function and a transition function. The transition function is given by the replay of measurements described in \ref{ssec:static_components} and the dynamics described in \ref{ssec:dynamic_components}.
-
-\subsubsection{Observation Space}
-The observation space is a bounded subset of $\mathbb{R}^{12}$, with the observables given in \ref{tab:observation_space}. 
-
-\begin{table}[H]
-\label{tab:observation_space}
+\begin{table}
 \caption{Observation Space}
+\label{tab:observation_space}
 \vskip 0.15in
 \begin{center}
 \begin{small}
 \begin{sc}
 \begin{tabular}{lcr}
 \toprule
-Observable & Symbol \\
+Observable & Symbol & Replayed\\
 \midrule
-Carbon Intensity & $I$\\
-    Household Energy Demand & $L_{HED}$ \\
-    Rooftop Solar Generation & $G$ \\
-    ESS Charge & $B$ \\
-    FDR power in current timeframe & $L_{FDR}$ \\
-    Indoor temperature & $T$ \\
-    Timestep & $t$ \\
-    Month of Year & $MoY$ \\
-    Solar Irradiation & $SI$ \\
-    Solar Elevation & $SE$ \\
-    Outdor temperature & $T_a$ \\
-    Wind Speed & $WS$ \\
+Carbon Intensity & $I$ & X\\
+    Household Energy Demand & $L_{HED}$ & X\\
+    Rooftop Solar Generation & $G$ & X\\
+    ESS Charge & $B$ & \\
+    FDR power in window & $L_{FDR}$ &\\
+    Indoor temperature & $T$ & \\
+    Time step & $t$ & X\\
+    Month of Year & $MoY$ & X \\
+    Solar Irradiation & $SI$ & X\\
+    Solar Elevation & $SE$ & X\\
+    Outdoor temperature & $T_a$ & X \\
+    Wind Speed & $WS$ & X\\
 \bottomrule
 \end{tabular}
 \end{sc}
@@ -109,12 +92,9 @@ Carbon Intensity & $I$\\
 \vskip -0.1in
 \end{table}
 
-\subsubsection{Action Space}
-The agent can influence the components of \ref{ssec:dynamic_components}, through the signals $a_{fdr}$, $a_{tcl}$ and $a_{ess}$. For $a_{ess}$ the charging and discharging rates are combined into a single signal, since the ESS can either be charged or discharged at any given timestep. 
-All signal are normalized to $[-1, 1]$ and can be discretized into bins, if the algorithm require a discrete action space. The action space is summarized in table \ref{tab:action_space}.
-\begin{table}[H]
-\label{tab:action_space}
+\begin{table}
 \caption{Action Space}
+\label{tab:action_space}
 \vskip 0.15in
 \begin{center}
 \begin{small}
@@ -134,8 +114,8 @@ $a_{ess}$ & Discharge & Charge \\
 \vskip -0.1in
 \end{table}
 
-\subsubsection{Reward Function}
-The reward function is mainly given by the physical quantity of CO2eq emissions. However, to prevent unintended exploitation of the TCL, which is often optimal at constant $T_{min}$, it is augmented by a discomfort penalty. The resulting function is given by:
+\subsection{Reward Function} \label{ssec:reward_function}
+The given objective of minimizing CO2eq emission is augmented by a temperature discomfort penalty to avoid unintended exploitation of the TCL, which is often optimal at constant $T_{min}$. The resulting reward function is
 \begin{flalign}
     r_t &= I_t (PE - CE) - DC && \\
     \begin{split}
@@ -145,12 +125,12 @@ The reward function is mainly given by the physical quantity of CO2eq emissions.
     E_p &= G_t + D_t  && \\
     DC &= \delta exp(|T_t - \frac{T_{max} + T_{min}}{2}) &&
 \end{flalign}
-where $PE$ is the energy produced, $CE$ is the energy produced, $U_e$ is the set of executed usages, $p_r$ is the remaining power after discounting, $U_d$ is the set of delayed usages, $DC$ is the discomfort with a penalty factor $\delta$. 
+where $U_e$ is the set of consumed FDR, $p_r$ is the remaining power after discounting, $U_d$ is the set of delayed FDR, and $\delta$ the discomfort coefficient. 
 \par
-Moreover, since the task is episodically formulated, there is a correction necessary at the end of the episode to account for e.g. differences in charge left. The correction of the final reward is given as:
+Since the task is episodic, it necessitates a correction at termination to account for the state reset. The terminal reward is corrected by
 \begin{flalign}
     reward &\mathrel{+}= I_t B_t && \\
     reward &\mathrel{+}= I_t (- \sum_{p \in U} p_r) && \\
     reward &\mathrel{+}= I_t (- r_h|T_t - \frac{T_{max}+T_{min}}{2}|) && 
 \end{flalign}
-where $U$ is the set of left over usages. Every equation is correcting for one type of left over energy in the system.
+where $U$ is the set of remaining FDR.

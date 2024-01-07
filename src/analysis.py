@@ -4,7 +4,7 @@ import pickle
 import matplotlib.pyplot as plt
 import numpy as np
 
-episode_length = 168
+episode_length = 167
 
 
 def overview(data_dict=None, path='./logs/minutely'):
@@ -39,11 +39,23 @@ def load_data(path):
     return data_dict
 
 
+def load_results(path):
+    files = os.listdir(path + "/results_only")
+    runs = {
+        file.split(".")[0]: np.array(
+            [el if isinstance(el, float) else el[0] for el in
+             pickle.load(open(path + "/results_only/" + file, "rb")).values()])
+        for file in files
+    }
+    return runs
+
+
 def reward_over_epochs(figsize=(20, 7), subplot=None, path=None):
     files = os.listdir(path + "/results_only")
     runs = {
         file.split(".")[0]: np.array(
-            [el if isinstance(el, float) else el[0] for el in pickle.load(open(path + "/results_only/" + file, "rb")).values()])
+            [el if isinstance(el, float) else el[0] for el in
+             pickle.load(open(path + "/results_only/" + file, "rb")).values()])
         for file in files
     }
 
@@ -67,7 +79,7 @@ def reward_over_epochs(figsize=(20, 7), subplot=None, path=None):
     ax.set_ylabel("Accumulated Reward")
     ax.set_xlabel("Epoch")
     ax.set_title("Accumulated Reward over Epochs")
-    #ax.set_ylim(bottom=0, top=1000)
+    # ax.set_ylim(bottom=0, top=1000)
 
     if subplot is None:
         plt.show()

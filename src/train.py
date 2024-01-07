@@ -5,7 +5,7 @@ from stable_baselines3.common.env_checker import check_env
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.monitor import Monitor
 
-from src.environment.single_family_home import SingleFamilyHome
+from src.environment.single_family_home_full import SingleFamilyHome
 from utils import LoggingCallback, gather_experiences, TrainCallback, NormalizeDictObservation
 from stable_baselines3 import SAC, PPO
 def log(msg: str):
@@ -109,8 +109,8 @@ if __name__ == "__main__":
     }
 
     folder_path = "environment/configs/config_"
-    for path in ["ess", "fdr", "tcl"]:
-        for name, train_epochs in zip(["single-threshold_hypo3", "idle_hypo3", "sac_hypo3"],[0,0,250]):
+    for path in ["hourly"]:
+        for name, train_epochs in zip(["sac_curious"],[1000]):
             train(
                 path,
                 name,
