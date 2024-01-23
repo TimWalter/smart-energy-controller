@@ -1,22 +1,10 @@
-import pickle
+from datetime import datetime
 
 import gymnasium as gym
 import numpy as np
 from gymnasium.wrappers.normalize import RunningMeanStd
-from stable_baselines3.common.callbacks import BaseCallback
+from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from stable_baselines3.common.evaluation import evaluate_policy
-from stable_baselines3.common.callbacks import EvalCallback
-
-
-def gather_experiences(agent, env, num_steps):
-    obs = env.reset()[0]
-    experiences = []
-    for _ in range(num_steps):
-        action, _ = agent.predict(obs)
-        next_obs, reward, done, _, _ = env.step(action[0])
-        experiences.append((obs, next_obs, action, reward, done, [{}]))
-        obs = next_obs if not done else env.reset()[0]
-    return experiences
 
 
 class NormalizeDictObservation(gym.Wrapper, gym.utils.RecordConstructorArgs):
@@ -58,22 +46,9 @@ class NormalizeDictObservation(gym.Wrapper, gym.utils.RecordConstructorArgs):
                 enumerate(obs.keys())}
 
 
-class LoggingCallback(BaseCallback):
+class LoggedEvalCallback(BaseCallback):
     def __init__(self, verbose=0):
         super().__init__(verbose)
-        self.infos = []
-
-    def dump(self, path: str):
-        with open(path, "wb") as f:
-            self.infos = {
-                key: {key_inner: [info[key][key_inner] for info in self.infos] for key_inner in
-                      self.infos[0][key].keys()}
-                if isinstance(self.infos[0][key], dict)
-                else [info[key] for info in self.infos]
-                for key in self.infos[0].keys()
-            }
-
-            pickle.dump(self.infos, f)
         self.infos = []
 
     def _on_step(self) -> bool:
@@ -86,18 +61,26 @@ class LoggingCallback(BaseCallback):
         self._on_step()
 
 
-class TrainCallback(EvalCallback):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.results = {}
-        self.infos = []
-        self.epoch = 0
+def evaluate_policy_logged(model, env, n_eval_episodes, results, infos):
+    eval_callback = LoggedEvalCallback()
+    results += [evaluate_policy(model, env, n_eval_episodes=n_eval_episodes, callback=eval_callback)]
+    infos += [eval_callback.infos]
+
+
+class TrainCallback(BaseCallback):
+    def __init__(self, results, infos, best_model_save_path, eval_freq, eval_env, n_eval_episodes, verbose=0):
+        super().__init__(verbose)
+        self.results = results
+        self.infos = infos
+        self.eval_freq = eval_freq
+        self.eval_env = eval_env
+        self.n_eval_episodes = n_eval_episodes
+        self.best_mean_reward = -np.inf
+        self.best_model_save_path = best_model_save_path
 
     def _on_step(self) -> bool:
-        super()._on_step()
         if self.eval_freq > 0 and self.n_calls % self.eval_freq == 0:
-            self.results[f"epoch_{self.epoch}_accumulated_reward"] = self.last_mean_reward
-            self.epoch += 1
-        else:
-            self.infos.append(self.locals["infos"][0])
+            evaluate_policy_logged(self.model, self.eval_env, n_eval_episodes=self.n_eval_episodes, results=self.results,
+                                   infos=self.infos)
+            print(f"[{datetime.now()}] Reward: {self.results[-1]}")
         return True

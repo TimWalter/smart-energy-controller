@@ -1,4 +1,4 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{22}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -136,11 +136,6 @@ Sonderegger, R.~C.
   parameters}.
 \newblock PhD thesis, {Princeton University, New Jersey}, 1978.
 
-\bibitem[Sutton(1984)]{Sutton.1984}
-Sutton, R.~S.
-\newblock \emph{Temporal Credit Assignment in Reinforcement Learning}.
-\newblock PhD thesis, 1984.
-
 \bibitem[{Thomas Huld} et~al.(2012){Thomas Huld}, {Richard M{\"u}ller}, and
   {Attilio Gambardella}]{ThomasHuld.2012}
 {Thomas Huld}, {Richard M{\"u}ller}, and {Attilio Gambardella}.
@@ -179,12 +174,6 @@ Wang, H., Lin, S., and Zhang, J.
 \newblock Warm-start actor-critic: From approximation error to sub-optimality
   gap.
 \newblock URL \url{http://arxiv.org/pdf/2306.11271.pdf}.
-
-\bibitem[Zhang et~al.()Zhang, Song, Cao, Zhang, Tan, and Xu]{Zhang.23.10.2020}
-Zhang, C., Song, W., Cao, Z., Zhang, J., Tan, P.~S., and Xu, C.
-\newblock Learning to dispatch for job shop scheduling via deep reinforcement
-  learning.
-\newblock URL \url{http://arxiv.org/pdf/2010.12367.pdf}.
 
 \bibitem[Zhu et~al.(2022)Zhu, Yang, Liu, Wang, Ma, and Guan]{Zhu.2022}
 Zhu, D., Yang, B., Liu, Y., Wang, Z., Ma, K., and Guan, X.

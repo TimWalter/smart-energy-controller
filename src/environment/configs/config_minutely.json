@@ -1,5 +1,6 @@
 {
   "resolution": "minutely",
+  "noise": true,
   "action_space": {
     "type": "discrete",
     "levels": [11, 11, 11]

@@ -73,7 +73,7 @@ class FlexibleDemandResponse(Component, DataLoader):
 
     def update_state(self):
         """
-        Update the the flexible demand response window.
+        Update the flexible demand response window.
         """
         self.state = self.get_values(self.time - self.planning_timedelta, self.time + self.planning_timedelta)  # in kW
 

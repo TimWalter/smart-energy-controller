@@ -1,5 +1,6 @@
 {
   "resolution": "hourly",
+  "noise": true,
   "action_space": {
     "type": "continuous",
     "levels": [101, 101, 101]

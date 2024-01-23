@@ -11,48 +11,46 @@ Warning--empty year in Castellanos.04.12.2022
 Warning--empty year in GeorgesHebrail.2006
 Warning--empty year in Haarnoja.04.01.2018
 Warning--empty year in Schulman.20.07.2017
-Warning--empty school in Sutton.1984
 Warning--empty year in Wang.20.06.2023
-Warning--empty year in Zhang.23.10.2020
-You've used 24 entries,
+You've used 22 entries,
             2773 wiz_defined-function locations,
-            772 strings with 10870 characters,
-and the built_in function-call counts, 12564 in all, are:
-= -- 1078
-> -- 968
-< -- 7
-+ -- 327
-- -- 303
-* -- 1125
-:= -- 2000
-add.period$ -- 97
-call.type$ -- 24
-change.case$ -- 171
-chr.to.int$ -- 24
-cite$ -- 58
-duplicate$ -- 456
-empty$ -- 852
-format.name$ -- 328
-if$ -- 2558
+            762 strings with 10538 characters,
+and the built_in function-call counts, 11725 in all, are:
+= -- 1010
+> -- 901
+< -- 6
++ -- 304
+- -- 282
+* -- 1055
+:= -- 1862
+add.period$ -- 91
+call.type$ -- 22
+change.case$ -- 159
+chr.to.int$ -- 22
+cite$ -- 52
+duplicate$ -- 424
+empty$ -- 797
+format.name$ -- 305
+if$ -- 2393
 int.to.chr$ -- 1
 int.to.str$ -- 1
 missing$ -- 13
-newline$ -- 153
-num.names$ -- 92
-pop$ -- 344
+newline$ -- 143
+num.names$ -- 84
+pop$ -- 314
 preamble$ -- 1
-purify$ -- 149
+purify$ -- 138
 quote$ -- 0
-skip$ -- 412
+skip$ -- 382
 stack$ -- 0
-substring$ -- 276
-swap$ -- 35
+substring$ -- 272
+swap$ -- 33
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 264
-warning$ -- 9
-while$ -- 86
+type$ -- 242
+warning$ -- 7
+while$ -- 80
 width$ -- 0
-write$ -- 351
-(There were 9 warnings)
+write$ -- 328
+(There were 7 warnings)

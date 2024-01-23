@@ -1,6 +1,6 @@
 \begin{table*}[t]
-\label{tab:experiments}
 \caption{Accumulated rewards split by origin per experiment. Evaluation were done after every epoch and the best result is shown.}
+\label{tab:experiments}
 \vskip 0.15in
 \begin{center}
 \begin{small}
@@ -53,7 +53,7 @@ As learning agents, Soft Actor Critic (SAC) \cite{Haarnoja.04.01.2018} and Proxi
 \par
 To allow for differentiation on which sub-tasks the agent performs well, the reward was split by the component of origin, as in \cref{sec:split_reward}. 
 \par
-The results of all experiments are shown in \cref{tab:experiments}. Since the initial task did not yield reward convergence surpassing the baselines, as shown in \cref{fig:training_curve}, three hypothesis with accompanying modifications to the environment were tested. The changes were cumulative and further details can be found in \cref{sec:training_procedure}.
+The results of all experiments are shown in \cref{tab:experiments}. Since the initial task did not yield reward convergence surpassing the baselines, as shown in \cref{fig:training_curve}, three hypotheses with accompanying modifications to the environment were tested. The changes were cumulative and further details can be found in \cref{sec:training_procedure}.
 \begin{figure}[H]
     \centering
     \setlength{\abovecaptionskip}{0pt}
@@ -63,25 +63,25 @@ The results of all experiments are shown in \cref{tab:experiments}. Since the in
 \end{figure}
 
 
-\subsection{Scheduling, Stochasticity, and Dimensionality}
-The challenge of learning in the FDR sub-task is innate in scheduling \cite{Zhang.23.10.2020} but is further complicated by the stochastic control. Furthermore, it bloats the dimensionality of the spaces with decreasing resolution, since the time window was always 24 hours.
+\subsection{Hypothesis 1: Scheduling, Stochasticity, and Dimensionality}
+The inherent scheduling challenge in the FDR sub-task is further exacerbated by the introduction of stochastic control. Furthermore, it bloats the dimensionality of the spaces with decreasing resolution, since the time window was fixed at 24 hours.
 \par
-To ease those challenges the control was changed to deterministic, and scalar and the observation included only the sum of the time window. These changes are equivalent to the assumption that the optimal policy is invariant to $U_e$ as long as the sum is maintained and that $\beta = \infty$.
+To ease those challenges the control was changed to deterministic and scalar, and the observation to include only the sum of the time window. These changes are equivalent to the assumption that the optimal policy is invariant to $U_e$ as long as the sum is maintained and that $\beta = \infty$.
 \par
-The modified task only showed improvements for minutely resolution, which suggests that high dimensionality is a problem. However, since convergence was still absent, the inefficiency of the other changes could not be concluded.
+The modified task only showed improvements for minutely resolution, which suggests that high dimensionality is a problem. However, since convergence was still absent, the inefficiency of the other changes could not be concluded with certainty.
 
 
-\subsection{Hard Exploration}
+\subsection{Hypothesis 2: Hard Exploration}
 The environment still provides a vast exploration space, due to the continuity of the spaces and the length of the episodes. Moreover, there is significant noise from the RSA and fixed demand on the reward. Moreover, a lot of observables are only relevant for estimating the future carbon intensity. 
 \par
-To address this the minutely resolution was omitted, the action space for PPO was discretised, the fixed demand and RSA were removed from the observables and reward calculation, and the agents were trained separately for every sub-task. Lastly, the replay buffer for SAC was initialized with transitions of the threshold algorithm, providing a warm start \cite{Wang.20.06.2023}.
+To address this the minutely resolution was omitted, the action space for PPO was discretised, the fixed demand and RSA were removed from the observables and reward calculation, and the agents were trained separately for each sub-task. Lastly, the replay buffer for SAC was initialized with transitions of the threshold algorithm, providing a warm start \cite{Wang.20.06.2023}.
 \par
-The result indicated, that the discretisation aided PPO in learning the ESS but hindered in the TCL sub-task, hinting too coarse discretisation. SAC did not benefit from the warm start after a few epochs. 
+The result indicated, that the discretisation aided PPO in learning the ESS but hindered in the TCL sub-task, hinting at a too coarse discretisation. SAC did not benefit from the warm start after a few epochs. 
 
 
-\subsection{Delayed or Deceptive reward}
-Another challenge of the setting is the reward structure for charging the ESS, expediting the FDR and heating or cooling the TCL. The rewards of those actions always occur delayed and only if the respective counter action is performed at a higher carbon intensity, which can be problematic \cite{Sutton.1984}. Moreover, the rewards might even be deceptive, since those actions are necessary for an effective policy but only ever receive negative reward.
+\subsection{Hypothesis 3: Delayed or Deceptive reward}
+Another challenge of the setting is the reward structure for charging the ESS, expediting the FDR and heating or cooling the TCL. The rewards of those actions always occur delayed and only if the respective counter action is performed at a higher carbon intensity, which can be problematic. Moreover, the rewards might even be deceptive, since those actions are necessary for an effective policy but always yield immediate negative reward.
 \par
 To test the hypothesis, the reward was transferred to an accumulating observable and only actuated in the terminal state, which should encourage the agent to evaluate the entire trajectory of an episode holistically.
 \par 
-Since the task was hardened by this change performance was expectedly decreased for TCL and FDR. However, the ESS sub-task showed signs of improvements but no convergence within the 250 epochs.
+Since the task was hardened by this change performance was expectedly decreased for TCL and FDR. However, the ESS sub-task showed signs of improvements but no convergence within the 250 training epochs.
