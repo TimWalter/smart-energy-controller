@@ -1,0 +1,187 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ele(29.12.2023)]{ElectricityMaps2023}
+Electricity maps | reduce carbon emissions with actionable electricity data,
+  29.12.2023.
+\newblock URL \url{https://www.electricitymaps.com/}.
+
+\bibitem[{Antonin Raffin} et~al.(2021){Antonin Raffin}, {Ashley Hill}, {Adam
+  Gleave}, {Anssi Kanervisto}, {Maximilian Ernestus}, and {Noah
+  Dormann}]{AntoninRaffin.2021}
+{Antonin Raffin}, {Ashley Hill}, {Adam Gleave}, {Anssi Kanervisto}, {Maximilian
+  Ernestus}, and {Noah Dormann}.
+\newblock Stable-baselines3: Reliable reinforcement learning implementations.
+\newblock \emph{Journal of Machine Learning Research}, 22\penalty0
+  (268):\penalty0 1--8, 2021.
+\newblock URL \url{http://jmlr.org/papers/v22/20-1364.html}.
+
+\bibitem[Basantes et~al.(2023)Basantes, Paredes, Llanos, Ortiz, and
+  Burgos]{Basantes.2023}
+Basantes, J.~A., Paredes, D.~E., Llanos, J.~R., Ortiz, D.~E., and Burgos, C.~D.
+\newblock Energy management system (ems) based on model predictive control
+  (mpc) for an isolated dc microgrid.
+\newblock \emph{Energies}, 16\penalty0 (6):\penalty0 2912, 2023.
+\newblock \doi{10.3390/en16062912}.
+
+\bibitem[Blum et~al.(2021)Blum, Arroyo, Huang, Drgo{\v{n}}a, Jorissen, Walnum,
+  Chen, Benne, Vrabie, Wetter, and Helsen]{Blum.2021}
+Blum, D., Arroyo, J., Huang, S., Drgo{\v{n}}a, J., Jorissen, F., Walnum, H.~T.,
+  Chen, Y., Benne, K., Vrabie, D., Wetter, M., and Helsen, L.
+\newblock Building optimization testing framework (boptest) for
+  simulation-based benchmarking of control strategies in buildings.
+\newblock \emph{Journal of Building Performance Simulation}, 14\penalty0
+  (5):\penalty0 586--610, 2021.
+\newblock ISSN 1940-1493.
+\newblock \doi{10.1080/19401493.2021.1986574}.
+
+\bibitem[Boyson et~al.(2007)Boyson, Galbraith, King, and Gonzalez]{Boyson.2007}
+Boyson, W.~E., Galbraith, G.~M., King, D.~L., and Gonzalez, S.
+\newblock Performance model for grid-connected photovoltaic inverters.
+\newblock 2007.
+\newblock \doi{10.2172/920449}.
+\newblock URL \url{https://www.osti.gov/biblio/920449, journal =}.
+
+\bibitem[Castellanos et~al.()Castellanos, Correa-Florez, Garc{\'e}s,
+  Ord{\'o}{\~n}ez-Plata, Uribe, and Patino]{Castellanos.04.12.2022}
+Castellanos, J., Correa-Florez, C.~A., Garc{\'e}s, A., Ord{\'o}{\~n}ez-Plata,
+  G., Uribe, C.~A., and Patino, D.
+\newblock An energy management system model with power quality constraints for
+  unbalanced multi-microgrids interacting in a local energy market.
+\newblock URL \url{http://arxiv.org/pdf/2212.01910.pdf}.
+
+\bibitem[Dobos(2012)]{Dobos.2012}
+Dobos, A.~P.
+\newblock An improved coefficient calculator for the california energy
+  commission 6 parameter photovoltaic module model.
+\newblock \emph{Journal of Solar Energy Engineering}, 134\penalty0 (2), 2012.
+\newblock ISSN 0199-6231.
+\newblock \doi{10.1115/1.4005759}.
+
+\bibitem[{F. Holmgren} et~al.(2018){F. Holmgren}, {W. Hansen}, and {A.
+  Mikofski}]{F.Holmgren.2018}
+{F. Holmgren}, W., {W. Hansen}, C., and {A. Mikofski}, M.
+\newblock pvlib python: a python package for modeling solar energy systems.
+\newblock \emph{Journal of Open Source Software}, 3\penalty0 (29):\penalty0
+  884, 2018.
+\newblock \doi{10.21105/joss.00884}.
+
+\bibitem[{Georges Hebrail}()]{GeorgesHebrail.2006}
+{Georges Hebrail}, A.~B.
+\newblock Individual household electric power consumption.
+
+\bibitem[Haarnoja et~al.()Haarnoja, Zhou, Abbeel, and
+  Levine]{Haarnoja.04.01.2018}
+Haarnoja, T., Zhou, A., Abbeel, P., and Levine, S.
+\newblock Soft actor-critic: Off-policy maximum entropy deep reinforcement
+  learning with a stochastic actor.
+\newblock URL \url{http://arxiv.org/pdf/1801.01290.pdf}.
+
+\bibitem[H{\"o}rsch et~al.(2018)H{\"o}rsch, Hofmann, Schlachtberger, and
+  Brown]{Horsch.2018}
+H{\"o}rsch, J., Hofmann, F., Schlachtberger, D., and Brown, T.
+\newblock Pypsa-eur: An open optimisation model of the european transmission
+  system.
+\newblock \emph{Energy Strategy Reviews}, 22:\penalty0 207--215, 2018.
+\newblock ISSN 2211467X.
+\newblock \doi{10.1016/j.esr.2018.08.012}.
+\newblock URL \url{http://arxiv.org/pdf/1806.01613.pdf}.
+
+\bibitem[IEA(06.01.2024)]{IEA.06.01.2024}
+IEA.
+\newblock Buildings - energy system - iea, 06.01.2024.
+\newblock URL \url{https://www.iea.org/energy-system/buildings}.
+
+\bibitem[{Javier Arroyo} et~al.(2022){Javier Arroyo}, {Carlo Manna}, {Fred
+  Spiessens}, and {Lieve Helsen}]{JavierArroyo.2022}
+{Javier Arroyo}, {Carlo Manna}, {Fred Spiessens}, and {Lieve Helsen}.
+\newblock Reinforced model predictive control (rl-mpc) for building energy
+  management.
+\newblock \emph{Applied Energy}, 309:\penalty0 118346, 2022.
+\newblock ISSN 0306-2619.
+\newblock \doi{10.1016/j.apenergy.2021.118346}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0306261921015932}.
+
+\bibitem[Jin et~al.(2021)Jin, Chen, Li, and Ye]{Jin.2021}
+Jin, L., Chen, Z., Li, J., and Ye, T.
+\newblock Reinforcement learning method based load shifting strategy with
+  demand response.
+\newblock In \emph{2021 40th Chinese Control Conference (CCC)}, pp.\
+  1586--1591, 2021.
+\newblock \doi{10.23919/CCC52363.2021.9549975}.
+
+\bibitem[Nakabi \& Toivanen(2021)Nakabi and Toivanen]{Nakabi.2021}
+Nakabi, T.~A. and Toivanen, P.
+\newblock Deep reinforcement learning for energy management in a microgrid with
+  flexible demand.
+\newblock \emph{Sustainable Energy, Grids and Networks}, 25:\penalty0 100413,
+  2021.
+\newblock ISSN 23524677.
+\newblock \doi{10.1016/j.segan.2020.100413}.
+
+\bibitem[Schulman et~al.()Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{Schulman.20.07.2017}
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and Klimov, O.
+\newblock Proximal policy optimization algorithms.
+\newblock URL \url{http://arxiv.org/pdf/1707.06347.pdf}.
+
+\bibitem[Sonderegger(1978)]{Sonderegger.1978}
+Sonderegger, R.~C.
+\newblock \emph{Dynamic models of house heating based on equivalent thermal
+  parameters}.
+\newblock PhD thesis, {Princeton University, New Jersey}, 1978.
+
+\bibitem[{Thomas Huld} et~al.(2012){Thomas Huld}, {Richard M{\"u}ller}, and
+  {Attilio Gambardella}]{ThomasHuld.2012}
+{Thomas Huld}, {Richard M{\"u}ller}, and {Attilio Gambardella}.
+\newblock A new solar radiation database for estimating pv performance in
+  europe and africa.
+\newblock \emph{Solar Energy}, 86\penalty0 (6):\penalty0 1803--1815, 2012.
+\newblock ISSN 0038-092X.
+\newblock \doi{10.1016/j.solener.2012.03.006}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0038092X12001119}.
+
+\bibitem[{Thomas Schreiber} et~al.(2020){Thomas Schreiber}, {S{\"o}ren
+  Eschweiler}, {Marc Baranski}, and {Dirk M{\"u}ller}]{ThomasSchreiber.2020}
+{Thomas Schreiber}, {S{\"o}ren Eschweiler}, {Marc Baranski}, and {Dirk
+  M{\"u}ller}.
+\newblock Application of two promising reinforcement learning algorithms for
+  load shifting in a cooling supply system.
+\newblock \emph{Energy and Buildings}, 229:\penalty0 110490, 2020.
+\newblock ISSN 0378-7788.
+\newblock \doi{10.1016/j.enbuild.2020.110490}.
+\newblock URL
+  \url{https://www.sciencedirect.com/science/article/pii/S0378778820320922}.
+
+\bibitem[Towers et~al.(2023)Towers, Terry, Kwiatkowski, Balis, de~Cola, Deleu,
+  Goul{\~a}o, Kallinteris, {KG, Arjun}, Krimmel, Perez-Vicente, Pierr{\'e},
+  Schulhoff, Tai, Shen, and Younis]{Towers.2023}
+Towers, M., Terry, J.~K., Kwiatkowski, A., Balis, J.~U., de~Cola, G., Deleu,
+  T., Goul{\~a}o, M., Kallinteris, A., {KG, Arjun}, Krimmel, M., Perez-Vicente,
+  R., Pierr{\'e}, A., Schulhoff, S., Tai, J.~J., Shen, A. T.~J., and Younis,
+  O.~G.
+\newblock Gymnasium, 2023.
+\newblock URL \url{https://zenodo.org/record/8127025}.
+
+\bibitem[Wang et~al.()Wang, Lin, and Zhang]{Wang.20.06.2023}
+Wang, H., Lin, S., and Zhang, J.
+\newblock Warm-start actor-critic: From approximation error to sub-optimality
+  gap.
+\newblock URL \url{http://arxiv.org/pdf/2306.11271.pdf}.
+
+\bibitem[Zhu et~al.(2022)Zhu, Yang, Liu, Wang, Ma, and Guan]{Zhu.2022}
+Zhu, D., Yang, B., Liu, Y., Wang, Z., Ma, K., and Guan, X.
+\newblock Energy management based on multi-agent deep reinforcement learning
+  for a multi-energy industrial park.
+\newblock \emph{Applied Energy}, 311:\penalty0 118636, 2022.
+\newblock ISSN 0306-2619.
+\newblock \doi{10.1016/j.apenergy.2022.118636}.
+\newblock URL \url{http://arxiv.org/pdf/2202.03771.pdf}.
+
+\end{thebibliography}

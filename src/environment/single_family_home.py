@@ -105,7 +105,7 @@ class SingleFamilyHome(gym.Env):
         }
         if self.noise:
             spaces["household_energy_demand"] = gym.spaces.Box(low=0.0,
-                                                      high=10.1619 if self.resolution == "minutely" else 6.0138)
+                                                               high=10.1619 if self.resolution == "minutely" else 6.0138)
             spaces["rooftop_solar_generation"] = gym.spaces.Box(low=-0.4269, high=44.0072)
 
         if self.ess_condition:
@@ -137,7 +137,7 @@ class SingleFamilyHome(gym.Env):
 
     def _construct_observation(self) -> ObsType:
         observation = {
-            "carbon_intensity": self.ees.state
+            "carbon_intensity": self.ees.state,
         }
 
         if self.noise:
@@ -235,17 +235,17 @@ class SingleFamilyHome(gym.Env):
 
         if self.ess_condition:
             info["ess_reward"] = self.ees.reward_cache["carbon_intensity"] * (
-                    -self.ess.reward_cache["consumed_energy"])
+                -self.ess.reward_cache["consumed_energy"])
             reward += info["ess_reward"]
 
         if self.fdr_condition:
             info["fdr_reward"] = self.ees.reward_cache["carbon_intensity"] * (
-                    -self.fdr.reward_cache["consumed_and_discounted_energy"])
+                -self.fdr.reward_cache["consumed_and_discounted_energy"])
             reward += info["fdr_reward"]
 
         if self.tcl_condition:
             info["tcl_reward"] = self.ees.reward_cache["carbon_intensity"] * (
-                    -self.tcl.reward_cache["consumed_energy"])
+                -self.tcl.reward_cache["consumed_energy"])
             reward += info["tcl_reward"]
             info["discomfort"] = -self.tcl.penalty_factor * np.exp(
                 self.tcl.reward_cache["indoor_temperature"] - self.tcl.desired_temperature)
@@ -275,7 +275,6 @@ class SingleFamilyHome(gym.Env):
 
     def reset(self, seed: int | None = 42, options: dict[str, Any] | None = None, ) -> tuple[ObsType, dict[str, Any]]:
         super().reset(seed=seed)
-
         episode = self.episode_set[self.next_episode]
 
         self.ees.reset(episode=episode)
@@ -328,13 +327,16 @@ class SingleFamilyHome(gym.Env):
         terminated = self._calculate_done()
         truncated = False
 
-        info = {"next_observation": observation, "action": rescaled_action, "reward": reward, "reward_info": reward_info}
 
         if terminated:
             reward_correction, reward_correction_info = self._terminal_reward_correction()
             reward += reward_correction
             for key, value in reward_correction_info.items():
-                info["reward_info"][key] += reward_correction_info[key]
+                reward_info[key] += reward_correction_info[key]
+
+        info = {"next_observation": observation, "action": rescaled_action, "reward": reward,
+                "reward_info": reward_info}
+
 
         return observation, reward, terminated, truncated, info
 

@@ -1,3 +1,5 @@
+import pickle
+import os
 from datetime import datetime
 from typing import Callable
 
@@ -5,7 +7,10 @@ from stable_baselines3 import SAC, PPO
 from stable_baselines3.common.env_checker import check_env
 from stable_baselines3.common.monitor import Monitor
 
-from src.environment.single_family_home import SingleFamilyHome
+from baselines.idle import Idle
+from baselines.mirror import Mirror
+from baselines.single_threshold import SingleThreshold
+from src.environment.stripped_single_family_home import SingleFamilyHome
 from utils import TrainCallback, evaluate_policy_logged
 
 
@@ -42,9 +47,9 @@ def train(
     log(f"Starting training for {name} with {agent.__name__} and {policy} policy")
 
     if agent == PPO:
-        model = agent(policy, train_env, seed=15, target_kl=0.5, n_steps=167, batch_size=167)
+        model = agent(policy, train_env, seed=15, n_steps=167, batch_size=167, learning_rate=1e-6, vf_coef=5e-2)
     else:
-        model = agent(policy, train_env, seed=15)
+        model = agent(policy, train_env, seed=15, learning_rate=1e-6)
 
     evaluate_policy_logged(model, eval_env, n_eval_episodes=eval_epochs, results=results, infos=infos)
     log(f"Untrained accumulated reward: {results[-1]}")
@@ -61,7 +66,8 @@ def train(
     def group_infos(infos):
         return [
             {
-                key: {key_inner: [timestep[key][key_inner] for timestep in episode] for key_inner in episode[0][key].keys()}
+                key: {key_inner: [timestep[key][key_inner] for timestep in episode] for key_inner in
+                      episode[0][key].keys()}
                 if isinstance(episode[0][key], dict)
                 else [timestep[key] for timestep in episode]
                 for key in episode[0].keys()
@@ -69,26 +75,28 @@ def train(
             for episode in infos
         ]
 
-    pickle.dump(group_infos(infos), open(f"./logs/{path}/{name}.pkl", "wb"))
-    pickle.dump(results, open(f"./logs/{path}/results_only/{name}", "wb"))
+    info_path = f"./logs/{path}"
+    os.makedirs(info_path, exist_ok=True)
+    pickle.dump(group_infos(infos), open(f"{info_path}/{name}.pkl", "wb"))
+
+    results_path = f"./logs/{path}/results_only"
+    os.makedirs(results_path, exist_ok=True)
+    pickle.dump(results, open(f"{results_path}/{name}.pkl", "wb"))
 
 
 if __name__ == "__main__":
-    import pickle
-
-    from baselines.single_threshold import SingleThreshold
-    from baselines.idle import Idle
 
     agents = {
         "ppo": PPO,
         "sac": SAC,
         "idle": Idle,
         "single-threshold": SingleThreshold,
+        "mirror": Mirror,
     }
 
     folder_path = "environment/configs/config_"
     for path in ["ess"]:
-        for name, train_epochs in zip(["ppo_test"], [10]):
+        for name, train_epochs in zip(["idle", "single-threshold", "mirror", "ppo_test", "sac_test"], [0,0,0,10,10]):
             train(
                 path,
                 name,
@@ -96,5 +104,5 @@ if __name__ == "__main__":
                 "MultiInputPolicy",
                 1,
                 train_epochs,
-                True,
+                False,
                 f"environment/configs/config_{path}.json")

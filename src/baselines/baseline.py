@@ -15,9 +15,10 @@ class Baseline(ABC):
         self.action_dim = env.action_space.shape[0]
         self.type = env.config["action_space"]["type"]
         self.levels = env.config["action_space"]["levels"]
-        self.ess_condition = env.ess_condition
-        self.fdr_condition = env.fdr_condition
-        self.tcl_condition = env.tcl_condition
+        self.ess_condition = "energy_storage_system" in env.config.keys()
+        self.fdr_condition = "flexible_demand_response" in env.config.keys()
+        self.tcl_condition = "thermostatically_controlled_load" in env.config.keys()
+
         self.resolution = env.resolution
         if self.tcl_condition:
             self.desired_temperature = env.config["thermostatically_controlled_load"]["maximal_temperature"] + \

@@ -1,0 +1,245 @@
+%%%%%%%% ICML 2023 EXAMPLE LATEX SUBMISSION FILE %%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+
+% Recommended, but optional, packages for figures and better typesetting:
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{booktabs} % for professional tables
+
+% hyperref makes hyperlinks in the resulting PDF.
+% If your build breaks (sometimes temporarily if a hyperlink spans a page)
+% please comment out the following usepackage line and replace
+% \usepackage{icml2023} with \usepackage[nohyperref]{icml2023} above.
+\usepackage{hyperref}
+
+
+% Attempt to make hyperref and algorithmic work together better:
+\newcommand{\theHalgorithm}{\arabic{algorithm}}
+
+% Use the following line for the initial blind version submitted for review:
+\usepackage[accepted]{icml2023}
+% If accepted, instead use the following line for the camera-ready submission:
+% \usepackage[accepted]{icml2023}
+
+% For theorems and such
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{multirow}
+% if you use cleveref..
+\usepackage[capitalize,noabbrev, nameinlink]{cleveref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THEOREMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{assumption}[theorem]{Assumption}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% Todonotes is useful during development; simply uncomment the next line
+%    and comment out the line below the next line to turn off comments
+%\usepackage[disable,textsize=tiny]{todonotes}
+\usepackage[textsize=tiny]{todonotes}
+
+
+% The \icmltitle you define below is probably too long as a header.
+% Therefore, a short form for the running title is supplied here:
+\icmltitlerunning{DRL for Energy Management}
+
+\begin{document}
+
+\twocolumn[
+\icmltitle{Deep Reinforcement Learning for Energy Management in Residential Housing}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the icml2023
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+% in order of appearance and this is the preferred way.
+\icmlsetsymbol{equal}{*}
+
+\begin{icmlauthorlist}
+    \icmlauthor{Tim Walter}{yyy}
+\end{icmlauthorlist}
+
+\icmlaffiliation{yyy}{Department of Scientific Computing, Technical University of Munich, Munich, Germany}
+
+
+\icmlcorrespondingauthor{Tim Walter}{tim.walter@tum.de}
+
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\icmlkeywords{Machine Learning, ICML}
+
+\vskip 0.3in
+]
+
+% this must go after the closing bracket ] following \twocolumn[ ...
+
+% This command actually creates the footnote in the first column
+% listing the affiliations and the copyright notice.
+% The command takes one argument, which is text to display at the start of the footnote.
+% The \icmlEqualContribution command is standard text for equal contribution.
+% Remove it (just {}) if you do not need this facility.
+
+%\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+\printAffiliationsAndNotice % otherwise use the standard text.
+
+\begin{abstract}
+    \input{sections/0_abstract}
+\end{abstract}
+
+\section{Introduction}\label{sec:introduction}
+\input{sections/1_introduction}
+
+\section{Related Work}\label{sec:related_work}
+\input{sections/2_related_work}
+
+\section{Environment}\label{sec:environment}
+\input{sections/3_environment}
+
+\section{Experiments}\label{sec:limitations}
+\input{sections/5_experiments}
+
+\section{Discussion}\label{sec:discussion}
+\input{sections/6_discussion}
+
+\bibliography{literature.bib}
+\bibliographystyle{icml2023}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APPENDIX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\appendix
+\onecolumn
+
+
+\section{Further Environment Details} \label{sec:environment_details}
+The replayed data was mainly recorded or simulated  in the time from 07.01.2007 to 28.12.2008. Although some episodes had to be left out due to missing data, there were more than 100 episodes, of which 95 were supposed to be used for training, 4 for testing and the rest for evaluation. The power was standardized to kilowatts, while the energy was simply kWmin or kWh depending on the resolution. However, es the time steps are equidistant, power and energy can be modeled equivalently, since the power was assumed to be constant over the time step. Only some constants had to be adapted. The location of the house was in France near Paris.
+\par
+The carbon intensity data was only available from 2021 and 2022 for France, so the carbon intensity might be biased, since the electricity mix might have drifted over the years. However, the daily, weekly and yearly frequencies should still be captured, although potentially drifted. The unit of carbon intensity is gram of CO\textsubscript{2} equivalent emissions per kWh or kWmin.
+\par To prevent the ESS from overcharging or overdischarging, the rates were further constrained by the current charge and capacity, such that actually $C_t \in [0, \min\{C_{max}, \frac{B_{max} - B_t + D_s}{\sqrt{\nu}}\}]$ and $D_t \in [0, \min\{D_{max}, (B_t - D_S) \sqrt{\nu}\}]$.
+
+\section{Thresholding Baseline} \label{sec:thresholding_baseline}
+\begin{equation}
+    a_t = \left\{
+        \begin{array}{ll}
+            \begin{bmatrix} \phantom{-}1 & [1]^H & \psi0.1 \end{bmatrix} & \text{if } I_t < \phi_1 \\
+            \begin{bmatrix} -1 & [0]^H & \phantom{\psi}0\phantom{.1} \end{bmatrix} & \text{if } I_t > \phi_2 \\
+            \begin{bmatrix} \phantom{-}0 & [0]^H & \psi0.1 \end{bmatrix} & \text{else}
+        \end{array}
+    \right.
+\end{equation}
+where $\phi_1$ and $\phi_2$ are the lower and upper threshold respectively, while $\psi = sign(T_t -\frac{T_{max} + T_{min}}{2})$.
+The parameters for the thresholding algorithm were $\psi_1 = 65$ and $\psi_2 = 85$.
+
+\section{SAC}\label{sec:sac}
+SAC is a squashed Gaussian policy, that employs entropy regularization, which adds a bonus reward in each time step proportional to the current entropy of the policy in an aim to encourage exploration. Furthermore, two Q-functions are learned and their minimal estimate is used to update the policy. The objective function for SAC is:
+\begin{equation}
+    \max _\theta \underset{\substack{s \sim \mathcal{D} \\ \xi \sim \mathcal{N}}}{\mathbb{E}}\left[\min _{j=1,2} Q_{\phi_{\hat{j}}}\left(s, \tilde{a}_\theta(s, \xi)\right)-\alpha H(\pi_\theta \mid s)\right]
+\end{equation}
+where $\theta$ denotes the policy parameter, $\xi$ normal Gaussian noise, $\tilde{a}_\theta(s, \xi)$ the action sampled from the current policy, $\alpha$ the entropy regularization coefficient, and $H(\pi_\theta \mid s) = \log \pi_\theta\left(\tilde{a}_\theta(s, \xi) \mid s\right)$ the entropy of the policy. The action samples are obtained as $\tilde{a}_\theta(s, \xi) = tanh(\mu_\theta(s)+\sigma_\theta(s) \odot \xi)$
+
+
+\section{PPO}\label{sec:ppo}
+PPO is a trust-region based policy gradient method, which solves a constrained policy update policy via SGD. It achieves the trust region remarkably simple, by employing the following update objective:
+\begin{flalign}
+    \theta_{k+1} &= \arg \max _{\theta} \underset{\substack{s \sim \mathcal{D} \\ a \sim \pi_{\theta_k}}}{\mathbb{E}} \left[ L(s,a)\right]&& \\
+    L(s,a)&=\min \left(\left|\frac{\pi_\theta(a \mid s)}{\pi_{\theta_k}(a \mid s)}\right|, 1\pm \epsilon \right) A^{\pi_{\theta_k}}(s, a)&&
+\end{flalign}
+where $A^{\pi_{\theta_k}}(s, a)$ is the advantage of the current policy, and $\epsilon$ the trust region hyperparameter, clipping the update size. Alternatively, PPO can also be implemented using a KL-divergence constraint.
+
+
+\section{Training Procedure} \label{sec:training_procedure}
+
+All experiments were run for 250 episodes and in hourly resolution. Due to the encountered difficulty all were replaying only a single episode. Furthermore, the initial conditions, the initial indoor temperature $T_0$, building mass temperature $T_{b,0}$, and initial charge $B_0$, were fixed. The training parameters are shown in \ref{tab:training_parameters}. 
+\begin{table}[H]
+\label{tab:training_parameters}
+\caption{Training Parameters}
+\vskip 0.15in
+\begin{center}
+\begin{small}
+\begin{sc}
+\begin{tabular}{lr}
+\toprule
+Parameter & Value\\
+\midrule
+$B_{max}$ & 13.5 \\
+$C_{max}$ & 1 \\
+$D_{max}$ & 1 \\
+$\nu$ & 0.95 \\
+$D_s$ & 0.01 \\
+$B_0$ & 0 \\
+$H$ & 25 \\
+$\beta$ & 20 \\
+$\delta$ & 5 \\
+$T_{0}$ & 20 \\
+$T_{b,0}$ & 20 \\
+$r_{a}$ & 0.04 \\
+$r_{b}$ & 0.1 \\
+$r_{h}$ & 0.05 \\
+$q$ & 0.05 \\
+$L_{TCL}$ & 5 \\
+$T_{max}$ & 23 \\
+$T_{min}$ & 18 \\
+\bottomrule
+\end{tabular}
+\end{sc}
+\end{small}
+\end{center}
+\vskip -0.1in
+\end{table}
+
+\section{Split Reward}\label{sec:split_reward}
+\begin{flalign}
+    r_{noise} &= I_t (G_t - L_t) && \\
+    r_{ESS} &= I_t (D_t - C_t) && \\
+    r_{FDR} &= I_t (-\sum_{p \in U_e} p_r - \sum_{p \in U_d} \frac{2p}{H-1}) && \\
+    r_{TCL} &= I_t (-\frac{1}{r_h} L_{TCL} a_{tcl,t}) && \\ 
+    r_{discomfort} &=- \delta exp(|T_t - \frac{T_{max} + T_{min}}{2}) &&
+\end{flalign}
+The reward for TCL was split, since maintaining the temperature is a very different task than minimizing the energy consumption.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
+
+% This document was modified from the file originally made available by
+% Pat Langley and Andrea Danyluk for ICML-2K. This version was created
+% by Iain Murray in 2018, and modified by Alexandre Bouchard in
+% 2019 and 2021 and by Csaba Szepesvari, Gang Niu and Sivan Sabato in 2022.
+% Modified again in 2023 by Sivan Sabato and Jonathan Scarlett.
+% Previous contributors include Dan Roy, Lise Getoor and Tobias
+% Scheffer, which was slightly modified from the 2010 version by
+% Thorsten Joachims & Johannes Fuernkranz, slightly modified from the
+% 2009 version by Kiri Wagstaff and Sam Roweis's 2008 version, which is
+% slightly modified from Prasad Tadepalli's 2007 version which is a
+% lightly changed version of the previous year's version by Andrew
+% Moore, which was in turn edited from those of Kristian Kersting and
+% Codrina Lauth. Alex Smola contributed to the algorithmic style files.
