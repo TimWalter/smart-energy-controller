@@ -5,7 +5,7 @@ import gymnasium as gym
 import numpy as np
 from gymnasium.core import ObsType, ActType
 
-from environment.components.energy_storage_system import EnergyStorageSystem
+from environment.components.stripped_energy_storage_system import EnergyStorageSystem
 from environment.components.external_electricity_supply import ExternalElectricitySupply
 
 
@@ -13,7 +13,7 @@ class SingleFamilyHome(gym.Env):
     ees: ExternalElectricitySupply
     ess: EnergyStorageSystem
 
-    def __init__(self, config: str):
+    def __init__(self, config: str, deterministic: bool = False):
         self.config = json.load(open(config, "r"))
 
         self.resolution = self.config["resolution"]
@@ -24,9 +24,13 @@ class SingleFamilyHome(gym.Env):
 
         self.observation_space = self._observation_space()
         self.action_space = self._action_space()
+        self.time = 0
+
+        self.deterministic = deterministic
 
     def _observation_space(self) -> gym.spaces.Dict:
         spaces = {
+            "time": gym.spaces.Box(low=0, high=167),
             "carbon_intensity": gym.spaces.Box(low=0.0512 * 60, high=2.373 * 60),
             "energy_storage_system_charge": gym.spaces.Box(low=0.0, high=self.config["energy_storage_system"][
                 "capacity"])
@@ -35,6 +39,7 @@ class SingleFamilyHome(gym.Env):
 
     def _construct_observation(self) -> ObsType:
         observation = {
+            "time": self.time,
             "carbon_intensity": self.ees.state,
             "energy_storage_system_charge": self.ess.state
         }
@@ -46,6 +51,13 @@ class SingleFamilyHome(gym.Env):
                 observation[key] = np.array([value], dtype=np.float32)
 
         return observation
+
+    def _normalize_observation(self, observation: ObsType) -> ObsType:
+        normalized_observation = {}
+        for key, value in observation.items():
+            normalized_observation[key] = (value - self.observation_space[key].low) / (
+                    self.observation_space[key].high - self.observation_space[key].low)
+        return normalized_observation
 
     def _action_space(self) -> gym.spaces.MultiDiscrete | gym.spaces.Box:
         if self.config["action_space"]["type"] == "discrete":
@@ -81,8 +93,11 @@ class SingleFamilyHome(gym.Env):
     def reset(self, seed: int | None = 42, options: dict[str, Any] | None = None, ) -> tuple[ObsType, dict[str, Any]]:
         super().reset(seed=seed)
 
-        self.ees.reset(episode=0)
+        self.time = 0
+
+        self.ees.reset(episode=0 if self.deterministic else np.random.randint(0, self.number_of_episodes-1))
         self.ess.reset()
+        self.ess.charge = 0 if self.deterministic else np.random.uniform(0, self.ess.capacity)
 
         observation = self._construct_observation()
         return observation, {}
@@ -96,6 +111,7 @@ class SingleFamilyHome(gym.Env):
 
         self.ess.step(rescaled_action[0])
 
+        self.time += 1
         observation = self._construct_observation()
         reward, reward_info = self._calculate_reward()
         terminated = self._calculate_done()
