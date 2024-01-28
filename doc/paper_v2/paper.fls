@@ -400,6 +400,29 @@ INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\generic\uniquecounter
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\generic\uniquecounter\uniquecounter.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\generic\bigintcalc\bigintcalc.sty
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\generic\infwarerr\infwarerr.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\caption\caption3.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
 INPUT .\icml2023.sty
 INPUT .\icml2023.sty
 INPUT icml2023.sty
@@ -1126,13 +1149,13 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmro7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro8r.tfm
-INPUT .\sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT .\sections\5_experiments.tex
-INPUT sections\5_experiments.tex
+INPUT .\sections\4_experiments.tex
+INPUT .\sections\4_experiments.tex
+INPUT .\sections\4_experiments.tex
+INPUT sections\4_experiments.tex
+INPUT .\sections\4_experiments.tex
+INPUT .\sections\4_experiments.tex
+INPUT sections\4_experiments.tex
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmbc7t.tfm
 INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
@@ -1150,17 +1173,18 @@ INPUT .\figures\training_curve.png
 INPUT .\figures\training_curve.png
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
-INPUT .\sections\6_discussion.tex
-INPUT .\sections\6_discussion.tex
-INPUT .\sections\6_discussion.tex
-INPUT sections\6_discussion.tex
-INPUT .\sections\6_discussion.tex
-INPUT .\sections\6_discussion.tex
-INPUT sections\6_discussion.tex
+INPUT .\sections\5_future_work.tex
+INPUT .\sections\5_future_work.tex
+INPUT .\sections\5_future_work.tex
+INPUT sections\5_future_work.tex
+INPUT .\sections\5_future_work.tex
+INPUT .\sections\5_future_work.tex
+INPUT sections\5_future_work.tex
 INPUT .\paper.bbl
 INPUT paper.bbl
 INPUT .\paper.bbl
 INPUT paper.bbl
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
@@ -1168,11 +1192,17 @@ INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.f
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmbc7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
+INPUT .\sections\appendix.tex
+INPUT .\sections\appendix.tex
+INPUT .\sections\appendix.tex
+INPUT sections\appendix.tex
+INPUT .\sections\appendix.tex
+INPUT .\sections\appendix.tex
+INPUT sections\appendix.tex
 INPUT paper.aux
 INPUT .\paper.out
 INPUT .\paper.out

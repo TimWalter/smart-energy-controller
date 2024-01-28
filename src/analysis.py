@@ -155,7 +155,7 @@ def deep_dive(data, episode=-1):
         observations["tcl"] = data[episode]["next_observation"]["tcl_indoor_temperature"]
 
     # Extract the carbon intensity observation
-    carbon_intensity = np.array(data[episode]["next_observation"]["carbon_intensity"])
+    carbon_intensity = np.array(data[episode]["next_observation"]["carbon_intensity"])[:,:, -1]
 
     # Create a subplot for each action
     fig, axs = plt.subplots(len(actions), 1, figsize=(20, 7 * len(actions)))
@@ -170,7 +170,7 @@ def deep_dive(data, episode=-1):
 
         ax2 = ax1.twinx()
         ax2.set_ylabel('Carbon Intensity', color='tab:red')
-        ax2.plot(carbon_intensity, color='tab:red', label="Carbon Intensity")
+        ax2.plot(carbon_intensity, color='tab:red', label="Carbon Intensity", linewidth=5, alpha=0.2)
         ax2.tick_params(axis='y', labelcolor='tab:red')
 
         ax3 = ax1.twinx()

@@ -25,13 +25,13 @@ class Baseline(ABC):
                                    env.config["thermostatically_controlled_load"]["minimal_temperature"] / 2
 
     def rescale_action(self, action, observation, *args, **kwargs):
-        if not self.ess_condition:
+        if not self.ess_condition and self.action_dim == 3:
             del action[0]
-        if not self.fdr_condition:
+        if not self.fdr_condition and self.action_dim == 3:
             del action[1 if self.ess_condition else 0]
-        if not self.tcl_condition:
+        if not self.tcl_condition and self.action_dim == 3:
             del action[-1]
-        else:
+        elif self.tcl_condition:
             tcl_sign = 1 if observation["tcl_indoor_temperature"] < self.desired_temperature else -1
             action[-1] *= tcl_sign
         if self.type == "discrete":

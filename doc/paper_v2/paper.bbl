@@ -5,11 +5,6 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Ele(29.12.2023)]{ElectricityMaps2023}
-Electricity maps | reduce carbon emissions with actionable electricity data,
-  29.12.2023.
-\newblock URL \url{https://www.electricitymaps.com/}.
-
 \bibitem[{Antonin Raffin} et~al.(2021){Antonin Raffin}, {Ashley Hill}, {Adam
   Gleave}, {Anssi Kanervisto}, {Maximilian Ernestus}, and {Noah
   Dormann}]{AntoninRaffin.2021}
@@ -62,6 +57,12 @@ Dobos, A.~P.
 \newblock ISSN 0199-6231.
 \newblock \doi{10.1115/1.4005759}.
 
+\bibitem[ElectricityMaps(29.12.2023)]{ElectricityMaps.2023}
+ElectricityMaps.
+\newblock Electricity maps | reduce carbon emissions with actionable
+  electricity data, 29.12.2023.
+\newblock URL \url{https://www.electricitymaps.com/}.
+
 \bibitem[{F. Holmgren} et~al.(2018){F. Holmgren}, {W. Hansen}, and {A.
   Mikofski}]{F.Holmgren.2018}
 {F. Holmgren}, W., {W. Hansen}, C., and {A. Mikofski}, M.
@@ -95,6 +96,10 @@ H{\"o}rsch, J., Hofmann, F., Schlachtberger, D., and Brown, T.
 IEA.
 \newblock Buildings - energy system - iea, 06.01.2024.
 \newblock URL \url{https://www.iea.org/energy-system/buildings}.
+
+\bibitem[Irpan(2018)]{rlblogpost}
+Irpan, A.
+\newblock Deep reinforcement learning doesn't work yet, 2018.
 
 \bibitem[{Javier Arroyo} et~al.(2022){Javier Arroyo}, {Carlo Manna}, {Fred
   Spiessens}, and {Lieve Helsen}]{JavierArroyo.2022}
@@ -168,12 +173,6 @@ Towers, M., Terry, J.~K., Kwiatkowski, A., Balis, J.~U., de~Cola, G., Deleu,
   O.~G.
 \newblock Gymnasium, 2023.
 \newblock URL \url{https://zenodo.org/record/8127025}.
-
-\bibitem[Wang et~al.()Wang, Lin, and Zhang]{Wang.20.06.2023}
-Wang, H., Lin, S., and Zhang, J.
-\newblock Warm-start actor-critic: From approximation error to sub-optimality
-  gap.
-\newblock URL \url{http://arxiv.org/pdf/2306.11271.pdf}.
 
 \bibitem[Zhu et~al.(2022)Zhu, Yang, Liu, Wang, Ma, and Guan]{Zhu.2022}
 Zhu, D., Yang, B., Liu, Y., Wang, Z., Ma, K., and Guan, X.

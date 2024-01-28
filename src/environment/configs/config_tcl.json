@@ -1,9 +1,9 @@
 {
   "resolution": "hourly",
-  "noise": true,
+  "noise": false,
   "action_space": {
     "type": "continuous",
-    "levels": [11, 11, 11]
+    "levels": [21, 21, 21]
   },
   "thermostatically_controlled_load": {
     "penalty_factor": 5,
@@ -17,6 +17,6 @@
     "minimal_temperature": 18,
     "maximal_temperature": 23
   },
-  "include_additional_information": false
+  "include_additional_information": true
 }
 

@@ -11,7 +11,7 @@ from baselines.idle import Idle
 from baselines.mirror import Mirror
 from baselines.running_average import RunningAverage
 from baselines.single_threshold import SingleThreshold
-from src.environment.single_family_home import SingleFamilyHome
+from src.environment.single_family_home_scalar_fdr import SingleFamilyHome
 from utils import TrainCallback, evaluate_policy_logged
 
 
@@ -32,11 +32,11 @@ def train(
     infos = []
 
     eval_env = SingleFamilyHome(config=config)
-    eval_env.unwrapped.eval()
+    #eval_env.unwrapped.eval()
     train_env = SingleFamilyHome(config=config)
-    train_env.train()
+    #train_env.train()
     test_env = SingleFamilyHome(config=config)
-    test_env.unwrapped.test()
+    #test_env.unwrapped.test()
 
     if check:
         log("Checking environment")
@@ -48,12 +48,11 @@ def train(
     log(f"Starting training for {name} with {agent.__name__} and {policy} policy")
 
     if agent == PPO:
-        model = agent(policy, train_env, seed=15)  # , n_steps=167, batch_size=167, learning_rate=1e-6)
+        model = agent(policy, train_env, seed=15, n_steps=167, batch_size=167)
     elif agent == SAC:
-        model = agent(policy, train_env, seed=15)  # , learning_rate=1e-4, learning_starts=0, batch_size=167,
-        # train_freq=(1, "episode"))
+        model = agent(policy, train_env, seed=15)
     else:
-        model = agent(policy, train_env, seed=15, learning_rate=1e-6)
+        model = agent(policy, train_env, seed=15)
 
     evaluate_policy_logged(model, eval_env, n_eval_episodes=eval_epochs, results=results, infos=infos)
     log(f"Untrained accumulated reward: {results[-eval_epochs:]}")
@@ -101,13 +100,13 @@ if __name__ == "__main__":
 
     folder_path = "environment/configs/config_"
     for path in ["hourly"]:
-        for name, train_epochs in zip(["ppo_full", "sac_full"], [2000, 2000]):
+        for name, train_epochs in zip(["sac_scalar_fdr"], [2000]):
             train(
                 path,
                 name,
                 agents[name.split("_")[0]],
                 "MultiInputPolicy",
-                4,
+                1,
                 train_epochs,
                 False,
                 f"environment/configs/config_{path}.json")

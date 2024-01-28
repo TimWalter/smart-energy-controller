@@ -3,16 +3,16 @@
   "noise": false,
   "action_space": {
     "type": "continuous",
-    "levels": [11, 11, 11]
+    "levels": [21, 21, 21]
   },
   "energy_storage_system": {
     "capacity": 13.5,
     "maximum_charge_rate_in_kw": 1,
     "maximum_discharge_rate_in_kw": 1,
-    "round_trip_efficiency":  1,
-    "self_discharge_rate": 0,
+    "round_trip_efficiency": 0.95,
+    "self_discharge_rate": 1e-2,
     "initial_charge": 0
   },
-  "include_additional_information": false
+  "include_additional_information": true
 }
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  24 JAN 2024 12:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  28 JAN 2024 21:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -206,6 +206,24 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
 )
 \Hy@SectionHShift=\skip56
+) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2022/03/01 v3.6b Customizing captions (AR)
+ (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
+\caption@tempdima=\dimen161
+\captionmargin=\dimen162
+\caption@leftmargin=\dimen163
+\caption@rightmargin=\dimen164
+\caption@width=\dimen165
+\caption@indent=\dimen166
+\caption@parindent=\dimen167
+\caption@hangindent=\dimen168
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count280
+\c@continuedfloat=\count281
+Package caption Info: hyperref package is loaded.
+Package caption Info: subfigure package is loaded.
 ) (icml2023.sty
 Package: icml2023 2023/01/03 v2.0 ICML Conference Style File
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\times.sty
@@ -241,7 +259,7 @@ Package: algorithm
 Document Style `algorithm' - floating environment
 (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count280
+\c@float@type=\count282
 \float@exts=\toks18
 \float@box=\box51
 \@float@everytoks=\toks19
@@ -250,56 +268,56 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks20
-\c@algorithm=\count281
+\c@algorithm=\count283
 ) (algorithmic.sty
 Package: algorithmic 
 
 Document Style `algorithmic' - environment
 (C:\Program Files\LaTeX\MiKTeX\tex/latex/tools\calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count282
-\calc@Bcount=\count283
-\calc@Adimen=\dimen161
-\calc@Bdimen=\dimen162
+\calc@Acount=\count284
+\calc@Bcount=\count285
+\calc@Adimen=\dimen169
+\calc@Bdimen=\dimen170
 \calc@Askip=\skip66
 \calc@Bskip=\skip67
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count284
+\calc@Ccount=\count286
 \calc@Cskip=\skip68
 )
-\c@ALC@line=\count285
-\c@ALC@rem=\count286
+\c@ALC@line=\count287
+\c@ALC@rem=\count288
 \ALC@tlm=\skip69
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip70
 \bibsep=\skip71
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count287
+\c@NAT@ctr=\count289
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/eso-pic\eso-pic.sty
 Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
-\ESO@tempdima=\dimen163
-\ESO@tempdimb=\dimen164
+\ESO@tempdima=\dimen171
+\ESO@tempdimb=\dimen172
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/forloop\forloop.sty
 Package: forloop 2023/05/03 v3.0 For Loops for LaTeX
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 147.
 \titrun=\box53
-\c@@affiliationcounter=\count288
-\c@@affilnum=\count289
+\c@@affiliationcounter=\count290
+\c@@affilnum=\count291
 \newcaptionbox=\box54
-\newcaptionboxwid=\dimen165
+\newcaptionboxwid=\dimen173
 \icmlrulerbox=\box55
-\icmlrulercount=\count290
-\icmlruleroffset=\dimen166
-\cv@lineheight=\dimen167
-\cv@boxheight=\dimen168
+\icmlrulercount=\count292
+\icmlruleroffset=\dimen174
+\cv@lineheight=\dimen175
+\cv@boxheight=\dimen176
 \cv@tmpbox=\box56
-\cv@refno=\count291
-\cv@tot=\count292
-\cv@tmpc@=\count293
-\cv@tmpc=\count294
+\cv@refno=\count293
+\cv@tot=\count294
+\cv@tmpc@=\count295
+\cv@tmpc=\count296
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2021/10/15 v2.17l AMS math features
 \@mathmargin=\skip72
@@ -310,44 +328,44 @@ Package: amstext 2021/08/26 v2.01 AMS text
  (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks21
-\ex@=\dimen169
+\ex@=\dimen177
 )) (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen170
+\pmbraise@=\dimen178
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2021/08/26 v2.02 operator names
 )
-\inf@bad=\count295
+\inf@bad=\count297
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count296
-\leftroot@=\count297
+\uproot@=\count298
+\leftroot@=\count299
 LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count298
-\DOTSCASE@=\count299
+\classnum@=\count300
+\DOTSCASE@=\count301
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
 \Mathstrutbox@=\box57
 \strutbox@=\box58
-\big@size=\dimen171
+\big@size=\dimen179
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count300
-\c@MaxMatrixCols=\count301
+\macc@depth=\count302
+\c@MaxMatrixCols=\count303
 \dotsspace@=\muskip17
-\c@parentequation=\count302
-\dspbrk@lvl=\count303
+\c@parentequation=\count304
+\dspbrk@lvl=\count305
 \tag@help=\toks22
-\row@=\count304
-\column@=\count305
-\maxfields@=\count306
+\row@=\count306
+\column@=\count307
+\maxfields@=\count308
 \andhelp@=\toks23
-\eqnshift@=\dimen172
-\alignsep@=\dimen173
-\tagshift@=\dimen174
-\tagwidth@=\dimen175
-\totwidth@=\dimen176
-\lineht@=\dimen177
+\eqnshift@=\dimen180
+\alignsep@=\dimen181
+\tagshift@=\dimen182
+\tagwidth@=\dimen183
+\totwidth@=\dimen184
+\lineht@=\dimen185
 \@envbody=\toks24
 \multlinegap=\skip73
 \multlinetaggap=\skip74
@@ -368,17 +386,17 @@ Package: mathtools 2022/06/29 v1.29 mathematical typesetting tools
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/mathtools\mhsetup.sty
 Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
 )
-\g_MT_multlinerow_int=\count307
-\l_MT_multwidth_dim=\dimen178
+\g_MT_multlinerow_int=\count309
+\l_MT_multwidth_dim=\dimen186
 \origjot=\skip75
-\l_MT_shortvdotswithinadjustabove_dim=\dimen179
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen180
-\l_MT_above_intertext_sep=\dimen181
-\l_MT_below_intertext_sep=\dimen182
-\l_MT_above_shortintertext_sep=\dimen183
-\l_MT_below_shortintertext_sep=\dimen184
+\l_MT_shortvdotswithinadjustabove_dim=\dimen187
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen188
+\l_MT_above_intertext_sep=\dimen189
+\l_MT_below_intertext_sep=\dimen190
+\l_MT_above_shortintertext_sep=\dimen191
+\l_MT_below_shortintertext_sep=\dimen192
 \xmathstrut@box=\box59
-\xmathstrut@dim=\dimen185
+\xmathstrut@dim=\dimen193
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks26
@@ -393,9 +411,9 @@ Package: amsthm 2020/05/29 v2.20.6
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip79
-\multirow@cntb=\count308
+\multirow@cntb=\count310
 \multirow@dima=\skip80
-\bigstrutjot=\dimen186
+\bigstrutjot=\dimen194
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/cleveref\cleveref.sty
 Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
 Package cleveref Info: `hyperref' support loaded on input line 2370.
@@ -416,7 +434,7 @@ Package cleveref Info: always capitalise cross-reference names on input line 785
 Package cleveref Info: no abbreviation of names on input line 7852.
 Package cleveref Info: include cross-reference names in hyperlinks on input line 7852.
 )
-\c@theorem=\count309
+\c@theorem=\count311
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/todonotes\todonotes.sty
 Package: todonotes 2023/01/31 v1.1.6 Todonotes source and documentation.
 Package: todonotes 2023/01/31
@@ -426,12 +444,12 @@ Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
 \XKV@toks=\toks32
 \XKV@tempa@toks=\toks33
 )
-\XKV@depth=\count310
+\XKV@depth=\count312
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex
 \pgfutil@everybye=\toks34
-\pgfutil@tempdima=\dimen187
-\pgfutil@tempdimb=\dimen188
+\pgfutil@tempdima=\dimen195
+\pgfutil@tempdimb=\dimen196
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgfutil-common-lists.tex)) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
 \pgfutil@abb=\box60
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf\pgf.revision.tex)
@@ -446,26 +464,26 @@ Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgfkeysfiltered.code.tex
 \pgfkeys@tmptoks=\toks37
 ))
-\pgf@x=\dimen189
-\pgf@y=\dimen190
-\pgf@xa=\dimen191
-\pgf@ya=\dimen192
-\pgf@xb=\dimen193
-\pgf@yb=\dimen194
-\pgf@xc=\dimen195
-\pgf@yc=\dimen196
-\pgf@xd=\dimen197
-\pgf@yd=\dimen198
+\pgf@x=\dimen197
+\pgf@y=\dimen198
+\pgf@xa=\dimen199
+\pgf@ya=\dimen256
+\pgf@xb=\dimen257
+\pgf@yb=\dimen258
+\pgf@xc=\dimen259
+\pgf@yc=\dimen260
+\pgf@xd=\dimen261
+\pgf@yd=\dimen262
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count311
-\c@pgf@countb=\count312
-\c@pgf@countc=\count313
-\c@pgf@countd=\count314
+\c@pgf@counta=\count313
+\c@pgf@countb=\count314
+\c@pgf@countc=\count315
+\c@pgf@countd=\count316
 \t@pgf@toka=\toks38
 \t@pgf@tokb=\toks39
 \t@pgf@tokc=\toks40
-\pgf@sys@id@count=\count315
+\pgf@sys@id@count=\count317
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
 File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
 )
@@ -476,59 +494,59 @@ File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
 ))) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfsyssoftpath@smallbuffer@items=\count316
-\pgfsyssoftpath@bigbuffer@items=\count317
+\pgfsyssoftpath@smallbuffer@items=\count318
+\pgfsyssoftpath@bigbuffer@items=\count319
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
 Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
-\pgfmath@dimen=\dimen199
-\pgfmath@count=\count318
+\pgfmath@dimen=\dimen263
+\pgfmath@count=\count320
 \pgfmath@box=\box61
 \pgfmath@toks=\toks41
 \pgfmath@stack@operand=\toks42
 \pgfmath@stack@operation=\toks43
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex))) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count319
+\c@pgfmathroundto@lastzeros=\count321
 )) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@picminx=\dimen256
-\pgf@picmaxx=\dimen257
-\pgf@picminy=\dimen258
-\pgf@picmaxy=\dimen259
-\pgf@pathminx=\dimen260
-\pgf@pathmaxx=\dimen261
-\pgf@pathminy=\dimen262
-\pgf@pathmaxy=\dimen263
-\pgf@xx=\dimen264
-\pgf@xy=\dimen265
-\pgf@yx=\dimen266
-\pgf@yy=\dimen267
-\pgf@zx=\dimen268
-\pgf@zy=\dimen269
+\pgf@picminx=\dimen264
+\pgf@picmaxx=\dimen265
+\pgf@picminy=\dimen266
+\pgf@picmaxy=\dimen267
+\pgf@pathminx=\dimen268
+\pgf@pathmaxx=\dimen269
+\pgf@pathminy=\dimen270
+\pgf@pathmaxy=\dimen271
+\pgf@xx=\dimen272
+\pgf@xy=\dimen273
+\pgf@yx=\dimen274
+\pgf@yy=\dimen275
+\pgf@zx=\dimen276
+\pgf@zy=\dimen277
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@path@lastx=\dimen270
-\pgf@path@lasty=\dimen271
+\pgf@path@lastx=\dimen278
+\pgf@path@lasty=\dimen279
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@shorten@end@additional=\dimen272
-\pgf@shorten@start@additional=\dimen273
+\pgf@shorten@end@additional=\dimen280
+\pgf@shorten@start@additional=\dimen281
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgfpic=\box62
 \pgf@hbox=\box63
 \pgf@layerbox@main=\box64
-\pgf@picture@serial@count=\count320
+\pgf@picture@serial@count=\count322
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgflinewidth=\dimen274
+\pgflinewidth=\dimen282
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@pt@x=\dimen275
-\pgf@pt@y=\dimen276
-\pgf@pt@temp=\dimen277
+\pgf@pt@x=\dimen283
+\pgf@pt@y=\dimen284
+\pgf@pt@temp=\dimen285
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
@@ -537,12 +555,12 @@ File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfarrowsep=\dimen278
+\pgfarrowsep=\dimen286
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@max=\dimen279
-\pgf@sys@shading@range@num=\count321
-\pgf@shadingcount=\count322
+\pgf@max=\dimen287
+\pgf@sys@shading@range@num=\count323
+\pgf@shadingcount=\count324
 ) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
@@ -563,60 +581,60 @@ File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@nodesepstart=\dimen280
-\pgf@nodesepend=\dimen281
+\pgf@nodesepstart=\dimen288
+\pgf@nodesepend=\dimen289
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
 )) (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Program Files\LaTeX\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
 Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)
-\pgffor@iter=\dimen282
-\pgffor@skip=\dimen283
+\pgffor@iter=\dimen290
+\pgffor@skip=\dimen291
 \pgffor@stack=\toks44
 \pgffor@toks=\toks45
 )) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
 Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@plot@mark@count=\count323
-\pgfplotmarksize=\dimen284
+\pgf@plot@mark@count=\count325
+\pgfplotmarksize=\dimen292
 )
-\tikz@lastx=\dimen285
-\tikz@lasty=\dimen286
-\tikz@lastxsaved=\dimen287
-\tikz@lastysaved=\dimen288
-\tikz@lastmovetox=\dimen289
-\tikz@lastmovetoy=\dimen290
-\tikzleveldistance=\dimen291
-\tikzsiblingdistance=\dimen292
+\tikz@lastx=\dimen293
+\tikz@lasty=\dimen294
+\tikz@lastxsaved=\dimen295
+\tikz@lastysaved=\dimen296
+\tikz@lastmovetox=\dimen297
+\tikz@lastmovetoy=\dimen298
+\tikzleveldistance=\dimen299
+\tikzsiblingdistance=\dimen300
 \tikz@figbox=\box67
 \tikz@figbox@bg=\box68
 \tikz@tempbox=\box69
 \tikz@tempbox@bg=\box70
-\tikztreelevel=\count324
-\tikznumberofchildren=\count325
-\tikznumberofcurrentchild=\count326
-\tikz@fig@count=\count327
+\tikztreelevel=\count326
+\tikznumberofchildren=\count327
+\tikznumberofcurrentchild=\count328
+\tikz@fig@count=\count329
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfmatrixcurrentrow=\count328
-\pgfmatrixcurrentcolumn=\count329
-\pgf@matrix@numberofcolumns=\count330
+\pgfmatrixcurrentrow=\count330
+\pgfmatrixcurrentcolumn=\count331
+\pgf@matrix@numberofcolumns=\count332
 )
-\tikz@expandcount=\count331
+\tikz@expandcount=\count333
  (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))) (C:\Program Files\LaTeX\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarypositioning.code.tex
 File: tikzlibrarypositioning.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
-\c@@todonotes@numberoftodonotes=\count332
+\c@@todonotes@numberoftodonotes=\count334
 )
 LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 59.
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count333
+\l__color_backend_stack_int=\count335
 \l__pdf_internal_box=\box71
 ) (paper.aux)
 \openout1 = `paper.aux'.
@@ -658,16 +676,16 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 ) (C:\Program Files\LaTeX\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count334
-\scratchdimen=\dimen293
+\scratchcounter=\count336
+\scratchdimen=\dimen301
 \scratchbox=\box72
-\nofMPsegments=\count335
-\nofMParguments=\count336
+\nofMPsegments=\count337
+\nofMParguments=\count338
 \everyMPshowfont=\toks46
-\MPscratchCnt=\count337
-\MPscratchDim=\dimen294
-\MPnumerator=\count338
-\makeMPintoPDFobject=\count339
+\MPscratchCnt=\count339
+\MPscratchDim=\dimen302
+\MPnumerator=\count340
+\makeMPintoPDFobject=\count341
 \everyMPtoPDFconversion=\toks47
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -683,7 +701,7 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count340
+\c@section@level=\count342
 )
 LaTeX Info: Redefining \ref on input line 59.
 LaTeX Info: Redefining \pageref on input line 59.
@@ -692,7 +710,10 @@ LaTeX Info: Redefining \nameref on input line 59.
 \@outlinefile=\write4
 \openout4 = `paper.out'.
 
-\c@@affilyyy=\count341
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@@affilyyy=\count343
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
@@ -717,17 +738,12 @@ File: omlptm.fd
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 107.
- (sections/0_abstract.tex) (sections/1_introduction.tex) (sections/2_related_work.tex)
-Underfull \hbox (badness 3701) in paragraph at lines 1--117
+ (sections/0_abstract.tex) (sections/1_introduction.tex) (sections/2_related_work.tex
+Underfull \hbox (badness 3701) in paragraph at lines 1--2
 []\OT1/ptm/m/n/10 (+20) The application field of smart energy management
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 1--117
-
- []
-
-(sections/3_environment.tex
+) (sections/3_environment.tex
 Underfull \hbox (badness 1033) in paragraph at lines 8--9
 []\OT1/ptm/m/n/10 (+20) The auxiliary information included weather and time
  []
@@ -740,65 +756,40 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-<figures/static_components.png, id=90, 498.663pt x 281.1303pt>
+<figures/static_components.png, id=92, 498.663pt x 281.1303pt>
 File: figures/static_components.png Graphic file (type png)
 <use figures/static_components.png>
 Package pdftex.def Info: figures/static_components.png  used on input line 18.
 (pdftex.def)             Requested size: 219.51863pt x 123.75777pt.
 
-Underfull \vbox (badness 3312) has occurred while \output is active []
+Underfull \hbox (badness 1033) in paragraph at lines 48--50
+\OT1/ptm/m/n/10 (+20) where $\OML/cmm/m/it/10 T[]$ \OT1/ptm/m/n/10 (+20) is the indoor temperature at time $\OML/cmm/m/it/10 t$\OT1/ptm/m/n/10 (+20) , $\OML/cmm/m/it/10 r[]$ \OT1/ptm/m/n/10 (+20) is
+ []
 
- [2
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.127 \end{flalign}
-                    <./figures/static_components.png>]) (sections/5_experiments.tex
-<figures/idle_reward.png, id=124, 467.5869pt x 268.1217pt>
+
+Underfull \vbox (badness 3861) has occurred while \output is active []
+
+ [2 <./figures/static_components.png>]) (sections/4_experiments.tex
+<figures/idle_reward.png, id=126, 467.5869pt x 268.1217pt>
 File: figures/idle_reward.png Graphic file (type png)
 <use figures/idle_reward.png>
 Package pdftex.def Info: figures/idle_reward.png  used on input line 47.
 (pdftex.def)             Requested size: 219.51863pt x 125.87402pt.
-<figures/training_curve.png, id=135, 467.5869pt x 268.1217pt>
+<figures/training_curve.png, id=138, 467.5869pt x 271.7352pt>
 File: figures/training_curve.png Graphic file (type png)
 <use figures/training_curve.png>
-Package pdftex.def Info: figures/training_curve.png  used on input line 60.
-(pdftex.def)             Requested size: 219.51863pt x 125.87402pt.
- [3
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.70 \par
-         
-pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.70 \par
-         
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.70 \par
-         
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.70 \par
-          <./figures/idle_reward.png> <./figures/training_curve.png>]
-Underfull \hbox (badness 4832) in paragraph at lines 71--72
-[]\OT1/ptm/m/n/10 (+20) The modified task only showed improvements for
- []
-
-
-Underfull \hbox (badness 5133) in paragraph at lines 71--72
-\OT1/ptm/m/n/10 (+20) the minutely resolution, which suggests that high
- []
-
-
+Package pdftex.def Info: figures/training_curve.png  used on input line 58.
+(pdftex.def)             Requested size: 219.51863pt x 127.57042pt.
+ [3 <./figures/idle_reward.png> <./figures/training_curve.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) (sections/6_discussion.tex) (paper.bbl
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 11.
+) (sections/5_future_work.tex)
+Underfull \hbox (badness 1533) in paragraph at lines 1--126
+\OT1/ptm/m/n/10 (+20) in a smart home environment. To further enhance
+ []
+
+(paper.bbl
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 16.
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
@@ -807,123 +798,129 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [4
-pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.12 
-     ]
-Underfull \hbox (badness 3219) in paragraph at lines 16--22
+Underfull \hbox (badness 3219) in paragraph at lines 11--17
 []\OT1/ptm/m/n/10 (+20) Antonin Raffin, Ashley Hill, Adam Gleave, Anssi
  []
 
 
-Underfull \hbox (badness 2662) in paragraph at lines 16--22
+Underfull \hbox (badness 2662) in paragraph at lines 11--17
 \OT1/ptm/m/n/10 (+20) Stable-baselines3: Reliable reinforcement learning
  []
 
 
-Underfull \hbox (badness 2903) in paragraph at lines 16--22
+Underfull \hbox (badness 2903) in paragraph at lines 11--17
 \OT1/ptm/m/n/10 (+20) 22(268):1--8, 2021.  URL [][]$\OT1/pcr/m/n/10 http : / / jmlr . org /
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 95--98
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+Underfull \hbox (badness 1152) in paragraph at lines 61--65
+[]\OT1/ptm/m/n/10 (+20) ElectricityMaps.  Electricity maps | reduce carbon
+ []
+
+
+Underfull \hbox (badness 1281) in paragraph at lines 96--99
 []\OT1/ptm/m/n/10 (+20) IEA.  Buildings - energy system - iea, 06.01.2024.
  []
 
 
-Underfull \hbox (badness 3989) in paragraph at lines 101--109
+Underfull \hbox (badness 3989) in paragraph at lines 106--114
 []\OT1/ptm/m/n/10 (+20) Javier Arroyo, Carlo Manna, Fred Spiessens, and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--109
+Underfull \hbox (badness 10000) in paragraph at lines 106--114
 \OT1/ptm/m/n/10 (+20) Lieve Helsen.  Reinforced model predictive
  []
 
 
-Underfull \hbox (badness 2990) in paragraph at lines 101--109
+Underfull \hbox (badness 2990) in paragraph at lines 106--114
 \OT1/ptm/m/n/10 (+20) control (rl-mpc) for building energy management.
  []
 
 
-Underfull \hbox (badness 1755) in paragraph at lines 101--109
+Underfull \hbox (badness 1755) in paragraph at lines 106--114
 \OT1/ptm/m/it/10 (+20) Applied Energy\OT1/ptm/m/n/10 (+20) , 309:118346, 2022.  ISSN 0306-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--109
+Underfull \hbox (badness 10000) in paragraph at lines 106--114
 \OT1/ptm/m/n/10 (+20) 2619.  doi: $10 . 1016 / j . apenergy . 2021 . 118346$.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--109
+Underfull \hbox (badness 10000) in paragraph at lines 106--114
 \OT1/ptm/m/n/10 (+20) URL [][]$\OT1/pcr/m/n/10 https : / / www . sciencedirect . com /
  []
 
 
-Underfull \hbox (badness 4366) in paragraph at lines 129--132
+Underfull \hbox (badness 4366) in paragraph at lines 134--137
 \OT1/ptm/m/n/10 (+20) and Klimov, O.  Proximal policy optimization
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--149
+Underfull \hbox (badness 10000) in paragraph at lines 146--154
 \OT1/ptm/m/n/10 (+20) A new solar radiation database for estimating
  []
 
 
-Underfull \hbox (badness 6220) in paragraph at lines 141--149
+Underfull \hbox (badness 6220) in paragraph at lines 146--154
 \OT1/ptm/m/n/10 (+20) pv performance in europe and africa.  \OT1/ptm/m/it/10 (+20) Solar
  []
 
 
-Underfull \hbox (badness 7221) in paragraph at lines 141--149
+Underfull \hbox (badness 7221) in paragraph at lines 146--154
 \OT1/ptm/m/it/10 (+20) Energy\OT1/ptm/m/n/10 (+20) , 86(6):1803--1815, 2012.  ISSN 0038-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--149
+Underfull \hbox (badness 10000) in paragraph at lines 146--154
 \OT1/ptm/m/n/10 (+20) 092X.  doi: $10 . 1016 / j . solener . 2012 . 03 . 006$.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--149
+Underfull \hbox (badness 10000) in paragraph at lines 146--154
 \OT1/ptm/m/n/10 (+20) URL [][]$\OT1/pcr/m/n/10 https : / / www . sciencedirect . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--161
+Underfull \hbox (badness 10000) in paragraph at lines 157--166
 \OT1/ptm/m/n/10 (+20) URL [][]$\OT1/pcr/m/n/10 https : / / www . sciencedirect . com /
  []
 
 [5]) [6
 
-] [7
+] (sections/appendix.tex
 
-] [8
-pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.230 \end{document}
-                    ] (paper.aux)
+Package caption Warning: \label without proper reference on input line 44.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `tab:training_parameters' on page 7 undefined on input line 42.
+
+[7
+
+]) [8] (paper.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26653 strings out of 480553
- 499637 string characters out of 2895249
- 802232 words of memory out of 3000000
- 43758 multiletter control sequences out of 15000+600000
- 508382 words of font info for 220 fonts, out of 8000000 for 9000
+ 27931 strings out of 480553
+ 524997 string characters out of 2895249
+ 820112 words of memory out of 3000000
+ 45021 multiletter control sequences out of 15000+600000
+ 508620 words of font info for 224 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 99i,16n,94p,1051b,495s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 99i,16n,94p,1051b,497s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Program Files/LaTeX/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (8 pages, 419327 bytes).
+Output written on paper.pdf (8 pages, 416102 bytes).
 PDF statistics:
- 328 PDF objects out of 1000 (max. 8388607)
- 80 named destinations out of 1000 (max. 500000)
+ 330 PDF objects out of 1000 (max. 8388607)
+ 81 named destinations out of 1000 (max. 500000)
  65052 words of extra memory for PDF output out of 74296 (max. 10000000)
 
