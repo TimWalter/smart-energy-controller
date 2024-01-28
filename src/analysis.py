@@ -22,6 +22,19 @@ def add_data(data_dict, name, path="./logs/minutely"):
     return data_dict
 
 
+def get_best_episodes(data_dict):
+    best_episodes = {}
+    for key, data in data_dict.items():
+        best_episode = 0
+        best_reward = -np.inf
+        for i, episode in enumerate(data):
+            if np.sum(episode["reward"]) > best_reward:
+                best_reward = np.sum(episode["reward"])
+                best_episode = i
+        best_episodes[key] = best_episode
+    return best_episodes
+
+
 def load_data(path):
     data_dict = {}
 
@@ -32,7 +45,9 @@ def load_data(path):
             data = pickle.load(open(item_path, 'rb'))
             if isinstance(data, list):
                 data_dict[item.split(".")[0]] = data
-    data_dict = {k: v for k, v in sorted(data_dict.items(), key=lambda item: np.sum(item[1][-1]["reward"]))}
+
+    best_episodes = get_best_episodes(data_dict)
+    data_dict = {k: v for k, v in sorted(data_dict.items(), key=lambda item: np.sum(item[1][best_episodes[item[0]]]["reward"]))}
 
     return data_dict
 
@@ -66,12 +81,13 @@ def reward_over_epochs(figsize=(20, 7), subplot=None, path=None):
         if len(results[run]) > 1:
             ax.plot(results[run], label=run, color=colors[i], )
         else:
-            ax.plot(results[run], label=run, marker='o', color=colors[i], )
+            ax.plot(results[run] * np.max([len(eps) for eps in results.values()]), label=run, color=colors[i], )
 
     ax.legend()
     ax.set_ylabel("Accumulated Reward")
     ax.set_xlabel("Epoch")
     ax.set_title("Accumulated Reward over Epochs")
+    ax.set_ylim([-50000, -15000])
     ax.grid()
 
     if subplot is None:
@@ -95,17 +111,10 @@ def best_rewards_by_category(data_dict, figsize=(20, 7), subplot=None):
     reward_types = ['given_reward', 'ess_reward', 'fdr_reward', 'tcl_reward', 'discomfort']
     rewards_sum = {reward_type: [] for reward_type in reward_types}
 
-    best_episodes = {}
+    best_episodes = get_best_episodes(data_dict)
     for key, data in data_dict.items():
-        best_episode = 0
-        best_reward = -np.inf
-        for i, episode in enumerate(data):
-            if np.sum(episode["reward"]) > best_reward:
-                best_reward = np.sum(episode["reward"])
-                best_episode = i
-        best_episodes[key] = best_episode
         for reward_type in reward_types:
-            rewards_sum[reward_type] += [np.sum(data[best_episode]["reward_info"].get(reward_type, np.zeros(167)))]
+            rewards_sum[reward_type] += [np.sum(data[best_episodes[key]]["reward_info"].get(reward_type, np.zeros(167)))]
 
     if subplot is None:
         plt.figure(figsize=figsize)
@@ -136,13 +145,13 @@ def deep_dive(data, episode=-1):
     actions = {}
     observations = {}
     if "ess_reward" in data[episode]["reward_info"].keys():
-        actions["ess"] = data[episode]["action"]
+        actions["ess"] = np.array(data[episode]["action"])[:, 0]
         observations["ess"] = data[episode]["next_observation"]["energy_storage_system_charge"]
     if "fdr_reward" in data[episode]["reward_info"].keys():
-        actions["fdr"] = data[episode]["action"][1 if "ess_reward" in data["reward_info"].keys() else 0]
+        actions["fdr"] = np.mean(np.array(data[episode]["action"])[:, 1:-1], axis=1)
         observations["fdr"] = data[episode]["next_observation"]["flexible_demand_schedule"]
     if "tcl_reward" in data[episode]["reward_info"].keys():
-        actions["tcl"] = data[episode]["action"]
+        actions["tcl"] = np.array(data[episode]["action"])[:, -1]
         observations["tcl"] = data[episode]["next_observation"]["tcl_indoor_temperature"]
 
     # Extract the carbon intensity observation

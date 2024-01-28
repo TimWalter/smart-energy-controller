@@ -5,7 +5,7 @@ import gymnasium as gym
 import numpy as np
 from gymnasium.core import ObsType, ActType
 
-from environment.components.stripped_energy_storage_system import EnergyStorageSystem
+from environment.components.energy_storage_system import EnergyStorageSystem
 from environment.components.external_electricity_supply import ExternalElectricitySupply
 
 

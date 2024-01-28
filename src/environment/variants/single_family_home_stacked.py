@@ -81,6 +81,8 @@ class SingleFamilyHome(gym.Env):
         self.action_space = self._action_space()
         self.action_slice = self._action_slice()
 
+        self.timestep = 0
+
     def develop(self):
         self.next_episode = 0
         self.episode_set = self.develop_set
@@ -104,7 +106,7 @@ class SingleFamilyHome(gym.Env):
     def _observation_space(self) -> gym.spaces.Dict:
         spaces = {
             "carbon_intensity": gym.spaces.Box(low=0.0512 * (1 if self.resolution == "minutely" else 60),
-                                               high=2.373 * (1 if self.resolution == "minutely" else 60)),
+                                               high=2.373 * (1 if self.resolution == "minutely" else 60), shape=(4,))
         }
         if self.noise:
             spaces["household_energy_demand"] = gym.spaces.Box(low=0.0,
@@ -140,7 +142,10 @@ class SingleFamilyHome(gym.Env):
 
     def _construct_observation(self) -> ObsType:
         observation = {
-            "carbon_intensity": self.ees.state,
+            "carbon_intensity": [
+                self.ees.get_values(self.ees.time + i * self.ees.one_timestep_delta)["Carbon Intensity"].values[
+                    0] if self.timestep + i < 167 else 0 for i in range(4)
+            ]
         }
 
         if self.noise:
@@ -277,6 +282,8 @@ class SingleFamilyHome(gym.Env):
         return self.ees.time >= self.ees.episode.index[-1]
 
     def reset(self, seed: int | None = 42, options: dict[str, Any] | None = None, ) -> tuple[ObsType, dict[str, Any]]:
+        self.timestep = 0
+
         super().reset(seed=seed)
         episode = self.episode_set[self.next_episode]
 
@@ -333,7 +340,6 @@ class SingleFamilyHome(gym.Env):
         terminated = self._calculate_done()
         truncated = False
 
-
         if terminated:
             reward_correction, reward_correction_info = self._terminal_reward_correction()
             reward += reward_correction
@@ -343,6 +349,7 @@ class SingleFamilyHome(gym.Env):
         info = {"next_observation": observation, "action": rescaled_action, "reward": reward,
                 "reward_info": reward_info}
 
+        self.timestep += 1
 
         return observation, reward, terminated, truncated, info
 

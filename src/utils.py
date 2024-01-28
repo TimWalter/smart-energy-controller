@@ -22,9 +22,10 @@ class LoggedEvalCallback(BaseCallback):
 
 
 def evaluate_policy_logged(model, env, n_eval_episodes, results, infos):
-    eval_callback = LoggedEvalCallback()
-    results += [evaluate_policy(model, env, n_eval_episodes=n_eval_episodes, callback=eval_callback)]
-    infos += [eval_callback.infos]
+    for _ in range(n_eval_episodes):
+        eval_callback = LoggedEvalCallback()
+        results += [evaluate_policy(model, env, n_eval_episodes=1, callback=eval_callback, warn=False)]
+        infos += [eval_callback.infos]
 
 
 class TrainCallback(BaseCallback):
@@ -37,6 +38,7 @@ class TrainCallback(BaseCallback):
         self.n_eval_episodes = n_eval_episodes
         self.best_mean_reward = -np.inf
         self.best_model_save_path = best_model_save_path
+        self.current_eval = 0
         os.makedirs(self.best_model_save_path, exist_ok=True)
 
     def _on_step(self) -> bool:
@@ -44,7 +46,8 @@ class TrainCallback(BaseCallback):
             evaluate_policy_logged(self.model, self.eval_env, n_eval_episodes=self.n_eval_episodes,
                                    results=self.results,
                                    infos=self.infos)
-            print(f"[{datetime.now()}] Reward: {self.results[-1]}")
+            print(f"[{datetime.now()}] Reward {self.current_eval}: {self.results[-self.n_eval_episodes:]}")
+            self.current_eval += 1
             if self.results[-1][0] > self.best_mean_reward:
                 self.best_mean_reward = self.results[-1][0]
                 self.model.save(os.path.join(self.best_model_save_path, "best_model"))

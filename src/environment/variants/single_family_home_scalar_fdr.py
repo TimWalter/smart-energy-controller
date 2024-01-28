@@ -39,12 +39,8 @@ class SingleFamilyHome(gym.Env):
 
         self.develop_set = [0]
         self.test_set = [25, 50, 75, 100]
-        self.eval_set = [24, 49, 74, 99]
-        self.train_set = list(set(range(self.number_of_episodes))
-                              - set(self.develop_set)
-                              - set(self.test_set)
-                              - set(self.eval_set)
-                              )
+        self.train_set = np.random.choice(np.setdiff1d(np.arange(0, self.number_of_episodes), self.test_set), 95,replace=False)
+        self.eval_set = np.setdiff1d(np.setdiff1d(np.arange(0, self.number_of_episodes), self.test_set), self.train_set)
 
         self.shuffle = False
         if self.ess_condition:
@@ -55,7 +51,7 @@ class SingleFamilyHome(gym.Env):
         self.shuffled_initial_conditions = [
             np.random.uniform(0, self.energy_storage_system_upper_bound * 0.2, 95)
             if self.ess_condition else None,
-            np.random.uniform(self.tcl_lower_bound, self.tcl_upper_bound, 95)
+            np.random.uniform(0, (self.tcl_upper_bound - self.tcl_lower_bound) * 0.2 + self.tcl_lower_bound, 95)
             if self.tcl_condition else None
         ]
 
@@ -118,8 +114,8 @@ class SingleFamilyHome(gym.Env):
         if self.fdr_condition:
             dim = self.config["flexible_demand_response"]["planning_horizon"] * 2 + 1
             spaces["flexible_demand_schedule"] = gym.spaces.Box(low=0.0,
-                                                                high=8.5839 if self.resolution == "minutely" else 4.6041,
-                                                                shape=(dim,))
+                                                                high=8.5839*dim if self.resolution == "minutely" else 4.6041*dim,
+                                                                shape=(1,))
 
         if self.tcl_condition:
             tcl_correction = self.config["thermostatically_controlled_load"]["nominal_power"] * \
@@ -151,7 +147,7 @@ class SingleFamilyHome(gym.Env):
             observation["energy_storage_system_charge"] = self.ess.state
 
         if self.fdr_condition:
-            observation["flexible_demand_schedule"] = self.fdr.state
+            observation["flexible_demand_schedule"] = np.sum(self.fdr.state)
 
         if self.tcl_condition:
             observation["tcl_indoor_temperature"] = self.tcl.state
@@ -175,8 +171,7 @@ class SingleFamilyHome(gym.Env):
             if self.ess_condition:
                 nvec += [self.config["action_space"]["levels"][0]]
             if self.fdr_condition:
-                nvec += [self.config["action_space"]["levels"][1 if self.ess_condition else 0]] * (
-                        2 * self.fdr.planning_horizon + 1)
+                nvec += [self.config["action_space"]["levels"][1 if self.ess_condition else 0]]
             if self.tcl_condition:
                 nvec += [self.config["action_space"]["levels"][-1]]
             return gym.spaces.MultiDiscrete(nvec, seed=42)
@@ -280,6 +275,7 @@ class SingleFamilyHome(gym.Env):
         super().reset(seed=seed)
         episode = self.episode_set[self.next_episode]
 
+        self.ees.reset(episode=episode)
         if self.noise:
             self.hed.reset(episode=episode)
             self.rsa.reset(episode=episode)
@@ -296,11 +292,7 @@ class SingleFamilyHome(gym.Env):
         if self.wtd_condition or self.tcl_condition:
             self.wtd.reset(episode=episode)
 
-        if self.ees.episode is not None and self.ees.time != self.ees.episode.index[0]:
-            self.next_episode = (self.next_episode + 1) % len(self.episode_set)
-
-        self.ees.reset(episode=episode)
-
+        self.next_episode = (self.next_episode + 1) % len(self.episode_set)
         observation = self._construct_observation()
         return observation, {}
 

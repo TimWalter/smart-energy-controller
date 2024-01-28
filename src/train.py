@@ -1,16 +1,17 @@
-import pickle
 import os
+import pickle
+import numpy as np
 from datetime import datetime
 from typing import Callable
 
 from stable_baselines3 import SAC, PPO
 from stable_baselines3.common.env_checker import check_env
-from stable_baselines3.common.monitor import Monitor
 
 from baselines.idle import Idle
 from baselines.mirror import Mirror
+from baselines.running_average import RunningAverage
 from baselines.single_threshold import SingleThreshold
-from src.environment.stripped_single_family_home import SingleFamilyHome
+from src.environment.single_family_home import SingleFamilyHome
 from utils import TrainCallback, evaluate_policy_logged
 
 
@@ -30,12 +31,12 @@ def train(
     results = []
     infos = []
 
-    eval_env = Monitor(SingleFamilyHome(config=config))
-    # eval_env.unwrapped.eval()
+    eval_env = SingleFamilyHome(config=config)
+    eval_env.unwrapped.eval()
     train_env = SingleFamilyHome(config=config)
-    # train_env.train()
-    test_env = Monitor(SingleFamilyHome(config=config))
-    # test_env.unwrapped.test()
+    train_env.train()
+    test_env = SingleFamilyHome(config=config)
+    test_env.unwrapped.test()
 
     if check:
         log("Checking environment")
@@ -47,12 +48,15 @@ def train(
     log(f"Starting training for {name} with {agent.__name__} and {policy} policy")
 
     if agent == PPO:
-        model = agent(policy, train_env, seed=15, n_steps=167, batch_size=167, learning_rate=1e-6, vf_coef=5e-2)
+        model = agent(policy, train_env, seed=15)  # , n_steps=167, batch_size=167, learning_rate=1e-6)
+    elif agent == SAC:
+        model = agent(policy, train_env, seed=15)  # , learning_rate=1e-4, learning_starts=0, batch_size=167,
+        # train_freq=(1, "episode"))
     else:
         model = agent(policy, train_env, seed=15, learning_rate=1e-6)
 
     evaluate_policy_logged(model, eval_env, n_eval_episodes=eval_epochs, results=results, infos=infos)
-    log(f"Untrained accumulated reward: {results[-1]}")
+    log(f"Untrained accumulated reward: {results[-eval_epochs:]}")
 
     if train_epochs:
         log("Starting training")
@@ -61,7 +65,7 @@ def train(
         log("Training finished")
 
         evaluate_policy_logged(model, eval_env, n_eval_episodes=eval_epochs, results=results, infos=infos)
-        log(f"Trained Accumulated reward: {results[-1]}")
+        log(f"Trained Accumulated reward: {results[-eval_epochs:]}")
 
     def group_infos(infos):
         return [
@@ -92,17 +96,18 @@ if __name__ == "__main__":
         "idle": Idle,
         "single-threshold": SingleThreshold,
         "mirror": Mirror,
+        "running-average": RunningAverage
     }
 
     folder_path = "environment/configs/config_"
-    for path in ["ess"]:
-        for name, train_epochs in zip(["idle", "single-threshold", "mirror", "ppo_test", "sac_test"], [0,0,0,10,10]):
+    for path in ["hourly"]:
+        for name, train_epochs in zip(["ppo_full", "sac_full"], [2000, 2000]):
             train(
                 path,
                 name,
                 agents[name.split("_")[0]],
                 "MultiInputPolicy",
-                1,
+                4,
                 train_epochs,
                 False,
                 f"environment/configs/config_{path}.json")
