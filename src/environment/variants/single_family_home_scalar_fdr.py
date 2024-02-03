@@ -186,8 +186,8 @@ class SingleFamilyHome(gym.Env):
                 low += [-1]
                 high += [1]
             if self.fdr_condition:
-                low += [-1] * (2 * self.fdr.planning_horizon + 1)
-                high += [1] * (2 * self.fdr.planning_horizon + 1)
+                low += [-1]
+                high += [1]
             if self.tcl_condition:
                 low += [-1]
                 high += [1]

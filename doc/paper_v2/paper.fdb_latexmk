@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex paper"] 1706457086 "paper.aux" "paper.bbl" "paper" 1706473485 0
+["bibtex paper"] 1706457086 "paper.aux" "paper.bbl" "paper" 1706642611 0
   "./icml2023.bst" 1703848364 27147 6b71b3d7a2f07477af75aa14d559effb ""
   "./literature.bib" 1706279793 29766 746e71da24f95de0fb2ecc4af7099c02 ""
-  "paper.aux" 1706473484 6752 db45845a25c61c3dc136c283b5312e44 "pdflatex"
+  "paper.aux" 1706642610 6752 db45845a25c61c3dc136c283b5312e44 "pdflatex"
   (generated)
   "paper.bbl"
   "paper.blg"
   (rewritten before read)
-["pdflatex"] 1706473480 "g:/projects/smart-energy-controller/doc/paper_v2/paper.tex" "paper.pdf" "paper" 1706473485 0
+["pdflatex"] 1706642607 "g:/projects/smart-energy-controller/doc/paper_v2/paper.tex" "paper.pdf" "paper" 1706642611 0
   "C:/Program Files/LaTeX/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Program Files/LaTeX/MiKTeX/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136765053 960 379cc0019370a9e0208a0a3f949f847a ""
   "C:/Program Files/LaTeX/MiKTeX/fonts/tfm/adobe/courier/pcrr8r.tfm" 1136765053 1292 bd42be2f344128bff6d35d98474adfe3 ""
@@ -222,15 +222,15 @@
   "figures/training_curve.png" 1706436084 48200 eb14d6953af8667db8f8540b4dbae97d ""
   "g:/projects/smart-energy-controller/doc/paper_v2/paper.tex" 1706456933 5983 4185e07414fe6d929d5dd8c55a9384ba ""
   "icml2023.sty" 1703848364 27888 5d2d5d3bcd7161421f3fd4a95cd5a7b6 ""
-  "paper.aux" 1706473484 6752 db45845a25c61c3dc136c283b5312e44 "pdflatex"
+  "paper.aux" 1706642610 6752 db45845a25c61c3dc136c283b5312e44 "pdflatex"
   "paper.bbl" 1706457086 8569 b2abd8bbdec6b80e6ff497272b18208e "bibtex paper"
-  "paper.out" 1706473483 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "paper.out" 1706642609 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "paper.tex" 1706456933 5983 4185e07414fe6d929d5dd8c55a9384ba ""
   "sections/0_abstract.tex" 1706277476 519 50c2c348e5426d2244ce9bbc1803dd4b ""
   "sections/1_introduction.tex" 1706275767 570 977129aabd794b08addf064e4fb4c71c ""
   "sections/2_related_work.tex" 1706277646 1037 a596940632cca81b81ced178d500aff9 ""
   "sections/3_environment.tex" 1706473109 8237 19cb27ce52031afc72b1626a2fe1286a ""
-  "sections/4_experiments.tex" 1706473479 5951 2e30384d1db738ab2a447b473fedd96a ""
+  "sections/4_experiments.tex" 1706642605 5952 65b8fcc8d36447c455ca91f227e3107d ""
   "sections/5_future_work.tex" 1706449801 591 44edff3552eff34c12e716c154e3c424 ""
   "sections/appendix.tex" 1706473314 5297 9d420450ac5bce42ac63e979569ebf26 ""
   (generated)

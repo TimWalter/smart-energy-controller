@@ -1,6 +1,5 @@
 import os
 import pickle
-import numpy as np
 from datetime import datetime
 from typing import Callable
 
@@ -11,7 +10,7 @@ from baselines.idle import Idle
 from baselines.mirror import Mirror
 from baselines.running_average import RunningAverage
 from baselines.single_threshold import SingleThreshold
-from src.environment.single_family_home_scalar_fdr import SingleFamilyHome
+from environment.single_family_home import SingleFamilyHome
 from utils import TrainCallback, evaluate_policy_logged
 
 
@@ -99,7 +98,7 @@ if __name__ == "__main__":
     }
 
     folder_path = "environment/configs/config_"
-    for path in ["hourly"]:
+    for path in ["ess", "fdr", "tcl"]:
         for name, train_epochs in zip(["sac_scalar_fdr"], [2000]):
             train(
                 path,
