@@ -1,0 +1,230 @@
+PWD g:\projects\smart-energy-controller\doc\presentation\text
+INPUT C:\Users\TIMWALTER\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
+INPUT g:\projects\smart-energy-controller\doc\presentation\text\text.tex
+OUTPUT text.log
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\article.cls
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\size10.clo
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\base\inputenc.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsmath.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amstext.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\amsmath\amsgen.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphicx.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\keyval.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\graphics.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics\trig.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\booktabs\booktabs.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT .\text.aux
+INPUT text.aux
+INPUT text.aux
+OUTPUT text.aux
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\epstopdf-pkg\epstopdf-base.sty
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\tex\latex\00miktex\epstopdf-sys.cfg
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+OUTPUT text.pdf
+INPUT C:\Users\TIMWALTER\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmr9.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmcsc10.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmmi9.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmsy9.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex9.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmbx9.tfm
+INPUT text.aux
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx9.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx9.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi5.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi7.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb

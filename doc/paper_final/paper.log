@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  3 FEB 2024 21:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.5.6)  18 FEB 2024 14:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -629,7 +629,7 @@ File: tikzlibrarypositioning.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 \c@@todonotes@numberoftodonotes=\count334
 )
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 59.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 58.
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 ) (C:\Program Files\LaTeX\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
@@ -639,36 +639,36 @@ File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 ) (paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Info: Redefining \microtypecontext on input line 59.
-Package microtype Info: Applying patch `item' on input line 59.
-Package microtype Info: Applying patch `toc' on input line 59.
-Package microtype Info: Applying patch `eqnum' on input line 59.
-Package microtype Info: Applying patch `footnote' on input line 59.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Info: Redefining \microtypecontext on input line 58.
+Package microtype Info: Applying patch `item' on input line 58.
+Package microtype Info: Applying patch `toc' on input line 58.
+Package microtype Info: Applying patch `eqnum' on input line 58.
+Package microtype Info: Applying patch `footnote' on input line 58.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 59.
+LaTeX Info: Redefining \showhyphens on input line 58.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -693,7 +693,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Program Files\LaTeX\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring ON on input line 59.
+Package hyperref Info: Link coloring ON on input line 58.
  (C:\Program Files\LaTeX\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -703,9 +703,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count342
 )
-LaTeX Info: Redefining \ref on input line 59.
-LaTeX Info: Redefining \pageref on input line 59.
-LaTeX Info: Redefining \nameref on input line 59.
+LaTeX Info: Redefining \ref on input line 58.
+LaTeX Info: Redefining \pageref on input line 58.
+LaTeX Info: Redefining \nameref on input line 58.
  (paper.out) (paper.out)
 \@outlinefile=\write4
 \openout4 = `paper.out'.
@@ -713,38 +713,32 @@ LaTeX Info: Redefining \nameref on input line 59.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@@affilyyy=\count343
- (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
-File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
- (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
- (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-
-Package hyperref Warning: Ignoring empty anchor on input line 107.
-
-LaTeX Font Info:    Trying to load font information for OML+ptm on input line 107.
-(C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\omlptm.fd
-File: omlptm.fd 
-)
-LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 107.
  (sections/0_abstract.tex) (sections/1_introduction.tex) (sections/2_related_work.tex
 Underfull \hbox (badness 3701) in paragraph at lines 1--2
 []\OT1/ptm/m/n/10 (+20) The application field of smart energy management
  []
 
-) (sections/3_environment.tex
-Underfull \hbox (badness 1033) in paragraph at lines 8--9
+(C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+ (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+ (C:\Program Files\LaTeX\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+))
+Underfull \hbox (badness 1043) in paragraph at lines 3--114
+\OT1/ptm/m/n/10 (+20) Demand Response (FDR). Differentiation is given in
+ []
+
+(sections/3_environment.tex
+Underfull \hbox (badness 1033) in paragraph at lines 61--62
 []\OT1/ptm/m/n/10 (+20) The auxiliary information included weather and time
  []
 
@@ -756,39 +750,34 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-<figures/static_components.png, id=92, 498.663pt x 281.1303pt>
+<figures/static_components.png, id=88, 498.663pt x 281.853pt>
 File: figures/static_components.png Graphic file (type png)
 <use figures/static_components.png>
-Package pdftex.def Info: figures/static_components.png  used on input line 18.
-(pdftex.def)             Requested size: 219.51863pt x 123.75777pt.
+Package pdftex.def Info: figures/static_components.png  used on input line 71.
+(pdftex.def)             Requested size: 219.51863pt x 124.07591pt.
 
-Underfull \hbox (badness 1033) in paragraph at lines 48--50
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 101--103
 \OT1/ptm/m/n/10 (+20) where $\OML/cmm/m/it/10 T[]$ \OT1/ptm/m/n/10 (+20) is the indoor temperature at time $\OML/cmm/m/it/10 t$\OT1/ptm/m/n/10 (+20) , $\OML/cmm/m/it/10 r[]$ \OT1/ptm/m/n/10 (+20) is
  []
 
-
-Underfull \vbox (badness 1348) has occurred while \output is active []
-
- [2 <./figures/static_components.png>]) (sections/4_experiments.tex
-<figures/idle_reward.png, id=126, 467.5869pt x 268.1217pt>
+[2 <./figures/static_components.png>]) (sections/4_experiments.tex
+<figures/idle_reward.png, id=122, 468.3096pt x 272.4579pt>
 File: figures/idle_reward.png Graphic file (type png)
 <use figures/idle_reward.png>
-Package pdftex.def Info: figures/idle_reward.png  used on input line 47.
-(pdftex.def)             Requested size: 219.51863pt x 125.87402pt.
-<figures/training_curve.png, id=138, 467.5869pt x 271.7352pt>
+Package pdftex.def Info: figures/idle_reward.png  used on input line 51.
+(pdftex.def)             Requested size: 219.51863pt x 127.71431pt.
+<figures/training_curve.png, id=134, 468.3096pt x 275.3487pt>
 File: figures/training_curve.png Graphic file (type png)
 <use figures/training_curve.png>
-Package pdftex.def Info: figures/training_curve.png  used on input line 58.
-(pdftex.def)             Requested size: 219.51863pt x 127.57042pt.
+Package pdftex.def Info: figures/training_curve.png  used on input line 62.
+(pdftex.def)             Requested size: 219.51863pt x 129.06937pt.
  [3 <./figures/idle_reward.png> <./figures/training_curve.png>]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) (sections/5_future_work.tex)
-Underfull \hbox (badness 1533) in paragraph at lines 1--126
-\OT1/ptm/m/n/10 (+20) in a smart home environment. To further enhance
- []
-
-(paper.bbl
+) (sections/5_future_work.tex) (paper.bbl
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 16.
  (C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -895,55 +884,55 @@ Underfull \hbox (badness 10000) in paragraph at lines 157--166
 ] (sections/appendix.tex [7
 
 ]
-<figures/training_curve_stacked.png, id=223, 747.2718pt x 271.7352pt>
+<figures/training_curve_stacked.png, id=221, 748.7172pt x 275.3487pt>
 File: figures/training_curve_stacked.png Graphic file (type png)
 <use figures/training_curve_stacked.png>
-Package pdftex.def Info: figures/training_curve_stacked.png  used on input line 98.
-(pdftex.def)             Requested size: 414.65208pt x 150.78578pt.
+Package pdftex.def Info: figures/training_curve_stacked.png  used on input line 100.
+(pdftex.def)             Requested size: 414.65208pt x 152.49681pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [8]
-<figures/training_curve_scalar_ess.png, id=239, 726.3135pt x 268.1217pt>
+<figures/training_curve_scalar_ess.png, id=238, 736.4313pt x 271.0125pt>
 File: figures/training_curve_scalar_ess.png Graphic file (type png)
 <use figures/training_curve_scalar_ess.png>
-Package pdftex.def Info: figures/training_curve_scalar_ess.png  used on input line 107.
-(pdftex.def)             Requested size: 414.65208pt x 153.07643pt.
-<figures/training_curve_scalar_fdr.png, id=240, 741.4902pt x 268.1217pt>
+Package pdftex.def Info: figures/training_curve_scalar_ess.png  used on input line 109.
+(pdftex.def)             Requested size: 414.65208pt x 152.59715pt.
+<figures/training_curve_scalar_fdr.png, id=239, 772.38562pt x 279.29344pt>
 File: figures/training_curve_scalar_fdr.png Graphic file (type png)
 <use figures/training_curve_scalar_fdr.png>
-Package pdftex.def Info: figures/training_curve_scalar_fdr.png  used on input line 113.
-(pdftex.def)             Requested size: 414.65208pt x 149.93848pt.
-<figures/training_curve_scalar_tcl.png, id=241, 747.2718pt x 268.1217pt>
+Package pdftex.def Info: figures/training_curve_scalar_fdr.png  used on input line 115.
+(pdftex.def)             Requested size: 414.65208pt x 149.93831pt.
+<figures/training_curve_scalar_tcl.png, id=240, 738.5994pt x 265.2309pt>
 File: figures/training_curve_scalar_tcl.png Graphic file (type png)
 <use figures/training_curve_scalar_tcl.png>
-Package pdftex.def Info: figures/training_curve_scalar_tcl.png  used on input line 119.
-(pdftex.def)             Requested size: 414.65208pt x 148.78067pt.
+Package pdftex.def Info: figures/training_curve_scalar_tcl.png  used on input line 121.
+(pdftex.def)             Requested size: 414.65208pt x 148.9006pt.
 
-Underfull \vbox (badness 2753) has occurred while \output is active []
+Underfull \vbox (badness 2351) has occurred while \output is active []
 
  [9 <./figures/training_curve_stacked.png> <./figures/training_curve_scalar_ess.png> <./figures/training_curve_scalar_fdr.png>]
-<figures/training_curve_terminal.png, id=254, 747.2718pt x 271.7352pt>
+<figures/training_curve_terminal.png, id=253, 748.7172pt x 275.3487pt>
 File: figures/training_curve_terminal.png Graphic file (type png)
 <use figures/training_curve_terminal.png>
-Package pdftex.def Info: figures/training_curve_terminal.png  used on input line 128.
-(pdftex.def)             Requested size: 414.65208pt x 150.78578pt.
+Package pdftex.def Info: figures/training_curve_terminal.png  used on input line 130.
+(pdftex.def)             Requested size: 414.65208pt x 152.49681pt.
 ) [10 <./figures/training_curve_scalar_tcl.png> <./figures/training_curve_terminal.png>] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 27992 strings out of 480553
- 527101 string characters out of 2895249
- 820942 words of memory out of 3000000
- 45067 multiletter control sequences out of 15000+600000
- 508620 words of font info for 224 fonts, out of 8000000 for 9000
+ 27944 strings out of 480553
+ 526338 string characters out of 2895249
+ 820024 words of memory out of 3000000
+ 45031 multiletter control sequences out of 15000+600000
+ 504808 words of font info for 214 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
  99i,16n,94p,1054b,497s stack positions out of 10000i,1000n,20000p,200000b,80000s
-{C:/Program Files/LaTeX/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmti9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (10 pages, 659017 bytes).
+{C:/Program Files/LaTeX/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program Files/LaTeX/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (10 pages, 651345 bytes).
 PDF statistics:
- 363 PDF objects out of 1000 (max. 8388607)
+ 358 PDF objects out of 1000 (max. 8388607)
  91 named destinations out of 1000 (max. 500000)
- 65077 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 58421 words of extra memory for PDF output out of 61914 (max. 10000000)
 

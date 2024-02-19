@@ -47,7 +47,8 @@ def load_data(path):
                 data_dict[item.split(".")[0]] = data
 
     best_episodes = get_best_episodes(data_dict)
-    data_dict = {k: v for k, v in sorted(data_dict.items(), key=lambda item: np.sum(item[1][best_episodes[item[0]]]["reward"]))}
+    data_dict = {k: v for k, v in
+                 sorted(data_dict.items(), key=lambda item: np.sum(item[1][best_episodes[item[0]]]["reward"]))}
 
     return data_dict
 
@@ -114,7 +115,8 @@ def best_rewards_by_category(data_dict, figsize=(20, 7), subplot=None):
     best_episodes = get_best_episodes(data_dict)
     for key, data in data_dict.items():
         for reward_type in reward_types:
-            rewards_sum[reward_type] += [np.sum(data[best_episodes[key]]["reward_info"].get(reward_type, np.zeros(167)))]
+            rewards_sum[reward_type] += [
+                np.sum(data[best_episodes[key]]["reward_info"].get(reward_type, np.zeros(167)))]
 
     if subplot is None:
         plt.figure(figsize=figsize)
@@ -148,14 +150,18 @@ def deep_dive(data, episode=-1):
         actions["ess"] = np.array(data[episode]["action"])[:, 0]
         observations["ess"] = data[episode]["next_observation"]["energy_storage_system_charge"]
     if "fdr_reward" in data[episode]["reward_info"].keys():
-        actions["fdr"] = np.mean(np.array(data[episode]["action"])[:, 1:-1], axis=1)
+        actions["fdr"] = np.mean(np.array(data[episode]["action"])[:,
+                                 1 if "ess_reward" in data[episode]["reward_info"].keys() else 0: -1 if "tcl_reward" in
+                                                                                                        data[episode][
+                                                                                                            "reward_info"].keys() else None],
+                                 axis=1)
         observations["fdr"] = data[episode]["next_observation"]["flexible_demand_schedule"]
     if "tcl_reward" in data[episode]["reward_info"].keys():
         actions["tcl"] = np.array(data[episode]["action"])[:, -1]
         observations["tcl"] = data[episode]["next_observation"]["tcl_indoor_temperature"]
 
     # Extract the carbon intensity observation
-    carbon_intensity = np.array(data[episode]["next_observation"]["carbon_intensity"])[:,:, -1]
+    carbon_intensity = np.array(data[episode]["next_observation"]["carbon_intensity"])[..., -1]
 
     # Create a subplot for each action
     fig, axs = plt.subplots(len(actions), 1, figsize=(20, 7 * len(actions)))

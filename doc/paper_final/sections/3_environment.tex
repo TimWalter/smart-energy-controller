@@ -1,6 +1,59 @@
-The main contribution of this work is an environment modeling a single-family household, consisting of a Rooftop Solar Array (RSA), an Energy Storage System (ESS), a Thermostatically Controlled Load (TCL), and a Flexible Demand Response (FDR). The environment is a mixture of replayed data and dynamic components. It is built on the Gymnasium framework \cite{Towers.2023} and available on GitHub\footnote{https://github.com/TimWalter/smart-energy-controller}. The main objective is minimizing the CO2eq emissions. The task is split into week-long episodes with hourly resolution, to capture daily and weekly patterns of demand and generation.
+The main contribution of this work is an environment modeling a single-family household, consisting of a Rooftop Solar Array (RSA), an ESS, a TCL, and a FDR. The environment is a mixture of replayed data and dynamic components. It is built on the Gymnasium framework \cite{Towers.2023} and available on GitHub\footnote{https://github.com/TimWalter/smart-energy-controller}. The main objective is minimizing the CO\textsubscript{2}eq emissions. The task is split into week-long episodes with hourly resolution, to capture daily and weekly patterns of demand and generation.
 \par
 The RL paradigm requires the formulation as a Markov Decision Process, consisting of a transition function, action and observation spaces, and a reward function. The transition function is given by the replayed data and the dynamics of the components in the following. The observation space is a bounded subset of $\mathbb{R}^{11+H}$, with the observables given in \cref{tab:observation_space}. The action space is summarized in  \cref{tab:action_space}. The reward function is described in \cref{ssec:reward_function}.
+
+\begin{table}
+    \caption{Observation Space.}
+    \label{tab:observation_space}
+    \vskip 0.15in
+    \begin{center}
+    \begin{small}
+    \begin{sc}
+    \begin{tabular}{lcr}
+    \toprule
+    Observable & Symbol & Replayed\\
+    \midrule
+    Carbon Intensity & $I$ & X\\
+        Household Energy Demand & $L_{HED}$ & X\\
+        Rooftop Solar Generation & $G$ & X\\
+        ESS Charge & $B$ & \\
+        FDR power in window & $L_{FDR}$ &\\
+        Indoor temperature & $T$ & \\
+        Time step & $t$ & X\\
+        Month of Year & $MoY$ & X \\
+        Solar Irradiation & $SI$ & X\\
+        Solar Elevation & $SE$ & X\\
+        Outdoor temperature & $T_a$ & X \\
+        Wind Speed & $WS$ & X\\
+    \bottomrule
+    \end{tabular}
+    \end{sc}
+    \end{small}
+    \end{center}
+    \vskip -0.1in
+    \end{table}
+    
+    \begin{table}
+    \caption{Action Space.}
+    \label{tab:action_space}
+    \vskip 0.15in
+    \begin{center}
+    \begin{small}
+    \begin{sc}
+    \begin{tabular}{lcr}
+    \toprule
+    Action & Min. Meaning & Max. Meaning\\
+    \midrule
+    $a_{ess}$ & Discharge & Charge \\ 
+        $a_{fdr}$ & Delay     & Expedite \\
+        $a_{tcl}$ & Cooling   & Heating\\
+    \bottomrule
+    \end{tabular}
+    \end{sc}
+    \end{small}
+    \end{center}
+    \vskip -0.1in
+    \end{table}
 
 \subsection{Replayed Data}\label{ssec:static_components}
 The data was either initially given in hourly resolution or down-sampled by averaging. The most relevant observables are displayed exemplary in \cref{fig:static_components}.
@@ -16,7 +69,7 @@ The direct carbon intensity of the electricity mix at any given time was sourced
     \centering
     \setlength{\abovecaptionskip}{0pt}
     \includegraphics[width=0.45\textwidth]{figures/static_components.png}
-    \caption{Replayed data for the first 24 hours.}
+    \caption{Replayed data for the first episode.}
     \label{fig:static_components}
 \end{figure}
 
@@ -41,7 +94,7 @@ where $s \in \{0,1\}^{H}$ indicates the desired consumption with elements $s_i =
 The TCL encapsulates all devices that aim to maintain the temperature of a given heat mass. To utilize such loads as energy storage, the temperature of the heat mass is allowed to fluctuate within a given range. The TCL is modeled as a second-order system \cite{Sonderegger.1978} with the following dynamics:
 \begin{equation}
     \begin{split}
-        T_t &= T_{t-1} + \frac{1}{r_a} (T_{a, t} - T_{t-1}) \\
+        T_t = T_{t-1} &+ \frac{1}{r_a} (T_{a, t} - T_{t-1}) \\
         &+ \frac{1}{r_b} (T_{b,t} - T_{t-1}) \\
         &+ \frac{1}{r_h} L_{TCL} a_{tcl,t} + q,
     \end{split}
@@ -61,70 +114,18 @@ $a_{tcl_t} \in [-1, 1]$ is the heating signal, and $q$ is the unintended heat dr
 \end{equation}
 where $T_{max}$ and $T_{min}$ define the desired temperature range. 
 
-\begin{table}
-\caption{Observation Space.}
-\label{tab:observation_space}
-\vskip 0.15in
-\begin{center}
-\begin{small}
-\begin{sc}
-\begin{tabular}{lcr}
-\toprule
-Observable & Symbol & Replayed\\
-\midrule
-Carbon Intensity & $I$ & X\\
-    Household Energy Demand & $L_{HED}$ & X\\
-    Rooftop Solar Generation & $G$ & X\\
-    ESS Charge & $B$ & \\
-    FDR power in window & $L_{FDR}$ &\\
-    Indoor temperature & $T$ & \\
-    Time step & $t$ & X\\
-    Month of Year & $MoY$ & X \\
-    Solar Irradiation & $SI$ & X\\
-    Solar Elevation & $SE$ & X\\
-    Outdoor temperature & $T_a$ & X \\
-    Wind Speed & $WS$ & X\\
-\bottomrule
-\end{tabular}
-\end{sc}
-\end{small}
-\end{center}
-\vskip -0.1in
-\end{table}
-
-\begin{table}
-\caption{Action Space.}
-\label{tab:action_space}
-\vskip 0.15in
-\begin{center}
-\begin{small}
-\begin{sc}
-\begin{tabular}{lcr}
-\toprule
-Action & Min. Meaning & Max. Meaning\\
-\midrule
-$a_{ess}$ & Discharge & Charge \\ 
-    $a_{fdr}$ & Delay     & Expedite \\
-    $a_{tcl}$ & Cooling   & Heating\\
-\bottomrule
-\end{tabular}
-\end{sc}
-\end{small}
-\end{center}
-\vskip -0.1in
-\end{table}
 
 \subsection{Reward Function} \label{ssec:reward_function}
-CO2eq emissions are modeled naively as carbon intensity $I_t$ times produced energy $E_p$ minus consumed energy $E_c$. The given objective is augmented by a temperature discomfort penalty $DC$ to bias towards the desired temperature. 
+CO\textsubscript{2}eq emissions are modeled naively as carbon intensity $I_t$ times produced energy $E_p$ minus consumed energy $E_c$. The given objective is augmented by a temperature discomfort penalty $DC$ to bias towards the desired temperature. 
 The resulting reward function is
 \begin{flalign}
-    r_t &= I_t (E_p - E_c) - DC && \\
+    E_p &= G_t + D_t  && \\
     \begin{split}
         E_c &= L_t + \frac{1}{r_h} L_{TCL} a_{tcl,t} + C_t \\
         &+ \sum_{p \in U_e} p_r + \sum_{p \in U_d} \frac{2p}{H-1}
     \end{split} && \\
-    E_p &= G_t + D_t  && \\
-    DC &= \delta \exp(|T_t - \frac{T_{max} + T_{min}}{2}), &&
+    DC &= \delta \exp(\left|T_t - \frac{T_{max} + T_{min}}{2}\right|) && \\
+    r_t &= I_t (E_p - E_c) - DC, && 
 \end{flalign}
 where $U_e$ is the set of consumed FDR, $p_r$ is the remaining power after discounting, $U_d$ is the set of delayed FDR, and $\delta$ the discomfort coefficient. 
 \par

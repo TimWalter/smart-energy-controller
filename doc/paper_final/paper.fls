@@ -1036,6 +1036,29 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
+INPUT .\sections\0_abstract.tex
+INPUT .\sections\0_abstract.tex
+INPUT .\sections\0_abstract.tex
+INPUT sections\0_abstract.tex
+INPUT .\sections\0_abstract.tex
+INPUT .\sections\0_abstract.tex
+INPUT sections\0_abstract.tex
+INPUT .\sections\1_introduction.tex
+INPUT .\sections\1_introduction.tex
+INPUT .\sections\1_introduction.tex
+INPUT sections\1_introduction.tex
+INPUT .\sections\1_introduction.tex
+INPUT .\sections\1_introduction.tex
+INPUT sections\1_introduction.tex
+INPUT .\sections\2_related_work.tex
+INPUT .\sections\2_related_work.tex
+INPUT .\sections\2_related_work.tex
+INPUT sections\2_related_work.tex
+INPUT .\sections\2_related_work.tex
+INPUT .\sections\2_related_work.tex
+INPUT sections\2_related_work.tex
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-cmr.cfg
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-cmr.cfg
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-cmr.cfg
@@ -1065,6 +1088,13 @@ INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-ms
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
+INPUT .\sections\3_environment.tex
+INPUT .\sections\3_environment.tex
+INPUT .\sections\3_environment.tex
+INPUT sections\3_environment.tex
+INPUT .\sections\3_environment.tex
+INPUT .\sections\3_environment.tex
+INPUT sections\3_environment.tex
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmr9.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmmi9.tfm
@@ -1078,53 +1108,13 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
-INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlptm.fd
-INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlptm.fd
-INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlptm.fd
-INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\omlptm.fd
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmti9.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmti7.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmti7.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb7t.tfm
-INPUT .\sections\0_abstract.tex
-INPUT .\sections\0_abstract.tex
-INPUT .\sections\0_abstract.tex
-INPUT sections\0_abstract.tex
-INPUT .\sections\0_abstract.tex
-INPUT .\sections\0_abstract.tex
-INPUT sections\0_abstract.tex
-INPUT .\sections\1_introduction.tex
-INPUT .\sections\1_introduction.tex
-INPUT .\sections\1_introduction.tex
-INPUT sections\1_introduction.tex
-INPUT .\sections\1_introduction.tex
-INPUT .\sections\1_introduction.tex
-INPUT sections\1_introduction.tex
-INPUT .\sections\2_related_work.tex
-INPUT .\sections\2_related_work.tex
-INPUT .\sections\2_related_work.tex
-INPUT sections\2_related_work.tex
-INPUT .\sections\2_related_work.tex
-INPUT .\sections\2_related_work.tex
-INPUT sections\2_related_work.tex
-INPUT .\sections\3_environment.tex
-INPUT .\sections\3_environment.tex
-INPUT .\sections\3_environment.tex
-INPUT sections\3_environment.tex
-INPUT .\sections\3_environment.tex
-INPUT .\sections\3_environment.tex
-INPUT sections\3_environment.tex
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmti10.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\public\cm\cmti7.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmrc7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\TIMWALTER\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
@@ -1133,8 +1123,8 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmr7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
 INPUT figures\static_components.png
@@ -1142,13 +1132,13 @@ INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
 INPUT .\figures\static_components.png
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr7t.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmrc7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmb7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmro7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmro8r.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT .\sections\4_experiments.tex
 INPUT .\sections\4_experiments.tex
 INPUT .\sections\4_experiments.tex
@@ -1164,6 +1154,7 @@ INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
 INPUT .\figures\idle_reward.png
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT .\figures\training_curve.png
 INPUT .\figures\training_curve.png
 INPUT figures\training_curve.png
@@ -1171,8 +1162,8 @@ INPUT .\figures\training_curve.png
 INPUT .\figures\training_curve.png
 INPUT .\figures\training_curve.png
 INPUT .\figures\training_curve.png
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmrc7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
+INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT .\sections\5_future_work.tex
 INPUT .\sections\5_future_work.tex
 INPUT .\sections\5_future_work.tex
@@ -1184,7 +1175,6 @@ INPUT .\paper.bbl
 INPUT paper.bbl
 INPUT .\paper.bbl
 INPUT paper.bbl
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri7t.tfm
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
 INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.fd
@@ -1192,8 +1182,6 @@ INPUT C:\Users\TIMWALTER\AppData\Local\Programs\MiKTeX\tex\latex\psnfss\ot1pcr.f
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr7t.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmbc7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\times\ptmri7t.vf
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\vf\adobe\courier\pcrr7t.vf
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT .\sections\appendix.tex
@@ -1266,8 +1254,6 @@ INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy7.pfb
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmti9.pfb
-INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\cm\cmti9.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
 INPUT C:\Program Files\LaTeX\MiKTeX\fonts\type1\urw\courier\ucrr8a.pfb

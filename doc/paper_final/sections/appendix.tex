@@ -39,7 +39,9 @@ where $A^{\pi_{\theta_k}}(s, a)$ is the advantage of the current policy, and $\e
 
 \section{Training Procedure} \label{sec:training_procedure}
 
-All experiments were run for 2000 episodes with fixed initial conditions, this took around 4 hours per algorithm on one RTX 2060 super. The training parameters are shown in \cref{tab:training_parameters}. 
+All experiments were run for 2000 episodes with fixed initial conditions, this took around 4 hours per algorithm on one RTX 2060 super. Only the random policy was evaluated for 10 episodes to average out the randomness. The stochastic policies of PPO and SAC were evaluated with a single episode.
+
+The training parameters are shown in \cref{tab:training_parameters}. 
 \begin{table}[H]
 \caption{Training Parameters}
 \label{tab:training_parameters}
@@ -78,7 +80,7 @@ $T_{min}$ & 18 \\
 \end{table}
 For the stacked carbon intensity, the next 3 hours of carbon intensity were given in the observable too.
 \par
-For the eased exploration setting, the fdr observations were also only reported as a sum and no longer indiviudally.
+For the eased exploration setting, the FDR observations were also only reported as a sum and no longer indiviudally.
 
 \section{Split Reward}\label{sec:split_reward}
 \begin{flalign}
@@ -91,7 +93,7 @@ For the eased exploration setting, the fdr observations were also only reported 
 The reward for TCL was split, since maintaining the temperature is a very different task than minimizing the energy consumption.
 
 \section{Stacked Carbon Intensity Details} \label{sec:stacked_carbon_intensity_details}
-The carbon intensity was stacked for the next 3 hours, such that the observable became $I_t = [I_t, I_{t+1}, I_{t+2}, I_{t+3}]^H$. The resulting training curve is shown in \cref{fig:training_curve_stacked}
+The carbon intensity was stacked for the next 3 hours, such that the observable became $I_t = [I_t, I_{t+1}, I_{t+2}, I_{t+3}]$. The resulting training curve is shown in \cref{fig:training_curve_stacked}
 
 \begin{figure}[H]
     \centering
